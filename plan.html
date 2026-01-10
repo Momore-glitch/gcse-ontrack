@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCSE Revision Plan Generator | GCSE OnTrack</title>
+  <meta name="description" content="Generate a simple GCSE revision plan based on your exam date, subjects, and available time." />
+  <link rel="canonical" href="https://momore-glitch.github.io/gcse-ontrack/plan.html" />
+  <style>
+    body {
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#0b1020;
+      color:#e9eefc;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1 { margin-top:0; }
+    label { display:block; margin-top:12px; font-weight:600; }
+    input, textarea {
+      width:100%;
+      margin-top:6px;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.15);
+      background:#11162a;
+      color:#e9eefc;
+    }
+    button {
+      margin-top:16px;
+      padding:12px;
+      width:100%;
+      border-radius:14px;
+      border:0;
+      font-weight:700;
+      background:#4f7cff;
+      color:#fff;
+      cursor:pointer;
+    }
+    button:hover { opacity:0.9; }
+    .plan { white-space:pre-line; line-height:1.5; }
+    .small { font-size:13px; opacity:0.8; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <h1>Revision Plan Generator</h1>
+      <p>Enter your details. Get a clear, simple plan.</p>
+
+      <label>Exam date</label>
+      <input id="examDate" type="date">
+
+      <label>Subjects (comma separated)</label>
+      <input id="subjects" placeholder="Maths, English, Biology">
+
+      <label>Hours per week you can study</label>
+      <input id="hours" type="number" placeholder="10">
+
+      <button onclick="generatePlan()">Generate my plan</button>
+    </div>
+
+    <div class="card" id="output" style="display:none">
+      <h2>Your plan</h2>
+      <div class="plan" id="planText"></div>
+      <p class="small">Tip: Focus on weak subjects first. Use active recall and past questions.</p>
+    </div>
+  </main>
+
+<script>
+function generatePlan() {
+  const examDate = new Date(document.getElementById('examDate').value);
+  const subjects = document.getElementById('subjects').value.split(',').map(s => s.trim()).filter(Boolean);
+  const hours = parseInt(document.getElementById('hours').value, 10);
+
+  if (!examDate || subjects.length === 0 || !hours) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  const today = new Date();
+  const weeks = Math.max(1, Math.ceil((examDate - today) / (1000 * 60 * 60 * 24 * 7)));
+  const hoursPerSubject = (hours / subjects.length).toFixed(1);
+
+  let text = `You have ${weeks} weeks until your exam.\n\n`;
+
+  for (let i = 1; i <= weeks; i++) {
+    text += `Week ${i}:\n`;
+    subjects.forEach(sub => {
+      text += `- ${sub}: ${hoursPerSubject} hours (revision + practice questions)\n`;
+    });
+    text += `\n`;
+  }
+
+  document.getElementById('planText').textContent = text;
+  document.getElementById('output').style.display = 'block';
+}
+</script>
+</body>
+</html>
