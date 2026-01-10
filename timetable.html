@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCSE Timetable Builder | GCSE OnTrack</title>
+  <meta name="description" content="Build a simple weekly GCSE revision timetable. Add blocks, keep it realistic, and print it." />
+  <link rel="canonical" href="https://momore-glitch.github.io/gcse-ontrack/timetable.html" />
+  <style>
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:#0b1020;
+      color:#e9eefc;
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:20px 16px;}
+    .card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:18px;
+      padding:18px;
+      margin-bottom:14px;
+    }
+    h1{margin:0 0 8px;}
+    p{margin:8px 0;opacity:0.88;line-height:1.5;}
+    label{display:block;margin-top:12px;font-weight:650;}
+    input, select{
+      width:100%;
+      margin-top:6px;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.15);
+      background:#11162a;
+      color:#e9eefc;
+    }
+    .row{display:grid;grid-template-columns:1fr;gap:10px;}
+    .actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px;}
+    button{
+      padding:12px;
+      border-radius:14px;
+      border:0;
+      font-weight:800;
+      cursor:pointer;
+    }
+    .btn-primary{background:#4f7cff;color:#fff;}
+    .btn-secondary{background:rgba(255,255,255,0.10);color:#e9eefc;border:1px solid rgba(255,255,255,0.14);}
+    .btn-danger{background:rgba(255,80,80,0.16);color:#ffb3b3;border:1px solid rgba(255,80,80,0.28);}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 90px repeat(7, 1fr);
+      gap:8px;
+      overflow-x:auto;
+    }
+    .cell, .head{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.06);
+      padding:10px;
+      min-height:54px;
+      font-size:13px;
+    }
+    .head{font-weight:800;text-align:center;}
+    .time{font-weight:800;opacity:0.95;}
+    .block{
+      border-radius:12px;
+      padding:8px;
+      margin-top:6px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(79,124,255,0.18);
+    }
+    .block small{opacity:0.9;}
+    .block button{
+      margin-top:6px;
+      width:100%;
+      padding:8px;
+      border-radius:10px;
+      font-weight:800;
+      background:rgba(255,255,255,0.10);
+      color:#e9eefc;
+      border:1px solid rgba(255,255,255,0.14);
+    }
+
+    @media (min-width:720px){
+      .row{grid-template-columns: 1fr 1fr 1fr;}
+      .actions{grid-template-columns: 1fr 1fr 1fr;}
+    }
+
+    @media print{
+      body{background:#fff;color:#111;}
+      .card{background:#fff;border:1px solid #ddd;}
+      button, input, select, .actions, .small-note{display:none !important;}
+      .cell,.head{background:#fff;border:1px solid #ddd;color:#111;}
+      .block{background:#eef3ff;border:1px solid #b9c8ff;color:#111;}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <h1>Weekly Timetable Builder</h1>
+      <p>Create a realistic revision week. Add blocks, then print it.</p>
+
+      <div class="row">
+        <div>
+          <label>Day</label>
+          <select id="day">
+            <option>Mon</option><option>Tue</option><option>Wed</option><option>Thu</option>
+            <option>Fri</option><option>Sat</option><option>Sun</option>
+          </select>
+        </div>
+        <div>
+          <label>Time</label>
+          <select id="time">
+            <option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option>
+            <option>20:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+            <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+          </select>
+        </div>
+        <div>
+          <label>Subject / Task</label>
+          <input id="task" placeholder="Maths: Algebra practice">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-primary" onclick="addBlock()">Add block</button>
+        <button class="btn-secondary" onclick="window.print()">Print timetable</button>
+        <button class="btn-danger" onclick="clearAll()">Clear all</button>
+      </div>
+
+      <p class="small-note" style="font-size:13px;opacity:0.8;">
+        Tip: Use 45–60 minute sessions. Mix topics. Do past questions after notes.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="grid" id="grid"></div>
+    </div>
+  </main>
+
+<script>
+const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const times = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"];
+
+function key(day, time){ return day + "_" + time; }
+
+function loadData(){
+  try { return JSON.parse(localStorage.getItem("ontrack_timetable") || "{}"); }
+  catch { return {}; }
+}
+function saveData(data){
+  localStorage.setItem("ontrack_timetable", JSON.stringify(data));
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  const data = loadData();
+  grid.innerHTML = "";
+
+  // header row
+  grid.appendChild(cell("","head"));
+  days.forEach(d => grid.appendChild(cell(d,"head")));
+
+  times.forEach(t => {
+    grid.appendChild(cell(t,"cell time"));
+    days.forEach(d => {
+      const c = cell("", "cell");
+      const k = key(d,t);
+      const blocks = data[k] || [];
+      blocks.forEach((text, idx) => {
+        const b = document.createElement("div");
+        b.className = "block";
+        b.innerHTML = `<div><strong>${escapeHtml(text)}</strong></div>
+                       <small>${d} • ${t}</small>`;
+        const del = document.createElement("button");
+        del.textContent = "Remove";
+        del.onclick = () => removeBlock(k, idx);
+        b.appendChild(del);
+        c.appendChild(b);
+      });
+      grid.appendChild(c);
+    });
+  });
+}
+
+function cell(text, cls){
+  const d = document.createElement("div");
+  d.className = cls || "cell";
+  d.textContent = text;
+  return d;
+}
+
+function addBlock(){
+  const d = document.getElementById("day").value;
+  const t = document.getElementById("time").value;
+  const task = document.getElementById("task").value.trim();
+  if(!task){ alert("Type a subject/task."); return; }
+
+  const data = loadData();
+  const k = key(d,t);
+  if(!data[k]) data[k] = [];
+  data[k].push(task);
+  saveData(data);
+  document.getElementById("task").value = "";
+  render();
+}
+
+function removeBlock(k, idx){
+  const data = loadData();
+  data[k].splice(idx, 1);
+  if(data[k].length === 0) delete data[k];
+  saveData(data);
+  render();
+}
+
+function clearAll(){
+  if(!confirm("Clear the entire timetable?")) return;
+  localStorage.removeItem("ontrack_timetable");
+  render();
+}
+
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[m]));
+}
+
+render();
+</script>
+</body>
+  </html>
