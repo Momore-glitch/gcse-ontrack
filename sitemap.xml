@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/</loc>
+    <lastmod>2026-01-10</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/plan.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/timetable.html</loc>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-active-recall.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-spaced-repetition.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-revision-timetable.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
