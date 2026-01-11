@@ -36,5 +36,29 @@
     <loc>https://momore-glitch.github.io/gcse-ontrack/guides-revision-timetable.html</loc>
     <priority>0.8</priority>
   </url>
+  
+<url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-gcse-maths.html</loc>
+    <priority>0.8</priority>
+  </url>
 
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-gcse-science.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-gcse-mistakes.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-no-motivation.html</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://momore-glitch.github.io/gcse-ontrack/guides-best-techniques.html</loc>
+    <priority>0.8</priority>
+  </url>
 </urlset>
