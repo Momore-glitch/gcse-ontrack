@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://momore-glitch.github.io/gcse-ontrack/sitemap.xml
