@@ -70,11 +70,6 @@
       <button onclick="generatePlan()">Generate my plan</button> 
     </div>
 
-document.getElementById("successMsg").style.display = "block";
-
-<p id="successMsg" style="margin-top:12px;color:#4f7cff;font-weight:600;display:none;">
-Plan created. Stay consistent and follow it daily.
-</p>
 
    <p style="opacity:0.85;">
 This plan is designed to remove confusion. Follow it step-by-step — don’t skip.
@@ -83,6 +78,9 @@ This plan is designed to remove confusion. Follow it step-by-step — don’t sk
     <div class="card" id="output" style="display:none">
       <h2>Your plan</h2>
       <div class="plan" id="planText"></div>
+<p id="successMsg" style="margin-top:12px;color:#4f7cff;font-weight:600;display:none;">
+Plan created. Stay consistent and follow it daily.
+</p>
       <p class="small">Tip: Focus on weak subjects first. Use active recall and past questions.</p>
     </div>
   </main>
@@ -92,6 +90,7 @@ function generatePlan() {
   const examDate = new Date(document.getElementById('examDate').value);
   const subjects = document.getElementById('subjects').value.split(',').map(s => s.trim()).filter(Boolean);
   const hours = parseInt(document.getElementById('hours').value, 10);
+document.getElementById("successMsg").style.display = "block";
 
   if (!examDate || subjects.length === 0 || !hours) {
     alert("Please fill in all fields.");
