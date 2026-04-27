@@ -67,8 +67,12 @@
       <label>Hours per week you can study</label>
       <input id="hours" type="number" placeholder="10">
 
-      <button onclick="generatePlan()">Generate my plan</button>
+      <button onclick="generatePlan()">Generate my plan</button> document.getElementById("successMsg").style.display = "block";
     </div>
+
+<p id="successMsg" style="margin-top:12px;color:#4f7cff;font-weight:600;display:none;">
+Plan created. Stay consistent and follow it daily.
+</p>
 
    <p style="opacity:0.85;">
 This plan is designed to remove confusion. Follow it step-by-step — don’t skip.
