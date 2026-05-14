@@ -137,5 +137,19 @@ No login. Free. Takes 30 seconds.
   <p style="opacity:0.8;">Stay consistent and check back soon.</p>
     </div>
   </main>
+<script>
+const tips = [
+  "Use active recall instead of rereading notes.",
+  "Study in short focused sessions instead of long unfocused ones.",
+  "Past papers are one of the fastest ways to improve.",
+  "Focus more time on your weakest subjects.",
+  "Consistency beats cramming every time."
+];
+
+const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
+document.getElementById("dailyTip").textContent = randomTip;
+</script>
+
 </body>
 </html>
