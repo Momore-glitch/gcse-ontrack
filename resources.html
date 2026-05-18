@@ -16,9 +16,44 @@
 
   <h2>Your Resources</h2>
 
+<input 
+  type="text" 
+  id="resourceInput" 
+  placeholder="Paste a study link..."
+  style="width:100%;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #ccc;"
+>
+
+<button 
+  onclick="addResource()" 
+  style="padding:10px 16px;border:none;border-radius:10px;background:#4f7cff;color:white;font-weight:600;cursor:pointer;"
+>
+  Add Resource
+</button>
+
   <ul id="resourceList">
     <li>No resources added yet.</li>
   </ul>
+
+<script>
+function addResource() {
+  const input = document.getElementById("resourceInput");
+  const list = document.getElementById("resourceList");
+
+  if (input.value.trim() === "") return;
+
+  if (list.innerHTML.includes("No resources added yet.")) {
+    list.innerHTML = "";
+  }
+
+  const li = document.createElement("li");
+
+  li.innerHTML = `<a href="${input.value}" target="_blank">${input.value}</a>`;
+
+  list.appendChild(li);
+
+  input.value = "";
+}
+</script>
 
 </div>
 
