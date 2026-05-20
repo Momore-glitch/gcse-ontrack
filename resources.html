@@ -51,8 +51,44 @@ function addResource() {
 
   list.appendChild(li);
 
+
+saveResources();
+
+
   input.value = "";
 }
+</script>
+
+<script>
+function saveResources() {
+  const links = [];
+
+  document.querySelectorAll("#resourceList li a").forEach(a => {
+    links.push(a.href);
+  });
+
+  localStorage.setItem("gcseResources", JSON.stringify(links));
+}
+
+function loadResources() {
+  const saved = JSON.parse(localStorage.getItem("gcseResources")) || [];
+
+  const list = document.getElementById("resourceList");
+
+  if (saved.length > 0) {
+    list.innerHTML = "";
+
+    saved.forEach(link => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+
+      list.appendChild(li);
+    });
+  }
+}
+
+loadResources();
 </script>
 
 </div>
