@@ -16,6 +16,21 @@
 
   <h2>Your Resources</h2>
 
+<select 
+  id="subjectSelect"
+  style="width:100%;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #ccc;"
+>
+  <option>Maths</option>
+  <option>English</option>
+  <option>Biology</option>
+  <option>Chemistry</option>
+  <option>Physics</option>
+  <option>History</option>
+  <option>Geography</option>
+  <option>Business</option>
+  <option>Computer Science</option>
+</select>
+
 <input 
   type="text" 
   id="resourceInput" 
@@ -47,7 +62,12 @@ function addResource() {
 
   const li = document.createElement("li");
 
-  li.innerHTML = `<a href="${input.value}" target="_blank">${input.value}</a>`;
+  const subject = document.getElementById("subjectSelect").value;
+
+li.innerHTML = `
+<strong>${subject}:</strong>
+<a href="${input.value}" target="_blank">${input.value}</a>
+`;
 
   list.appendChild(li);
 
