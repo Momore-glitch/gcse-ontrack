@@ -45,6 +45,18 @@
   Add Resource
 </button>
 
+function deleteResource(button) {
+  button.parentElement.remove();
+
+  saveResources();
+
+  const list = document.getElementById("resourceList");
+
+  if (list.children.length === 0) {
+    list.innerHTML = "<li>No resources added yet.</li>";
+  }
+}
+
   <ul id="resourceList">
     <li>No resources added yet.</li>
   </ul>
@@ -67,6 +79,13 @@ function addResource() {
 li.innerHTML = `
 <strong>${subject}:</strong>
 <a href="${input.value}" target="_blank">${input.value}</a>
+
+<button 
+  onclick="deleteResource(this)"
+  style="margin-left:10px;padding:4px 8px;border:none;border-radius:6px;background:#ff4d4d;color:white;cursor:pointer;"
+>
+  Delete
+</button>
 `;
 
   list.appendChild(li);
