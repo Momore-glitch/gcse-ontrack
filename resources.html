@@ -57,7 +57,24 @@ function deleteResource(button) {
   }
 }
 
+<input
+  type="text"
+  id="searchInput"
+  placeholder="Search resources..."
+  onkeyup="filterResources()"
+  style="
+    width:100%;
+    padding:12px;
+    margin-top:20px;
+    margin-bottom:16px;
+    border-radius:10px;
+    border:1px solid #ccc;
+  "
+>
+
   <ul id="resourceList">
+
+
     <li>No resources added yet.</li>
   </ul>
 
@@ -128,6 +145,22 @@ function loadResources() {
 }
 
 loadResources();
+</script>
+
+<script>
+function filterResources() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+
+  const items = document.querySelectorAll("#resourceList li");
+
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+
+    item.style.display = text.includes(input)
+      ? "block"
+      : "none";
+  });
+}
 </script>
 
 </div>
