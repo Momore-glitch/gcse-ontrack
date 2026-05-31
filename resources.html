@@ -97,6 +97,19 @@ li.innerHTML = `
 <strong>${subject}:</strong>
 <a href="${input.value}" target="_blank">${input.value}</a>
 
+<button
+  onclick="toggleFavourite(this)"
+  style="
+    padding:6px 10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-right:8px;
+  "
+>
+  ⭐ Favourite
+</button>
+
 <button 
   onclick="deleteResource(this)"
   style="margin-left:10px;padding:4px 8px;border:none;border-radius:6px;background:#ff4d4d;color:white;cursor:pointer;"
@@ -105,6 +118,17 @@ li.innerHTML = `
 </button>
 `;
 
+function toggleFavourite(button) {
+  const card = button.closest("li");
+
+  if (card.dataset.favourite === "true") {
+    card.dataset.favourite = "false";
+    card.style.border = "";
+  } else {
+    card.dataset.favourite = "true";
+    card.style.border = "2px solid gold";
+  }
+}
   list.appendChild(li);
 
 
