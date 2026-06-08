@@ -150,6 +150,8 @@ function toggleFavourite(button) {
 }
   list.appendChild(li);
 
+// Next: add favourite status
+
 
 saveResources();
 
@@ -163,7 +165,10 @@ function saveResources() {
   const links = [];
 
   document.querySelectorAll("#resourceList li a").forEach(a => {
-    links.push(a.href);
+    resources.push({
+  subject: subject,
+  link: link
+});
   });
 
   localStorage.setItem("gcseResources", JSON.stringify(links));
