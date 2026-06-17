@@ -23,6 +23,20 @@ border-bottom:1px solid #ddd;
 
 <h1>Progress Tracker</h1>
 
+<div style="margin:20px 0;padding:20px;border-radius:12px;background:rgba(79,124,255,0.12);">
+  <h2>Today's Goal</h2>
+
+  <p id="dailyGoal">
+    Complete one focused 30-minute revision session.
+  </p>
+
+  <button onclick="completeGoal()">
+    Mark as Complete
+  </button>
+
+  <p id="goalStatus"></p>
+</div>
+
 <p>Track your GCSE revision progress.</p>
 
 <div style="
@@ -32,6 +46,8 @@ background:rgba(0,0,0,0.05);
 ">
   <p>No progress data yet.</p>
 </div>
+
+
 
 </body>
 </html>
