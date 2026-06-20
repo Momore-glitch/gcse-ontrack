@@ -37,6 +37,18 @@ border-bottom:1px solid #ddd;
   <p id="goalStatus"></p>
 </div>
 
+<div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
+  <h2>Past Paper Tracker</h2>
+
+  <p>Past papers completed:</p>
+
+  <p id="paperCount">0</p>
+
+  <button onclick="addPaper()">
+    + Completed a Past Paper
+  </button>
+</div>
+
 <p>Track your GCSE revision progress.</p>
 
 <div style="
@@ -48,6 +60,17 @@ background:rgba(0,0,0,0.05);
 </div>
 
 
+<script>
+let paperCount = Number(localStorage.getItem("paperCount")) || 0;
+
+document.getElementById("paperCount").textContent = paperCount;
+
+function addPaper() {
+  paperCount++;
+  localStorage.setItem("paperCount", paperCount);
+  document.getElementById("paperCount").textContent = paperCount;
+}
+</script>
 
 </body>
 </html>
