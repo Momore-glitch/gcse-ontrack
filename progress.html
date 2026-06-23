@@ -38,6 +38,26 @@ border-bottom:1px solid #ddd;
 </div>
 
 <div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
+
+<div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
+  <h2>My Target Grade</h2>
+
+  <select id="targetGrade">
+    <option>9</option>
+    <option>8</option>
+    <option>7</option>
+    <option>6</option>
+    <option>5</option>
+    <option>4</option>
+  </select>
+
+  <button onclick="saveTargetGrade()">
+    Save
+  </button>
+
+  <p id="targetMessage"></p>
+</div>
+
   <h2>Past Paper Tracker</h2>
 
   <p>Past papers completed:</p>
@@ -69,6 +89,23 @@ function addPaper() {
   paperCount++;
   localStorage.setItem("paperCount", paperCount);
   document.getElementById("paperCount").textContent = paperCount;
+}
+
+function saveTargetGrade() {
+  const grade = document.getElementById("targetGrade").value;
+
+  localStorage.setItem("targetGrade", grade);
+
+  document.getElementById("targetMessage").textContent =
+    "Target Grade: " + grade;
+}
+
+const savedGrade = localStorage.getItem("targetGrade");
+
+if (savedGrade) {
+  document.getElementById("targetGrade").value = savedGrade;
+  document.getElementById("targetMessage").textContent =
+    "Target Grade: " + savedGrade;
 }
 </script>
 
