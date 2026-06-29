@@ -63,6 +63,17 @@ border-bottom:1px solid #ddd;
   <p id="targetMessage"></p>
 </div>
 
+<div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
+
+<h2>Revision Session Timer</h2>
+
+<p id="timer">25:00</p>
+
+<button onclick="startTimer()">Start</button>
+<button onclick="resetTimer()">Reset</button>
+
+</div>
+
   <h2>Past Paper Tracker</h2>
 
   <p>Past papers completed:</p>
@@ -127,6 +138,52 @@ if (savedGrade) {
 }
 
 document.getElementById("streak").textContent = streak;
+
+let timeLeft = 1500;
+let timer;
+
+function updateTimer() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+
+  document.getElementById("timer").textContent =
+    `${minutes}:${seconds.toString().padStart(2,"0")}`;
+}
+
+function startTimer() {
+
+  if (timer) return;
+
+  timer = setInterval(() => {
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      timer = null;
+      alert("Revision session complete!");
+      return;
+    }
+
+    timeLeft--;
+
+    updateTimer();
+
+  },1000);
+
+}
+
+function resetTimer() {
+
+  clearInterval(timer);
+
+  timer = null;
+
+  timeLeft = 1500;
+
+  updateTimer();
+
+}
+
+updateTimer();
 </script>
 
 </body>
