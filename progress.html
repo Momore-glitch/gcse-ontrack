@@ -42,6 +42,10 @@ border-bottom:1px solid #ddd;
 </p>
 </div>
 
+<h3>Recent Study Sessions</h3>
+
+<ul id="historyList"></ul>
+
 <div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
 
 <div style="margin-top:30px;padding:20px;border-radius:12px;background:rgba(0,0,0,0.05);">
@@ -117,6 +121,12 @@ function completeGoal() {
 
   localStorage.setItem("studyStreak", streak);
 
+let history = JSON.parse(localStorage.getItem("studyHistory")) || [];
+
+history.push(new Date().toLocaleDateString());
+
+localStorage.setItem("studyHistory", JSON.stringify(history));
+
   document.getElementById("streak").textContent = streak;
 }
 
@@ -184,6 +194,22 @@ function resetTimer() {
 }
 
 updateTimer();
+
+const history =
+JSON.parse(localStorage.getItem("studyHistory")) || [];
+
+const historyList =
+document.getElementById("historyList");
+
+history.slice(-5).reverse().forEach(date => {
+
+  const li = document.createElement("li");
+
+  li.textContent = "✅ " + date;
+
+  historyList.appendChild(li);
+
+});
 </script>
 
 </body>
