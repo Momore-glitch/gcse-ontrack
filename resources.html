@@ -75,19 +75,8 @@ Save revision videos, websites, notes and past papers here.
   Add Resource
 </button>
 
-function deleteResource(button) {
-  button.parentElement.remove();
 
-  // TODO: Save subject, link, and favourite status
-
-saveResources();
-
-  const list = document.getElementById("resourceList");
-
-  if (list.children.length === 0) {
-    list.innerHTML = "<li>No resources added yet.</li>";
-  }
-}
+    
 
 <input
   type="text"
@@ -178,9 +167,8 @@ function saveResources() {
   const links = [];
 
   document.querySelectorAll("#resourceList li a").forEach(a => {
-    resources.push({
-  subject: subject,
-  link: link
+    links.push({
+  
 });
   });
 
@@ -217,7 +205,7 @@ function filterResources() {
   items.forEach(item => {
     const text = item.textContent.toLowerCase();
 
-<a href="progress.html">Progress</a>
+
 
     item.style.display = text.includes(input)
       ? "block"
