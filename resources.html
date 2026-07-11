@@ -164,36 +164,57 @@ saveResources();
 
 <script>
 function saveResources() {
-  const links = [];
 
-  document.querySelectorAll("#resourceList li a").forEach(a => {
-    links.push({
-  
-});
+  const resources = [];
+
+  document.querySelectorAll("#resourceList li").forEach(item => {
+
+    const subject = item.querySelector("strong").textContent.replace(":", "");
+    const link = item.querySelector("a").href;
+
+    resources.push({
+      subject: subject,
+      link: link
+    });
+
   });
 
-  localStorage.setItem("gcseResources", JSON.stringify(links));
+  localStorage.setItem("gcseResources", JSON.stringify(resources));
+
 }
 
 function loadResources() {
+
   const saved = JSON.parse(localStorage.getItem("gcseResources")) || [];
 
   const list = document.getElementById("resourceList");
 
-  if (saved.length > 0) {
-    list.innerHTML = "";
+  if (saved.length === 0) return;
 
-    saved.forEach(link => {
-      const li = document.createElement("li");
+  list.innerHTML = "";
 
-      li.innerHTML = `<a href="${link}" target="_blank">${link}</a>`;
+  saved.forEach(resource => {
 
-      list.appendChild(li);
-    });
-  }
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <strong>${resource.subject}:</strong>
+      <a href="${resource.link}" target="_blank">${resource.link}</a>
+
+      <button onclick="toggleFavourite(this)">
+        ⭐ Favourite
+      </button>
+
+      <button onclick="deleteResource(this)">
+        Delete
+      </button>
+    `;
+
+    list.appendChild(li);
+
+  });
+
 }
-
-loadResources();
 </script>
 
 <script>
