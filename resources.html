@@ -1,265 +1,302 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GCSE Study Resources</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body style="font-family:sans-serif;max-width:900px;margin:auto;padding:20px;">
+<title>GCSE Study Resources</title>
 
-<nav style="
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#0b1020;
+color:white;
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+nav{
 display:flex;
 gap:20px;
-padding:16px 0;
-margin-bottom:20px;
-border-bottom:1px solid #ddd;
-">
-  <a href="index.html">Home</a>
-  <a href="plan.html">Revision Plan</a>
-  <a href="resources.html">Resources</a>
+padding:20px 0;
+border-bottom:1px solid #333;
+margin-bottom:30px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#4f7cff;
+}
+
+.card{
+background:#161f36;
+padding:20px;
+border-radius:15px;
+margin-bottom:25px;
+}
+
+input,select{
+
+width:100%;
+padding:12px;
+margin-top:12px;
+margin-bottom:12px;
+border:none;
+border-radius:10px;
+font-size:16px;
+
+}
+
+button{
+
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:#4f7cff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#3b68df;
+
+}
+
+#resourceList{
+
+list-style:none;
+padding:0;
+margin-top:20px;
+
+}
+
+#resourceList li{
+
+background:#212c47;
+padding:15px;
+border-radius:12px;
+margin-bottom:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="plan.html">Revision Plan</a>
+
+<a href="resources.html">Resources</a>
+
+<a href="progress.html">Progress</a>
+
+<a href="timetable.html">Timetable</a>
+
+<a href="guides.html">Guides</a>
+
 </nav>
 
 <h1>Study Resources</h1>
 
 <p>
-Save revision videos, websites, notes and past papers here.
+Save every useful GCSE resource in one place.
 </p>
 
-<p>Organise all your GCSE study links and resources in one place.</p>
+<div class="card">
 
-<div style="margin-top:24px;padding:18px;border-radius:14px;background:rgba(0,0,0,0.05);">
+<h2>Add Resource</h2>
 
-  <h2>Your Resources</h2>
+<select id="subjectSelect">
 
-<select 
-  id="subjectSelect"
-  style="width:100%;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #ccc;"
->
-  <option>Maths</option>
-  <option>English</option>
-  <option>Biology</option>
-  <option>Chemistry</option>
-  <option>Physics</option>
-  <option>History</option>
-  <option>Geography</option>
-  <option>Business</option>
-  <option>Computer Science</option>
+<option>Maths</option>
+<option>English</option>
+<option>Biology</option>
+<option>Chemistry</option>
+<option>Physics</option>
+<option>History</option>
+<option>Geography</option>
+<option>Business</option>
+<option>Computer Science</option>
+
 </select>
 
-<input 
-  type="text" 
-  id="resourceInput" 
-  placeholder="Paste a study link..."
-  style="width:100%;padding:12px;border-radius:10px;margin-bottom:12px;border:1px solid #ccc;"
->
+<input
+id="resourceInput"
+type="url"
+placeholder="Paste resource link">
 
-<div style="margin-bottom:24px;padding:18px;border-radius:14px;background:rgba(79,124,255,0.12);">
-  <h2>Today's Focus</h2>
+<button onclick="addResource()">
 
-  <p>
-    Add your most important resource for today's revision session.
-  </p>
+Add Resource
 
-  <div id="todayFocus">
-    No focus resource selected.
-  </div>
-</div>
-
-
-<button 
-  onclick="addResource()" 
-  style="padding:10px 16px;border:none;border-radius:10px;background:#4f7cff;color:white;font-weight:600;cursor:pointer;"
->
-  Add Resource
 </button>
 
+</div>
 
-    
+<div class="card">
+
+<h2>Search</h2>
 
 <input
-  type="text"
-  id="searchInput"
-  placeholder="Search resources..."
-  onkeyup="filterResources()"
-  style="
-    width:100%;
-    padding:12px;
-    margin-top:20px;
-    margin-bottom:16px;
-    border-radius:10px;
-    border:1px solid #ccc;
-  "
->
+id="searchInput"
+type="text"
+placeholder="Search resources..."
+onkeyup="filterResources()">
 
-  <ul id="resourceList">
+</div>
 
+<div class="card">
 
-    <li>No resources added yet.</li>
-  </ul>
+<h2>Your Resources</h2>
+
+<ul id="resourceList">
+
+<li>No resources added yet.</li>
+
+</ul>
+
+</div>
 
 <script>
+
 function addResource() {
-  const input = document.getElementById("resourceInput");
-  const list = document.getElementById("resourceList");
+
+  const subject =
+    document.getElementById("subjectSelect").value;
+
+  const input =
+    document.getElementById("resourceInput");
+
+  const list =
+    document.getElementById("resourceList");
 
   if (input.value.trim() === "") return;
 
-  if (list.innerHTML.includes("No resources added yet.")) {
+  if (list.innerHTML.includes("No resources")) {
     list.innerHTML = "";
   }
 
   const li = document.createElement("li");
 
-  const subject = document.getElementById("subjectSelect").value;
+  li.innerHTML = `
+    <strong>${subject}</strong><br><br>
 
-li.innerHTML = `
-<strong>${subject}:</strong>
-<a href="${input.value}" target="_blank">${input.value}</a>
+    <a href="${input.value}" target="_blank">
+      ${input.value}
+    </a>
 
-<button
-  onclick="toggleFavourite(this)"
-  style="
-    padding:6px 10px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin-right:8px;
-  "
->
-  ⭐ Favourite
-</button>
+    <br><br>
 
-<button onclick="editResource(this)">
-  Edit
-</button>
+    <button onclick="toggleFavourite(this)">
+      ⭐ Favourite
+    </button>
 
-<button onclick="deleteResource(this)">
-  Delete
-</button>
+    <button onclick="editResource(this)">
+      ✏️ Edit
+    </button>
 
-function deleteResource(button) {
-    ...
-}
+    <button onclick="deleteResource(this)">
+      🗑 Delete
+    </button>
+  `;
 
-function editResource(button) {
-
-    const li = button.parentElement;
-
-    const link = li.querySelector("a");
-
-    const newLink = prompt("Edit resource link:", link.href);
-
-    if (!newLink) return;
-
-    link.href = newLink;
-    link.textContent = newLink;
-
-    saveResources();
-
-}
-
-
-
-
-function toggleFavourite(button) {
-  const card = button.closest("li");
-
-  if (card.dataset.favourite === "true") {
-    card.dataset.favourite = "false";
-    card.style.border = "";
-  } else {
-    card.dataset.favourite = "true";
-    card.style.border = "2px solid gold";
-  }
-}
   list.appendChild(li);
 
-// Next: add favourite status
-
-
-saveResources();
-
-
   input.value = "";
+
+  saveResources();
+
 }
-</script>
 
-<script>
-function saveResources() {
+function deleteResource(button){
 
-  const resources = [];
+  button.parentElement.remove();
 
-  document.querySelectorAll("#resourceList li").forEach(item => {
+  const list =
+    document.getElementById("resourceList");
 
-    const subject = item.querySelector("strong").textContent.replace(":", "");
-    const link = item.querySelector("a").href;
+  if(list.children.length===0){
 
-    resources.push({
-      subject: subject,
-      link: link
-    });
+    list.innerHTML="<li>No resources added yet.</li>";
+
+  }
+
+  saveResources();
+
+}
+
+function editResource(button){
+
+  const li=button.parentElement;
+
+  const link=li.querySelector("a");
+
+  const updated=
+    prompt("Edit link",link.href);
+
+  if(updated===null||updated==="") return;
+
+  link.href=updated;
+
+  link.textContent=updated;
+
+  saveResources();
+
+}
+
+function toggleFavourite(button){
+
+  const li=button.parentElement;
+
+  if(li.dataset.favourite==="true"){
+
+    li.dataset.favourite="false";
+
+    li.style.border="";
+
+  }else{
+
+    li.dataset.favourite="true";
+
+    li.style.border="2px solid gold";
+
+  }
+
+  saveResources();
+
+}
+
+function filterResources(){
+
+  const search=
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+  document
+  .querySelectorAll("#resourceList li")
+  .forEach(li=>{
+
+    li.style.display=
+      li.textContent.toLowerCase()
+      .includes(search)
+      ?"block":"none";
 
   });
 
-  localStorage.setItem("gcseResources", JSON.stringify(resources));
-
 }
-
-function loadResources() {
-
-  const saved = JSON.parse(localStorage.getItem("gcseResources")) || [];
-
-  const list = document.getElementById("resourceList");
-
-  if (saved.length === 0) return;
-
-  list.innerHTML = "";
-
-  saved.forEach(resource => {
-
-    const li = document.createElement("li");
-
-    li.innerHTML = `
-      <strong>${resource.subject}:</strong>
-      <a href="${resource.link}" target="_blank">${resource.link}</a>
-
-      <button onclick="toggleFavourite(this)">
-        ⭐ Favourite
-      </button>
-
-      <button onclick="deleteResource(this)">
-        Delete
-      </button>
-    `;
-
-    list.appendChild(li);
-
-  });
-
-}
-</script>
-
-<script>
-function filterResources() {
-  const input = document.getElementById("searchInput").value.toLowerCase();
-
-  const items = document.querySelectorAll("#resourceList li");
-
-  items.forEach(item => {
-    const text = item.textContent.toLowerCase();
-
-
-
-    item.style.display = text.includes(input)
-      ? "block"
-      : "none";
-  });
-}
-</script>
-
-</div>
-
-</body>
-</html>
