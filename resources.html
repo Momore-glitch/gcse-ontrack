@@ -131,12 +131,30 @@ li.innerHTML = `
   ⭐ Favourite
 </button>
 
-<button 
-  onclick="deleteResource(this)"
-  style="margin-left:10px;padding:4px 8px;border:none;border-radius:6px;background:#ff4d4d;color:white;cursor:pointer;"
->
+<button onclick="editResource(this)">
+  Edit
+</button>
+
+<button onclick="deleteResource(this)">
   Delete
 </button>
+
+function editResource(button) {
+
+  const li = button.parentElement;
+
+  const link = li.querySelector("a");
+
+  const newLink = prompt("Edit resource link:", link.href);
+
+  if (!newLink) return;
+
+  link.href = newLink;
+  link.textContent = newLink;
+
+  saveResources();
+
+}
 `;
 
 function toggleFavourite(button) {
