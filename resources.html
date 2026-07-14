@@ -300,3 +300,91 @@ function filterResources(){
   });
 
 }
+
+function saveResources() {
+
+  const resources = [];
+
+  document.querySelectorAll("#resourceList li").forEach(li => {
+
+    if (li.querySelector("a") === null) return;
+
+    resources.push({
+
+      subject: li.querySelector("strong").textContent,
+
+      link: li.querySelector("a").href,
+
+      favourite: li.dataset.favourite === "true"
+
+    });
+
+  });
+
+  localStorage.setItem(
+    "gcseResources",
+    JSON.stringify(resources)
+  );
+
+}
+
+function loadResources() {
+
+  const saved =
+    JSON.parse(localStorage.getItem("gcseResources")) || [];
+
+  if(saved.length===0) return;
+
+  const list =
+    document.getElementById("resourceList");
+
+  list.innerHTML="";
+
+  saved.forEach(resource=>{
+
+    const li=document.createElement("li");
+
+    if(resource.favourite){
+
+      li.dataset.favourite="true";
+
+      li.style.border="2px solid gold";
+
+    }
+
+    li.innerHTML=`
+
+      <strong>${resource.subject}</strong><br><br>
+
+      <a href="${resource.link}" target="_blank">
+        ${resource.link}
+      </a>
+
+      <br><br>
+
+      <button onclick="toggleFavourite(this)">
+        ⭐ Favourite
+      </button>
+
+      <button onclick="editResource(this)">
+        ✏️ Edit
+      </button>
+
+      <button onclick="deleteResource(this)">
+        🗑 Delete
+      </button>
+
+    `;
+
+    list.appendChild(li);
+
+  });
+
+}
+
+loadResources();
+
+</script>
+
+</body>
+</html>
