@@ -139,23 +139,29 @@ li.innerHTML = `
   Delete
 </button>
 
+function deleteResource(button) {
+    ...
+}
+
 function editResource(button) {
 
-  const li = button.parentElement;
+    const li = button.parentElement;
 
-  const link = li.querySelector("a");
+    const link = li.querySelector("a");
 
-  const newLink = prompt("Edit resource link:", link.href);
+    const newLink = prompt("Edit resource link:", link.href);
 
-  if (!newLink) return;
+    if (!newLink) return;
 
-  link.href = newLink;
-  link.textContent = newLink;
+    link.href = newLink;
+    link.textContent = newLink;
 
-  saveResources();
+    saveResources();
 
 }
-`;
+
+
+
 
 function toggleFavourite(button) {
   const card = button.closest("li");
