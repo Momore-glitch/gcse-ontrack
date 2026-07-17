@@ -165,6 +165,10 @@ onkeyup="filterResources()">
 
 <h2>Your Resources</h2>
 
+<button onclick="openSubjectResources()">
+📚 Open All For Selected Subject
+</button>
+
 <ul id="resourceList">
 
 <li>No resources added yet.</li>
@@ -325,6 +329,29 @@ function saveResources() {
     "gcseResources",
     JSON.stringify(resources)
   );
+
+}
+
+function openSubjectResources(){
+
+  const subject =
+    document.getElementById("subjectSelect").value;
+
+  document.querySelectorAll("#resourceList li").forEach(li=>{
+
+    const savedSubject =
+      li.querySelector("strong").textContent;
+
+    if(savedSubject===subject){
+
+      window.open(
+        li.querySelector("a").href,
+        "_blank"
+      );
+
+    }
+
+  });
 
 }
 
