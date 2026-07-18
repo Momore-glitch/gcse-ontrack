@@ -169,6 +169,16 @@ onkeyup="filterResources()">
 📚 Open All For Selected Subject
 </button>
 
+<div style="margin-bottom:20px;padding:15px;border-radius:12px;background:#1b2745;">
+
+<h3>Your Library</h3>
+
+<p>Total Resources:
+<span id="resourceCount">0</span>
+</p>
+
+</div>
+
 <ul id="resourceList">
 
 <li>No resources added yet.</li>
@@ -226,6 +236,8 @@ function addResource() {
 
   saveResources();
 
+updateResourceCount();
+
 }
 
 function deleteResource(button){
@@ -242,6 +254,8 @@ function deleteResource(button){
   }
 
   saveResources();
+
+updateResourceCount();
 
 }
 
@@ -283,6 +297,8 @@ function toggleFavourite(button){
   }
 
   saveResources();
+
+
 
 }
 
@@ -409,7 +425,16 @@ function loadResources() {
 
 }
 
+function updateResourceCount(){
+
+  document.getElementById("resourceCount").textContent =
+    document.querySelectorAll("#resourceList li a").length;
+
+}
+
 loadResources();
+
+updateResourceCount();
 
 </script>
 
