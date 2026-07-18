@@ -179,7 +179,7 @@ onkeyup="filterResources()">
 
 </div>
 
-<ul id="resourceList">
+<ul id="resourceList" style="display:flex;flex-direction:column;gap:15px;">
 
 <li>No resources added yet.</li>
 
@@ -208,6 +208,9 @@ function addResource() {
 
   const li = document.createElement("li");
 
+li.dataset.created =
+resource.created || Date.now();
+
   li.innerHTML = `
     <strong>${subject}</strong><br><br>
 
@@ -235,6 +238,8 @@ function addResource() {
   input.value = "";
 
   saveResources();
+
+sortResources();
 
 updateResourceCount();
 
@@ -329,15 +334,17 @@ function saveResources() {
 
     if (li.querySelector("a") === null) return;
 
-    resources.push({
+   resources.push({
 
-      subject: li.querySelector("strong").textContent,
+  subject: li.querySelector("strong").textContent,
 
-      link: li.querySelector("a").href,
+  link: li.querySelector("a").href,
 
-      favourite: li.dataset.favourite === "true"
+  favourite: li.dataset.favourite === "true",
 
-    });
+  created: li.dataset.created
+
+});
 
   });
 
@@ -368,6 +375,21 @@ function openSubjectResources(){
     }
 
   });
+
+}
+
+function sortResources(){
+
+  const list = document.getElementById("resourceList");
+
+  const items = [...list.querySelectorAll("li")];
+
+  items.sort((a,b)=>
+    Number(b.dataset.created||0)-
+    Number(a.dataset.created||0)
+  );
+
+  items.forEach(item=>list.appendChild(item));
 
 }
 
