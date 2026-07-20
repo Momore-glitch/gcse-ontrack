@@ -194,6 +194,10 @@ function addResource() {
   const subject =
     document.getElementById("subjectSelect").value;
 
+const tag = prompt(
+  "Add a topic/tag (e.g. Algebra, Paper 1, Macbeth):"
+) || "General";
+
   const input =
     document.getElementById("resourceInput");
 
@@ -212,7 +216,21 @@ li.dataset.created =
 resource.created || Date.now();
 
   li.innerHTML = `
-    <strong>${subject}</strong><br><br>
+    <strong>${subject}</strong>
+
+<span style="
+background:#4f7cff;
+padding:4px 8px;
+border-radius:8px;
+font-size:12px;
+margin-left:8px;
+">
+
+${tag}
+
+</span>
+
+<br><br>
 
     <a href="${input.value}" target="_blank">
       ${input.value}
@@ -338,15 +356,15 @@ function saveResources() {
 
   subject: li.querySelector("strong").textContent,
 
+  tag: li.querySelector("span").textContent,
+
   link: li.querySelector("a").href,
 
-  favourite: li.dataset.favourite === "true",
+  favourite: li.dataset.favourite==="true",
 
   created: li.dataset.created
 
 });
-
-  });
 
   localStorage.setItem(
     "gcseResources",
@@ -417,9 +435,21 @@ function loadResources() {
 
     }
 
-    li.innerHTML=`
+li.innerHTML = `
 
-      <strong>${resource.subject}</strong><br><br>
+    <strong>${resource.subject}</strong>
+
+<span style="
+background:#4f7cff;
+padding:4px 8px;
+border-radius:8px;
+font-size:12px;
+margin-left:8px;
+">
+
+${resource.tag}
+
+</span>
 
       <a href="${resource.link}" target="_blank">
         ${resource.link}
