@@ -8,6 +8,20 @@
 
 <style>
 
+.resource-note{
+
+    margin:10px 0;
+
+    color:#c9d4e8;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+    font-style:italic;
+
+}
+
 body{
 font-family:Arial,sans-serif;
 background:#0b1020;
@@ -198,6 +212,10 @@ const tag = prompt(
   "Add a topic/tag (e.g. Algebra, Paper 1, Macbeth):"
 ) || "General";
 
+const note = prompt(
+  "Add an optional note about this resource:"
+) || "";
+
   const input =
     document.getElementById("resourceInput");
 
@@ -235,6 +253,14 @@ ${tag}
     <a href="${input.value}" target="_blank">
       ${input.value}
     </a>
+
+<br><br>
+
+<p class="resource-note">
+${note}
+</p>
+
+<br>
 
     <br><br>
 
@@ -327,18 +353,12 @@ function toggleFavourite(button){
 
 function filterResources(){
 
-  const search=
-    document.getElementById("searchInput")
-    .value.toLowerCase();
+  const text = li.textContent.toLowerCase();
 
-  document
-  .querySelectorAll("#resourceList li")
-  .forEach(li=>{
-
-    li.style.display=
-      li.textContent.toLowerCase()
-      .includes(search)
-      ?"block":"none";
+li.style.display =
+text.includes(searchTerm)
+? ""
+: "none";
 
   });
 
@@ -360,9 +380,12 @@ function saveResources() {
 
   link: li.querySelector("a").href,
 
+note: li.querySelector(".resource-note").textContent,
+
   favourite: li.dataset.favourite==="true",
 
   created: li.dataset.created
+
 
 });
 
@@ -454,6 +477,14 @@ ${resource.tag}
       <a href="${resource.link}" target="_blank">
         ${resource.link}
       </a>
+
+<br><br>
+
+<p class="resource-note">
+${resource.note || ""}
+</p>
+
+<br>
 
       <br><br>
 
