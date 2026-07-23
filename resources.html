@@ -104,6 +104,18 @@ margin-bottom:15px;
 
 }
 
+.clickCount{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#9fb3d1;
+
+    font-size:13px;
+
+}
+
 </style>
 
 </head>
@@ -386,7 +398,9 @@ note: li.querySelector(".resource-note").textContent,
 
   favourite: li.dataset.favourite==="true",
 
-  created: li.dataset.created
+  created: li.dataset.created,
+
+clicks: li.dataset.clicks
 
 
 });
@@ -436,6 +450,23 @@ function sortResources(){
 
 }
 
+function trackClick(link){
+
+    const li = link.closest("li");
+
+    let clicks = Number(li.dataset.clicks);
+
+    clicks++;
+
+    li.dataset.clicks = clicks;
+
+    li.querySelector(".clickCount").textContent =
+        `Opened ${clicks} ${clicks===1?"time":"times"}`;
+
+    saveResources();
+
+}
+
 function loadResources() {
 
   const saved =
@@ -476,9 +507,20 @@ ${resource.tag}
 
 </span>
 
-      <a href="${resource.link}" target="_blank">
-        ${resource.link}
-      </a>
+      <a
+href="${formattedLink}"
+target="_blank"
+onclick="trackClick(this)"
+>
+${formattedLink}
+</a>
+
+<br><br>
+
+<small class="clickCount">
+Opened ${resource.clicks || 0}
+${(resource.clicks || 0)==1?"time":"times"}
+</small>
 
 <br><br>
 
