@@ -502,6 +502,10 @@ function trackClick(link){
 currentSubject=subject;
 
 renderResources();
+        
+        resources
+.filter(resource=>currentSubject==="All" || resource.subject===currentSubject)
+.forEach((resource,index)=>{
 
     }
 
