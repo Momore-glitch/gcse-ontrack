@@ -272,8 +272,7 @@ const note = prompt(
 
   const li = document.createElement("li");
 
-li.dataset.created =
-resource.created || Date.now();
+li.dataset.created = Date.now();
 
 li.dataset.clicks = 0;
 
