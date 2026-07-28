@@ -515,13 +515,19 @@ function trackClick(link){
 
     function filterBySubject(subject){
 
-currentSubject=subject;
+document.querySelectorAll("#resourceList li").forEach(li=>{
 
-renderResources();
-        
-        resources
-.filter(resource=>currentSubject==="All" || resource.subject===currentSubject)
-.forEach((resource,index)=>{
+if(li.querySelector("strong")==null) return;
+
+const itemSubject=
+li.querySelector("strong").textContent;
+
+li.style.display=
+(subject==="All"||itemSubject===subject)
+? ""
+: "none";
+
+});
 
     }
 
