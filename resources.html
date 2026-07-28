@@ -397,14 +397,25 @@ function toggleFavourite(button){
 
 function filterResources(){
 
-  const text = li.textContent.toLowerCase();
+const searchTerm =
+document.getElementById("searchInput")
+.value
+.toLowerCase();
+
+document.querySelectorAll("#resourceList li")
+.forEach(li=>{
+
+if(li.querySelector("a")==null) return;
+
+const text =
+li.textContent.toLowerCase();
 
 li.style.display =
 text.includes(searchTerm)
 ? ""
 : "none";
 
-  });
+});
 
 }
 
