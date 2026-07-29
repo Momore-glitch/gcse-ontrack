@@ -1026,6 +1026,14 @@ const card=document.createElement("div");
 
 card.className="resourceCard";
 
+    card.style.borderLeftColor=
+
+SUBJECT_COLOURS[resource.subject]
+
+||
+
+"var(--primary)";
+
 if(resource.favourite){
 
 card.style.border="2px solid gold";
