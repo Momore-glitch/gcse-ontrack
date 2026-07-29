@@ -802,6 +802,16 @@ return{
 
 id:crypto.randomUUID(),
 
+    shortId:
+
+Math.random()
+
+.toString(36)
+
+.substring(2,8)
+
+.toUpperCase(),
+
 title:titleInput.value.trim(),
 
 url:urlInput.value.trim(),
