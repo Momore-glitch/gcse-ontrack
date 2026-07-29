@@ -1064,15 +1064,15 @@ ${escapeHTML(resource.subject)}
 
 </strong>
 
-<span style="
-background:var(--primary);
-padding:5px 10px;
-border-radius:999px;
-margin-left:8px;
-font-size:12px;
-">
+<span
 
-${escapeHTML(resource.tag)}
+class="resourceSubject"
+
+style="background:${SUBJECT_COLOURS[resource.subject]||'var(--primary)'}"
+
+>
+
+${resource.subject}
 
 </span>
 
