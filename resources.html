@@ -1176,13 +1176,37 @@ onclick="deleteResource('${resource.id}')">
 
 </div>
 
-<div style="
-margin-top:18px;
-color:var(--muted);
-font-size:13px;
-">
+<div class="resourceStats">
 
-Opened
+<span>
+
+📅 Added:
+
+<strong>
+
+${formatDate(resource.created)}
+
+</strong>
+
+</span>
+
+<span>
+
+🕒 Last Opened:
+
+<strong>
+
+${resource.lastOpened
+? formatDate(resource.lastOpened)
+: "Never"}
+
+</strong>
+
+</span>
+
+<span>
+
+👆 Opens:
 
 <strong>
 
@@ -1190,13 +1214,7 @@ ${resource.clicks}
 
 </strong>
 
-times
-
-•
-
-Added
-
-${formatDate(resource.created)}
+</span>
 
 </div>
 
