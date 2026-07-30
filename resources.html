@@ -702,7 +702,29 @@ placeholder="Search resources...">
 
 </select>
 
+    <button
+
+id="toggleTabMode"
+
+class="secondaryBtn">
+
+🌐 New Tab
+
+    </button>
+
 </div>
+
+    <div
+
+id="resultsText"
+
+style="margin-bottom:18px;
+color:var(--muted);
+font-weight:600;">
+
+0 resources
+
+    </div>
 
 <div id="resourceGrid">
 
@@ -765,6 +787,8 @@ let currentSubject = "All Subjects";
 
 let currentSort = "newest";
 
+    let openInNewTab=true;
+
 /* ---------- Elements ---------- */
 
 const resourceGrid =
@@ -826,7 +850,23 @@ Math.random()
 
 title:titleInput.value.trim(),
 
-url:urlInput.value.trim(),
+url:
+
+urlInput.value
+
+.trim()
+
+.startsWith("http")
+
+?
+
+urlInput.value.trim()
+
+:
+
+"https://"+
+
+urlInput.value.trim(),
 
 tag:tagInput.value.trim(),
 
@@ -1016,6 +1056,24 @@ if(filtered.length===0){
 
 resourceGrid.innerHTML=`
 
+document
+
+.getElementById("resultsText")
+
+.textContent=
+
+filtered.length+
+
+(filtered.length===1
+
+?
+
+" resource"
+
+:
+
+" resources");
+
 <div class="emptyState">
 
 <h2>No Resources Found</h2>
@@ -1132,7 +1190,7 @@ ${escapeHTML(resource.note)||"No notes."}
 
 href="${resource.url}"
 
-target="_blank"
+target="${openInNewTab?"_blank":"_self"}"
 
 onclick="trackOpen('${resource.id}')"
 
@@ -1164,6 +1222,12 @@ gap:10px;
 onclick="editResource('${resource.id}')">
 
 ✏ Edit
+
+</button>
+
+<button onclick="copyResourceLink('${resource.id}')">
+
+📋 Copy Link
 
 </button>
 
@@ -1304,6 +1368,26 @@ return;
 
 }
 
+    if(
+
+resources.some(r=>
+
+r.url===urlInput.value.trim()
+
+)
+
+){
+
+alert(
+
+"This resource already exists."
+
+);
+
+return;
+
+    }
+
 resources.unshift(createResource());
 
 saveResources();
@@ -1316,7 +1400,9 @@ renderResources();
 
 function deleteResource(id){
 
-if(!confirm("Delete this resource?")) return;
+if(!confirm("Delete this resource permanently?
+
+This cannot be undone.")) return;
 
 resources=
 
@@ -1451,6 +1537,26 @@ saveResources();
 renderResources();
 
 }
+
+    function copyResourceLink(id){
+
+const resource=
+
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+navigator.clipboard
+
+.writeText(resource.url)
+
+.then(()=>{
+
+alert("Link copied.");
+
+});
+
+    }
 
 function trackOpen(id){
 
@@ -1761,7 +1867,35 @@ renderResources();
 /* ==========================================
    END
 ========================================== */
+document
 
+.getElementById("toggleTabMode")
+
+.addEventListener(
+
+"click",
+
+function(){
+
+openInNewTab=
+
+!openInNewTab;
+
+this.textContent=
+
+openInNewTab
+
+?
+
+"🌐 New Tab"
+
+:
+
+"📄 Same Tab";
+
+});
+
+    
 </script>
 
 </body>
