@@ -878,6 +878,12 @@ favourite:false,
 
 clicks:0,
 
+pinned:false,
+
+archived:false,
+
+lastEdited:null,
+
 created:Date.now(),
 
 lastOpened:null
@@ -958,7 +964,13 @@ return div.innerHTML;
 
 function renderResources(){
 
-let filtered=[...resources];
+let filtered=
+
+resources.filter(
+
+r=>!r.archived
+
+);
 
 /* ---------- Search ---------- */
 
@@ -995,6 +1007,16 @@ resource.subject===currentSubject
 }
 
 /* ---------- Sort ---------- */
+
+    filtered.sort(
+
+(a,b)=>
+
+Number(b.pinned)-
+
+Number(a.pinned)
+
+);
 
 switch(currentSort){
 
@@ -1056,23 +1078,33 @@ if(filtered.length===0){
 
 resourceGrid.innerHTML=`
 
+const archived=
+
+resources.filter(
+
+r=>r.archived
+
+).length;
+
 document
 
-.getElementById("resultsText")
+.getElementById(
+
+"resultsText"
+
+)
 
 .textContent=
 
-filtered.length+
+`${filtered.length}
 
-(filtered.length===1
+resources
 
-?
+•
 
-" resource"
+${archived}
 
-:
-
-" resources");
+archived`;
 
 <div class="emptyState">
 
@@ -1129,6 +1161,38 @@ new URL(resource.url)
 .replace("www.","");
 
 card.innerHTML=`
+
+${resource.pinned?
+
+`
+
+<div  style="
+
+display:inline-block;
+
+background:#f59e0b;
+
+color:white;
+
+padding:5px 12px;
+
+border-radius:999px;
+
+font-size:12px;
+
+font-weight:700;
+
+margin-bottom:12px;
+
+">
+
+📌 PINNED
+
+</div>  `
+
+:
+
+""}
 
 <div style="display:flex;
 justify-content:space-between;
@@ -1228,6 +1292,30 @@ onclick="editResource('${resource.id}')">
 <button onclick="copyResourceLink('${resource.id}')">
 
 📋 Copy Link
+
+</button>
+
+<button
+
+onclick="togglePinned('${resource.id}')">
+
+${resource.pinned
+
+?
+
+"📌 Unpin"
+
+:
+
+"📍 Pin"}
+
+</button>
+
+<button
+
+onclick="archiveResource('${resource.id}')">
+
+🗄 Archive
 
 </button>
 
@@ -1532,6 +1620,12 @@ resource.subject=
 
 subject.trim();
 
+    resource.lastEdited=
+
+new Date()
+
+.toISOString();
+
 saveResources();
 
 renderResources();
@@ -1555,6 +1649,57 @@ navigator.clipboard
 alert("Link copied.");
 
 });
+
+    }
+    function togglePinned(id){
+
+const resource=
+
+resources.find(
+
+r=>r.id===id
+
+);
+
+if(!resource) return;
+
+resource.pinned=
+
+!resource.pinned;
+
+saveResources();
+
+renderResources();
+
+}
+
+function archiveResource(id){
+
+if(
+
+!confirm(
+
+"Archive this resource?"
+
+)
+
+)return;
+
+const resource=
+
+resources.find(
+
+r=>r.id===id
+
+);
+
+if(!resource) return;
+
+resource.archived=true;
+
+saveResources();
+
+renderResources();
 
     }
 
@@ -1892,6 +2037,38 @@ openInNewTab
 :
 
 "📄 Same Tab";
+
+});
+
+    document
+
+.getElementById(
+
+"archiveBtn"
+
+)
+
+.addEventListener(
+
+"click",
+
+()=>{
+
+const archived=
+
+resources.filter(
+
+r=>r.archived
+
+);
+
+alert(
+
+archived.length+
+
+" archived resources."
+
+);
 
 });
 
