@@ -890,6 +890,10 @@ pinned:false,
 
 archived:false,
 
+deleted:false,
+
+deletedDate:null,
+
 lastEdited:null,
 
 created:Date.now(),
@@ -972,12 +976,9 @@ return div.innerHTML;
 
 function renderResources(){
 
-let filtered=
-
+let filtered =
 resources.filter(
-
-r=>!r.archived
-
+r=>!r.archived && !r.deleted
 );
 
 /* ---------- Search ---------- */
@@ -1420,6 +1421,17 @@ resources.map(r=>r.subject)
 
 ).size;
 
+    const deletedCount=
+
+resources.filter(
+r=>r.deleted
+).length;
+
+console.log(
+"Deleted:",
+deletedCount
+);
+
     }
 
     /* ==========================================
@@ -1496,23 +1508,56 @@ renderResources();
 
 function deleteResource(id){
 
-if(!confirm("Delete this resource permanently?
+if(!confirm(
+"Move this resource to the Recycle Bin?"
+)) return;
 
-This cannot be undone.")) return;
+const resource=
+resources.find(r=>r.id===id);
 
-resources=
+if(!resource) return;
 
-resources.filter(resource=>
+resource.deleted=true;
 
-resource.id!==id
-
-);
+resource.deletedDate=Date.now();
 
 saveResources();
 
 renderResources();
 
 }
+
+    function restoreResource(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.deleted=false;
+
+resource.deletedDate=null;
+
+saveResources();
+
+renderResources();
+
+    }
+
+    function permanentlyDelete(id){
+
+if(!confirm(
+"Permanently delete this resource?"
+)) return;
+
+resources=
+resources.filter(r=>r.id!==id);
+
+saveResources();
+
+renderResources();
+
+    }
 
 function toggleFavourite(id){
 
@@ -2077,6 +2122,36 @@ archived.length+
 " archived resources."
 
 );
+
+});
+
+    document
+.getElementById("recycleBinBtn")
+.addEventListener("click",()=>{
+
+const deleted=
+
+resources.filter(r=>r.deleted);
+
+if(deleted.length===0){
+
+alert("Recycle Bin is empty.");
+
+return;
+
+}
+
+let message="Recycle Bin\n\n";
+
+deleted.forEach(resource=>{
+
+message+=
+resource.title+
+"\n";
+
+});
+
+alert(message);
 
 });
 
