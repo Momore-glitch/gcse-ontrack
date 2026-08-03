@@ -663,6 +663,12 @@ id="archiveBtn">
 
     </button>
 
+    <button id="recycleBinBtn">
+
+♻ Recycle Bin
+
+    </button>
+
 <input
 type="file"
 id="importFile"
@@ -1085,37 +1091,30 @@ break;
 
 if(filtered.length===0){
 
-resourceGrid.innerHTML=`
+const archived =
+resources.filter(r => r.archived).length;
 
-const archived=
+const deleted =
+resources.filter(r => r.deleted).length;
 
-resources.filter(
+document.getElementById("resultsText").textContent =
+`${filtered.length} resources • ${archived} archived • ${deleted} deleted`;
 
-r=>r.archived
-
-).length;
-
-document
-
-.getElementById(
-
-"resultsText"
-
-)
-
-.textContent=
-
-`${filtered.length}
-
-resources
-
-•
-
-${archived}
-
-archived`;
-
+resourceGrid.innerHTML = `
 <div class="emptyState">
+
+<h2>No Resources Found</h2>
+
+<br>
+
+<p>
+
+Try another search or add a new resource.
+
+</p>
+
+</div>
+`;
 
 <h2>No Resources Found</h2>
 
