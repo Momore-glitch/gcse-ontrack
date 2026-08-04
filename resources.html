@@ -563,6 +563,23 @@ Everything is searchable, sortable and stored locally.
 
 </div>
 
+    <div class="panel"
+style="margin-bottom:24px;">
+
+<h2>
+
+Library Status
+
+</h2>
+
+<p id="libraryStatus">
+
+Everything is up to date.
+
+</p>
+
+    </div>
+
 <div class="pageGrid">
 
 <aside class="panel">
@@ -711,6 +728,12 @@ placeholder="Search resources...">
 <option value="alphabetical">A-Z</option>
 
 <option value="mostOpened">Most Opened</option>
+
+    <option value="recentlyEdited">
+
+Recently Edited
+
+    </option>
 
 <option value="favourites">Favourites First</option>
 
@@ -1085,6 +1108,16 @@ Number(b.favourite)-Number(a.favourite)
 
 break;
 
+        case "recentlyEdited":
+
+filtered.sort((a,b)=>
+
+(b.lastEdited||0)-(a.lastEdited||0)
+
+);
+
+break;
+
 }
 
 /* ---------- Empty ---------- */
@@ -1144,6 +1177,14 @@ filtered.forEach(resource=>{
 
 const card=document.createElement("div");
 
+const age=
+
+Date.now()-resource.created;
+
+const isNew=
+
+age<604800000;
+
 card.className="resourceCard";
 
     card.style.borderLeftColor=
@@ -1160,6 +1201,14 @@ card.style.border="2px solid gold";
 
 }
 
+if(resource.clicks>=10){
+
+card.style.boxShadow=
+
+"0 0 18px rgba(79,124,255,.45)";
+
+}
+
     const website=
 
 new URL(resource.url)
@@ -1173,6 +1222,8 @@ card.innerHTML=`
 ${resource.pinned?
 
 `
+
+
 
 <div  style="
 
@@ -1201,6 +1252,26 @@ margin-bottom:12px;
 :
 
 ""}
+
+    ${isNew?`
+
+<div style="
+display:inline-block;
+margin-left:8px;
+background:#16a34a;
+color:white;
+padding:5px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-bottom:12px;
+">
+
+🆕 NEW
+
+</div>
+
+`:""}
 
 <div style="display:flex;
 justify-content:space-between;
@@ -1350,6 +1421,20 @@ ${formatDate(resource.created)}
 
 </span>
 
+    <span>
+
+✏ Edited:
+
+<strong>
+
+${resource.lastEdited
+? formatDate(resource.lastEdited)
+: "Never"}
+
+</strong>
+
+</span>
+
 <span>
 
 🕒 Last Opened:
@@ -1359,6 +1444,26 @@ ${formatDate(resource.created)}
 ${resource.lastOpened
 ? formatDate(resource.lastOpened)
 : "Never"}
+
+</strong>
+
+</span>
+
+    <span>
+
+📆 Age:
+
+<strong>
+
+${Math.floor(
+
+(Date.now()-resource.created)
+
+/86400000
+
+)}
+
+days
 
 </strong>
 
@@ -1431,6 +1536,28 @@ console.log(
 deletedCount
 );
 
+
+document
+
+.getElementById(
+
+"libraryStatus"
+
+)
+
+.textContent=
+
+resources.length===0
+
+?
+
+"No resources added."
+
+:
+
+resources.length+
+
+" resources currently stored locally.";
     }
 
     /* ==========================================
