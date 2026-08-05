@@ -1075,3 +1075,220 @@ clearInputs();
 renderResources();
 
 }
+
+
+            /* ==========================
+   RENDER ENGINE
+========================== */
+
+function renderResources(){
+
+let filtered=resources.filter(
+
+r=>!r.archived&&!r.deleted
+
+);
+
+/* ---------- Search ---------- */
+
+if(currentSearch){
+
+const search=currentSearch.toLowerCase();
+
+filtered=filtered.filter(resource=>
+
+resource.title.toLowerCase().includes(search)||
+
+resource.subject.toLowerCase().includes(search)||
+
+resource.tag.toLowerCase().includes(search)||
+
+resource.note.toLowerCase().includes(search)||
+
+resource.url.toLowerCase().includes(search)
+
+);
+
+}
+
+/* ---------- Subject ---------- */
+
+if(currentSubject!=="All Subjects"){
+
+filtered=filtered.filter(
+
+resource=>resource.subject===currentSubject
+
+);
+
+}
+
+/* ---------- Sort ---------- */
+
+switch(currentSort){
+
+case"newest":
+
+filtered.sort((a,b)=>b.created-a.created);
+
+break;
+
+case"oldest":
+
+filtered.sort((a,b)=>a.created-b.created);
+
+break;
+
+case"alphabetical":
+
+filtered.sort((a,b)=>
+
+a.title.localeCompare(b.title)
+
+);
+
+break;
+
+case"mostOpened":
+
+filtered.sort((a,b)=>b.clicks-a.clicks);
+
+break;
+
+case"recentlyEdited":
+
+filtered.sort(
+
+(a,b)=>
+
+(b.lastEdited||0)-(a.lastEdited||0)
+
+);
+
+break;
+
+case"favourites":
+
+filtered.sort(
+
+(a,b)=>
+
+Number(b.favourite)-Number(a.favourite)
+
+);
+
+break;
+
+}
+
+/* ---------- Pin ---------- */
+
+filtered.sort(
+
+(a,b)=>
+
+Number(b.pinned)-Number(a.pinned)
+
+);
+
+/* ---------- Counter ---------- */
+
+const archived=
+
+resources.filter(r=>r.archived).length;
+
+const deleted=
+
+resources.filter(r=>r.deleted).length;
+
+resultsText.textContent=
+
+`${filtered.length} resources • ${archived} archived • ${deleted} deleted`;
+
+/* ---------- Empty ---------- */
+
+if(filtered.length===0){
+
+resourceGrid.innerHTML=`
+
+<div class="emptyState">
+
+<h2>
+
+No Resources Found
+
+</h2>
+
+<br>
+
+<p>
+
+Try another search or add a resource.
+
+</p>
+
+</div>
+
+`;
+
+updateStatistics();
+
+return;
+
+}
+
+/* ---------- Cards ---------- */
+
+resourceGrid.innerHTML="";
+
+filtered.forEach(resource=>{
+
+const card=document.createElement("div");
+
+card.className="resourceCard";
+
+card.style.borderLeftColor=
+
+SUBJECT_COLOURS[resource.subject]||
+
+"var(--primary)";
+
+if(resource.favourite){
+
+card.style.border="2px solid gold";
+
+}
+
+if(resource.clicks>=10){
+
+card.style.boxShadow=
+
+"0 0 20px rgba(79,124,255,.35)";
+
+}
+
+const website=
+
+new URL(resource.url)
+
+.hostname
+
+.replace("www.","");
+
+const age=
+
+Date.now()-resource.created;
+
+const isNew=
+
+age<604800000;
+
+/* Card HTML continues in the next section */
+
+resourceGrid.appendChild(card);
+
+});
+
+updateStatistics();
+
+}
