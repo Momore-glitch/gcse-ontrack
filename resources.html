@@ -807,3 +807,134 @@ Start building your GCSE library by adding your first resource.
 </main>
 
 </div>
+
+
+        <script>
+
+/* ==========================================
+   GCSE ONTRACK RESOURCES ENGINE v3
+========================================== */
+
+const STORAGE_KEY="gcse_resources_v3";
+
+let resources=[];
+
+const SUBJECT_COLOURS={
+
+"Maths":"#2563eb",
+"English":"#7c3aed",
+"Biology":"#16a34a",
+"Chemistry":"#06b6d4",
+"Physics":"#f59e0b",
+"History":"#dc2626",
+"Geography":"#059669",
+"Business":"#9333ea",
+"Computer Science":"#0ea5e9"
+
+};
+
+let currentSearch="";
+
+let currentSubject="All Subjects";
+
+let currentSort="newest";
+
+let openInNewTab=true;
+
+/* ==========================
+   DOM ELEMENTS
+========================== */
+
+const resourceGrid=document.getElementById("resourceGrid");
+
+const resultsText=document.getElementById("resultsText");
+
+const totalResources=document.getElementById("totalResources");
+
+const totalFavourites=document.getElementById("totalFavourites");
+
+const totalClicks=document.getElementById("totalClicks");
+
+const totalSubjects=document.getElementById("totalSubjects");
+
+const libraryStatus=document.getElementById("libraryStatus");
+
+const subjectInput=document.getElementById("subjectInput");
+
+const titleInput=document.getElementById("titleInput");
+
+const urlInput=document.getElementById("urlInput");
+
+const tagInput=document.getElementById("tagInput");
+
+const noteInput=document.getElementById("noteInput");
+
+const searchInput=document.getElementById("searchInput");
+
+const subjectFilter=document.getElementById("subjectFilter");
+
+const sortSelect=document.getElementById("sortSelect");
+
+/* ==========================
+   STORAGE
+========================== */
+
+function saveResources(){
+
+localStorage.setItem(
+
+STORAGE_KEY,
+
+JSON.stringify(resources)
+
+);
+
+}
+
+function loadResources(){
+
+resources=
+
+JSON.parse(
+
+localStorage.getItem(STORAGE_KEY)
+
+)||[];
+
+}
+
+/* ==========================
+   HELPERS
+========================== */
+
+function formatDate(date){
+
+return new Date(date)
+
+.toLocaleDateString();
+
+}
+
+function escapeHTML(text){
+
+const div=document.createElement("div");
+
+div.textContent=text;
+
+return div.innerHTML;
+
+}
+
+function clearInputs(){
+
+subjectInput.selectedIndex=0;
+
+titleInput.value="";
+
+urlInput.value="";
+
+tagInput.value="";
+
+noteInput.value="";
+
+}
