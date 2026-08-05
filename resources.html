@@ -938,3 +938,140 @@ tagInput.value="";
 noteInput.value="";
 
 }
+
+            /* ==========================
+   RESOURCE OBJECT
+========================== */
+
+function createResource(){
+
+return{
+
+id:crypto.randomUUID(),
+
+shortId:
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase(),
+
+title:titleInput.value.trim(),
+
+url:
+urlInput.value.trim().startsWith("http")
+?
+urlInput.value.trim()
+:
+"https://"+urlInput.value.trim(),
+
+subject:subjectInput.value,
+
+tag:tagInput.value.trim(),
+
+note:noteInput.value.trim(),
+
+favourite:false,
+
+pinned:false,
+
+archived:false,
+
+deleted:false,
+
+deletedDate:null,
+
+clicks:0,
+
+created:Date.now(),
+
+lastEdited:null,
+
+lastOpened:null
+
+};
+
+}
+
+/* ==========================
+   ADD RESOURCE
+========================== */
+
+function addResource(){
+
+if(subjectInput.value===""){
+
+alert("Choose a subject.");
+
+return;
+
+}
+
+if(titleInput.value.trim()===""){
+
+alert("Enter a title.");
+
+return;
+
+}
+
+if(urlInput.value.trim()===""){
+
+alert("Enter a URL.");
+
+return;
+
+}
+
+const fixedURL=
+
+urlInput.value.trim().startsWith("http")
+
+?
+
+urlInput.value.trim()
+
+:
+
+"https://"+urlInput.value.trim();
+
+try{
+
+new URL(fixedURL);
+
+}catch{
+
+alert("Invalid URL.");
+
+return;
+
+}
+
+if(
+
+resources.some(
+
+r=>r.url===fixedURL
+
+)
+
+){
+
+alert("This resource already exists.");
+
+return;
+
+}
+
+const resource=createResource();
+
+resource.url=fixedURL;
+
+resources.unshift(resource);
+
+saveResources();
+
+clearInputs();
+
+renderResources();
+
+}
