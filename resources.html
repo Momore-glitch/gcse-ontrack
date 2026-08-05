@@ -1521,3 +1521,431 @@ resourceGrid.appendChild(card);
 updateStatistics();
 
 }
+
+
+            /* ==========================
+   STATISTICS
+========================== */
+
+function updateStatistics(){
+
+totalResources.textContent=
+resources.length;
+
+totalFavourites.textContent=
+resources.filter(r=>r.favourite).length;
+
+totalClicks.textContent=
+resources.reduce(
+(sum,r)=>sum+r.clicks,
+0
+);
+
+totalSubjects.textContent=
+new Set(
+resources.map(r=>r.subject)
+).size;
+
+libraryStatus.textContent=
+resources.length===0
+?
+"No resources added."
+:
+resources.length+
+" resources currently stored locally.";
+
+}
+
+/* ==========================
+   RESOURCE ACTIONS
+========================== */
+
+function toggleFavourite(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.favourite=
+!resource.favourite;
+
+saveResources();
+
+renderResources();
+
+}
+
+function togglePinned(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.pinned=
+!resource.pinned;
+
+saveResources();
+
+renderResources();
+
+}
+
+function archiveResource(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.archived=true;
+
+saveResources();
+
+renderResources();
+
+}
+
+function deleteResource(id){
+
+if(!confirm(
+"Move this resource to the Recycle Bin?"
+)) return;
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.deleted=true;
+
+resource.deletedDate=Date.now();
+
+saveResources();
+
+renderResources();
+
+}
+
+function editResource(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+const title=
+prompt(
+"Title",
+resource.title
+);
+
+if(title===null) return;
+
+const url=
+prompt(
+"URL",
+resource.url
+);
+
+if(url===null) return;
+
+const tag=
+prompt(
+"Tag",
+resource.tag
+);
+
+if(tag===null) return;
+
+const note=
+prompt(
+"Notes",
+resource.note
+);
+
+if(note===null) return;
+
+resource.title=title.trim();
+resource.url=url.trim();
+resource.tag=tag.trim();
+resource.note=note.trim();
+
+resource.lastEdited=Date.now();
+
+saveResources();
+
+renderResources();
+
+}
+
+function copyResourceLink(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+navigator.clipboard
+.writeText(resource.url);
+
+alert("Link copied.");
+
+}
+
+function trackOpen(id){
+
+const resource=
+resources.find(r=>r.id===id);
+
+if(!resource) return;
+
+resource.clicks++;
+
+resource.lastOpened=Date.now();
+
+saveResources();
+
+}
+
+/* ==========================
+   IMPORT / EXPORT
+========================== */
+
+document
+.getElementById("exportBtn")
+.onclick=function(){
+
+const blob=new Blob(
+[
+JSON.stringify(
+resources,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"gcse_resources.json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+};
+
+const importFile=
+document.getElementById("importFile");
+
+document
+.getElementById("importBtn")
+.onclick=
+()=>importFile.click();
+
+importFile.onchange=function(){
+
+const file=this.files[0];
+
+if(!file) return;
+
+const reader=
+new FileReader();
+
+reader.onload=()=>{
+
+try{
+
+resources=
+JSON.parse(reader.result);
+
+saveResources();
+
+renderResources();
+
+alert("Library imported.");
+
+}catch{
+
+alert("Invalid file.");
+
+}
+
+};
+
+reader.readAsText(file);
+
+};
+
+/* ==========================
+   QUICK ACTIONS
+========================== */
+
+document
+.getElementById("clearLibraryBtn")
+.onclick=function(){
+
+if(!confirm(
+"Delete entire library?"
+))
+return;
+
+resources=[];
+
+saveResources();
+
+renderResources();
+
+};
+
+document
+.getElementById("openSubjectBtn")
+.onclick=function(){
+
+if(subjectInput.value===""){
+
+alert("Choose a subject.");
+
+return;
+
+}
+
+resources
+.filter(r=>
+r.subject===subjectInput.value
+)
+.forEach(r=>
+
+window.open(
+
+r.url,
+
+"_blank"
+
+)
+
+);
+
+};
+
+document
+.getElementById("archiveBtn")
+.onclick=function(){
+
+const archived=
+
+resources.filter(r=>r.archived);
+
+alert(
+
+archived.length+
+
+" archived resources."
+
+);
+
+};
+
+document
+.getElementById("recycleBinBtn")
+.onclick=function(){
+
+const deleted=
+
+resources.filter(r=>r.deleted);
+
+if(deleted.length===0){
+
+alert(
+"Recycle Bin is empty."
+);
+
+return;
+
+}
+
+alert(
+
+deleted.length+
+
+" deleted resources."
+
+);
+
+};
+
+document
+.getElementById("toggleTabMode")
+.onclick=function(){
+
+openInNewTab=
+!openInNewTab;
+
+this.textContent=
+
+openInNewTab
+
+?
+
+"🌐 New Tab"
+
+:
+
+"📄 Same Tab";
+
+};
+
+/* ==========================
+   FILTERS
+========================== */
+
+searchInput.oninput=function(){
+
+currentSearch=
+this.value.trim();
+
+renderResources();
+
+};
+
+subjectFilter.onchange=function(){
+
+currentSubject=
+this.value;
+
+renderResources();
+
+};
+
+sortSelect.onchange=function(){
+
+currentSort=
+this.value;
+
+renderResources();
+
+};
+
+document
+.getElementById("addResourceBtn")
+.onclick=addResource;
+
+/* ==========================
+   STARTUP
+========================== */
+
+loadResources();
+
+renderResources();
