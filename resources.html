@@ -1285,6 +1285,235 @@ age<604800000;
 
 /* Card HTML continues in the next section */
 
+card.innerHTML=`
+
+${resource.pinned?`
+
+<div style="
+display:inline-block;
+background:#f59e0b;
+color:white;
+padding:5px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-bottom:12px;
+">
+
+📌 PINNED
+
+</div>
+
+`:""}
+
+${isNew?`
+
+<div style="
+display:inline-block;
+margin-left:8px;
+background:#16a34a;
+color:white;
+padding:5px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-bottom:12px;
+">
+
+🆕 NEW
+
+</div>
+
+`:""}
+
+<div class="resourceTop">
+
+<div>
+
+<h2>
+
+${escapeHTML(resource.title)}
+
+</h2>
+
+<div style="margin-top:8px;">
+
+<strong>
+
+${resource.shortId}
+
+</strong>
+
+<br><br>
+
+<span
+class="resourceSubject"
+style="
+background:
+${SUBJECT_COLOURS[resource.subject]||"var(--primary)"};
+">
+
+${resource.subject}
+
+</span>
+
+</div>
+
+</div>
+
+<div>
+
+<button onclick="toggleFavourite('${resource.id}')">
+
+${resource.favourite?"⭐":"☆"}
+
+</button>
+
+</div>
+
+</div>
+
+<p style="margin:18px 0;line-height:1.7;">
+
+${escapeHTML(resource.note)||"No notes."}
+
+</p>
+
+<a
+href="${resource.url}"
+target="${openInNewTab?"_blank":"_self"}"
+onclick="trackOpen('${resource.id}')">
+
+${resource.url}
+
+</a>
+
+<div style="
+margin-top:8px;
+color:var(--muted);
+font-size:13px;
+">
+
+🌐 ${website}
+
+</div>
+
+<div style="
+margin-top:18px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+">
+
+<button onclick="editResource('${resource.id}')">
+
+✏ Edit
+
+</button>
+
+<button onclick="copyResourceLink('${resource.id}')">
+
+📋 Copy
+
+</button>
+
+<button onclick="togglePinned('${resource.id}')">
+
+${resource.pinned?"📌 Unpin":"📍 Pin"}
+
+</button>
+
+<button onclick="archiveResource('${resource.id}')">
+
+🗄 Archive
+
+</button>
+
+<button onclick="deleteResource('${resource.id}')">
+
+🗑 Delete
+
+</button>
+
+</div>
+
+<div class="resourceStats">
+
+<span>
+
+📅 Added:
+<strong>
+
+${formatDate(resource.created)}
+
+</strong>
+
+</span>
+
+<span>
+
+✏ Edited:
+<strong>
+
+${resource.lastEdited
+?
+formatDate(resource.lastEdited)
+:
+"Never"}
+
+</strong>
+
+</span>
+
+<span>
+
+🕒 Last Opened:
+<strong>
+
+${resource.lastOpened
+?
+formatDate(resource.lastOpened)
+:
+"Never"}
+
+</strong>
+
+</span>
+
+<span>
+
+👆 Opens:
+<strong>
+
+${resource.clicks}
+
+</strong>
+
+</span>
+
+<span>
+
+📆 Age:
+<strong>
+
+${Math.floor(
+
+(Date.now()-resource.created)
+
+/86400000
+
+)}
+
+days
+
+</strong>
+
+</span>
+
+</div>
+
+`;
+
 resourceGrid.appendChild(card);
 
 });
