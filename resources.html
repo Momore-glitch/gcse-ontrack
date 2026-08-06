@@ -1904,25 +1904,79 @@ document
 
 const deleted=
 
-resources.filter(r=>r.deleted);
+resources.filter(
+
+r=>r.deleted
+
+);
 
 if(deleted.length===0){
 
-alert(
-"Recycle Bin is empty."
-);
+alert("Recycle Bin is empty.");
 
 return;
 
 }
 
-alert(
+const names=
 
-deleted.length+
+deleted.map(
 
-" deleted resources."
+(r,i)=>
+
+`${i+1}. ${r.title}`
+
+).join("\n");
+
+const input=
+
+prompt(
+
+`Recycle Bin\n\n${names}\n\nType:\nR1 = Restore item 1\nD1 = Delete item 1 forever`
 
 );
+
+if(input===null)return;
+
+const action=
+
+input.charAt(0).toUpperCase();
+
+const index=
+
+Number(input.substring(1))-1;
+
+if(
+
+index<0||
+
+index>=deleted.length
+
+)return;
+
+if(action==="R"){
+
+deleted[index].deleted=false;
+
+deleted[index].deletedDate=null;
+
+}
+
+else if(action==="D"){
+
+resources=
+
+resources.filter(
+
+r=>r.id!==deleted[index].id
+
+);
+
+}
+
+saveResources();
+
+renderResources();
 
 };
 
