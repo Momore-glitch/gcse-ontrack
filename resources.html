@@ -1599,6 +1599,16 @@ resources.find(r=>r.id===id);
 
 if(!resource) return;
 
+    if(
+
+!confirm(
+
+"Archive this resource?"
+
+)
+
+)return;
+
 resource.archived=true;
 
 saveResources();
@@ -1610,7 +1620,7 @@ renderResources();
 function deleteResource(id){
 
 if(!confirm(
-"Move this resource to the Recycle Bin?"
+"Move this resource to the Recycle Bin?\n\nYou can restore it later."
 )) return;
 
 const resource=
