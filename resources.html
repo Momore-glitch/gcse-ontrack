@@ -1848,13 +1848,53 @@ const archived=
 
 resources.filter(r=>r.archived);
 
-alert(
+if(archived.length===0){
 
-archived.length+
+alert("Archive is empty.");
 
-" archived resources."
+return;
+
+}
+
+const names=
+
+archived.map(
+
+(r,i)=>
+
+`${i+1}. ${r.title}`
+
+).join("\n");
+
+const choice=
+
+prompt(
+
+`Archived Resources\n\n${names}\n\nEnter number to restore:`
 
 );
+
+if(choice===null)return;
+
+const index=
+
+Number(choice)-1;
+
+if(
+
+index<0||
+
+index>=archived.length
+
+)return;
+
+archived[index].archived=false;
+
+saveResources();
+
+renderResources();
+
+alert("Resource restored.");
 
 };
 
