@@ -69,13 +69,28 @@ async function (event) {
         return;
     }
 
+    /* CONFIRMATION REDIRECT */
+
+    const redirectURL =
+        window.location.origin +
+        "/gcse-ontrack/account.html";
+
     const {
         data,
         error
     } =
     await supabase.auth.signUp({
+
         email,
-        password
+        password,
+
+        options: {
+
+            emailRedirectTo:
+                redirectURL
+
+        }
+
     });
 
     if (error) {
@@ -91,13 +106,13 @@ async function (event) {
     if (data.session) {
 
         showMessage(
-            "Account created successfully."
+            "✅ Account created successfully."
         );
 
     } else {
 
         showMessage(
-            "Account created. Check your email to confirm your account."
+            "✅ Account created! Check your email and click the confirmation link to finish signing up."
         );
     }
 
@@ -127,8 +142,10 @@ async function (event) {
         error
     } =
     await supabase.auth.signInWithPassword({
+
         email,
         password
+
     });
 
     if (error) {
@@ -142,7 +159,7 @@ async function (event) {
     }
 
     showMessage(
-        "Signed in successfully."
+        "✅ You're signed in!"
     );
 
     updateAccount();
@@ -168,18 +185,20 @@ async function () {
 
     const redirectURL =
         window.location.origin +
-        window.location.pathname
-            .replace(/[^/]*$/, "") +
-        "account.html";
+        "/gcse-ontrack/account.html";
 
     const {
         error
     } =
     await supabase.auth.resetPasswordForEmail(
+
         email.trim(),
+
         {
-            redirectTo: redirectURL
+            redirectTo:
+                redirectURL
         }
+
     );
 
     if (error) {
@@ -193,7 +212,7 @@ async function () {
     }
 
     showMessage(
-        "Password reset email requested. Check your inbox."
+        "📧 Password reset email requested. Check your inbox."
     );
 
 });
@@ -225,7 +244,7 @@ async function () {
     }
 
     showMessage(
-        "You have been logged out."
+        "You've been logged out."
     );
 
     updateAccount();
@@ -266,14 +285,16 @@ async function updateAccount() {
 
     if (session) {
 
-        panel.style.display = "block";
+        panel.style.display =
+            "block";
 
         $("accountEmail").textContent =
             session.user.email || "";
 
     } else {
 
-        panel.style.display = "none";
+        panel.style.display =
+            "none";
     }
 }
 
