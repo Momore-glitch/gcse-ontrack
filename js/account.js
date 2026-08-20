@@ -1,13 +1,290 @@
-/* GCSE OnTrack — Account authentication */
-(function(){
+/* GCSE OnTrack — Account */
+
+(function () {
+
 "use strict";
-const $=id=>document.getElementById(id);
-function msg(text,error=false){const e=$("accountMessage");e.textContent=text;e.style.display="block";e.style.borderLeft=`4px solid ${error?"#ef4444":"#2563eb"}`;}
-function ready(){if(!window.supabaseClient){msg("Supabase is not configured yet. Add your credentials in js/supabase.js.",true);return false}return true}
-async function refresh(){if(!ready())return;const {data,error}=await supabaseClient.auth.getSession();if(error)return msg(error.message,true);if(data.session){$("loggedInPanel").style.display="block";$("accountEmail").textContent=data.session.user.email||""}else $("loggedInPanel").style.display="none"}
-$("signupForm")?.addEventListener("submit",async e=>{e.preventDefault();if(!ready())return;const email=$("signupEmail").value.trim(),password=$("signupPassword").value;if(password.length<8)return msg("Password must be at least 8 characters.",true);const {data,error}=await supabaseClient.auth.signUp({email,password});if(error)return msg(error.message,true);msg(data.session?"Account created and signed in.":"Account created. Check your email if confirmation is enabled.");refresh()});
-$("loginForm")?.addEventListener("submit",async e=>{e.preventDefault();if(!ready())return;const {error}=await supabaseClient.auth.signInWithPassword({email:$("loginEmail").value.trim(),password:$("loginPassword").value});if(error)return msg(error.message,true);msg("Signed in successfully.");refresh()});
-$("logoutBtn")?.addEventListener("click",async()=>{if(!ready())return;const {error}=await supabaseClient.auth.signOut();if(error)return msg(error.message,true);msg("Logged out.");refresh()});
-$("resetPassword")?.addEventListener("click",async()=>{if(!ready())return;const email=prompt("Enter your account email:");if(!email)return;const redirect=location.origin+location.pathname.replace(/[^/]*$/,"")+"account.html";const {error}=await supabaseClient.auth.resetPasswordForEmail(email.trim(),{redirectTo:redirect});if(error)msg(error.message,true);else msg("If that email exists, a password-reset email has been requested.")});
-document.addEventListener("DOMContentLoaded",refresh);
+
+const $ = id => document.getElementById(id);
+
+function showMessage(text, error = false) {
+
+    const box = $("accountMessage");
+
+    if (!box) return;
+
+    box.textContent = text;
+    box.style.display = "block";
+
+    box.style.borderLeft =
+        error
+        ? "4px solid #ef4444"
+        : "4px solid #2563eb";
+}
+
+
+function getClient() {
+
+    if (
+        !window.supabaseClient ||
+        !window.supabaseClient.auth
+    ) {
+
+        showMessage(
+            "The account system could not connect to Supabase. Refresh the page and try again.",
+            true
+        );
+
+        return null;
+    }
+
+    return window.supabaseClient;
+}
+
+
+/* CREATE ACCOUNT */
+
+$("signupForm")?.addEventListener(
+"submit",
+async function (event) {
+
+    event.preventDefault();
+
+    const supabase = getClient();
+
+    if (!supabase) return;
+
+    const email =
+        $("signupEmail").value.trim();
+
+    const password =
+        $("signupPassword").value;
+
+    if (password.length < 8) {
+
+        showMessage(
+            "Password must be at least 8 characters.",
+            true
+        );
+
+        return;
+    }
+
+    const {
+        data,
+        error
+    } =
+    await supabase.auth.signUp({
+        email,
+        password
+    });
+
+    if (error) {
+
+        showMessage(
+            error.message,
+            true
+        );
+
+        return;
+    }
+
+    if (data.session) {
+
+        showMessage(
+            "Account created successfully."
+        );
+
+    } else {
+
+        showMessage(
+            "Account created. Check your email to confirm your account."
+        );
+    }
+
+    updateAccount();
+});
+
+
+/* SIGN IN */
+
+$("loginForm")?.addEventListener(
+"submit",
+async function (event) {
+
+    event.preventDefault();
+
+    const supabase = getClient();
+
+    if (!supabase) return;
+
+    const email =
+        $("loginEmail").value.trim();
+
+    const password =
+        $("loginPassword").value;
+
+    const {
+        error
+    } =
+    await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) {
+
+        showMessage(
+            error.message,
+            true
+        );
+
+        return;
+    }
+
+    showMessage(
+        "Signed in successfully."
+    );
+
+    updateAccount();
+});
+
+
+/* FORGOT PASSWORD */
+
+$("resetPassword")?.addEventListener(
+"click",
+async function () {
+
+    const supabase = getClient();
+
+    if (!supabase) return;
+
+    const email =
+        prompt(
+            "Enter the email address linked to your account:"
+        );
+
+    if (!email) return;
+
+    const redirectURL =
+        window.location.origin +
+        window.location.pathname
+            .replace(/[^/]*$/, "") +
+        "account.html";
+
+    const {
+        error
+    } =
+    await supabase.auth.resetPasswordForEmail(
+        email.trim(),
+        {
+            redirectTo: redirectURL
+        }
+    );
+
+    if (error) {
+
+        showMessage(
+            error.message,
+            true
+        );
+
+        return;
+    }
+
+    showMessage(
+        "Password reset email requested. Check your inbox."
+    );
+
+});
+
+
+/* LOG OUT */
+
+$("logoutBtn")?.addEventListener(
+"click",
+async function () {
+
+    const supabase = getClient();
+
+    if (!supabase) return;
+
+    const {
+        error
+    } =
+    await supabase.auth.signOut();
+
+    if (error) {
+
+        showMessage(
+            error.message,
+            true
+        );
+
+        return;
+    }
+
+    showMessage(
+        "You have been logged out."
+    );
+
+    updateAccount();
+});
+
+
+/* ACCOUNT STATUS */
+
+async function updateAccount() {
+
+    const supabase = getClient();
+
+    if (!supabase) return;
+
+    const {
+        data,
+        error
+    } =
+    await supabase.auth.getSession();
+
+    if (error) {
+
+        showMessage(
+            error.message,
+            true
+        );
+
+        return;
+    }
+
+    const session =
+        data.session;
+
+    const panel =
+        $("loggedInPanel");
+
+    if (!panel) return;
+
+    if (session) {
+
+        panel.style.display = "block";
+
+        $("accountEmail").textContent =
+            session.user.email || "";
+
+    } else {
+
+        panel.style.display = "none";
+    }
+}
+
+
+/* INITIALISE */
+
+document.addEventListener(
+"DOMContentLoaded",
+function () {
+
+    updateAccount();
+
+});
 })();
