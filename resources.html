@@ -1,185 +1,592 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resources | GCSE OnTrack</title><link rel="stylesheet" href="styles.css"></head><body><div class="container"><nav>
-<a href="index.html">🏠 Home</a><a href="account.html">👤 Account</a><a href="plan.html">📝 Plan</a><a href="resources.html">📚 Resources</a><a href="progress.html">📊 Progress</a><a href="timetable.html">🗓 Timetable</a><a href="guides.html">📖 Guides</a>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resources | GCSE OnTrack</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="account.html">👤 Account</a>
+<a href="plan.html">📝 Plan</a>
+<a href="resources.html">📚 Resources</a>
+<a href="progress.html">📊 Progress</a>
+<a href="timetable.html">🗓 Timetable</a>
+<a href="guides.html">📖 Guides</a>
 </nav>
-<header class="pageHeader"><h1>Study Resources</h1><p>Build a searchable GCSE library with tags, notes, favourites, pins, priorities, ratings, archives and backups.</p></header>
+
+<header class="pageHeader">
+<h1>Study Resources</h1>
+<p>
+Build a searchable GCSE library with tags, notes, favourites,
+pins, priorities, ratings, archives and backups.
+</p>
+</header>
+
 <div class="grid grid4">
-<div class="panel stat"><h3>Active Resources</h3><strong id="totalResources">0</strong></div><div class="panel stat"><h3>Favourites</h3><strong id="totalFavourites">0</strong></div><div class="panel stat"><h3>Total Opens</h3><strong id="totalClicks">0</strong></div><div class="panel stat"><h3>Subjects Used</h3><strong id="totalSubjects">0</strong></div>
+
+<div class="panel stat">
+<h3>Active Resources</h3>
+<strong id="totalResources">0</strong>
 </div>
-<div class="panel" style="margin:20px 0"><strong>Library Status</strong><p id="libraryStatus" class="muted">Everything is up to date.</p><div class="actions"><span class="badge">🗄 Archived: <b id="archivedCount">0</b></span><span class="badge">♻ Deleted: <b id="deletedCount">0</b></span></div></div>
+
+<div class="panel stat">
+<h3>Favourites</h3>
+<strong id="totalFavourites">0</strong>
+</div>
+
+<div class="panel stat">
+<h3>Total Opens</h3>
+<strong id="totalClicks">0</strong>
+</div>
+
+<div class="panel stat">
+<h3>Subjects Used</h3>
+<strong id="totalSubjects">0</strong>
+</div>
+
+</div>
+
+<div class="panel" style="margin:20px 0">
+
+<strong>Library Status</strong>
+
+<p id="libraryStatus" class="muted">
+Everything is up to date.
+</p>
+
+<div class="actions">
+
+<span class="badge">
+🗄 Archived: <b id="archivedCount">0</b>
+</span>
+
+<span class="badge">
+♻ Deleted: <b id="deletedCount">0</b>
+</span>
+
+</div>
+
+</div>
+
+
 <div class="grid grid2">
-<aside class="panel"><h2>Add Resource</h2><label>Subject</label><select id="subjectInput"><option value="">Choose Subject</option><option>Maths</option><option>English</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option><option>Geography</option><option>Business</option><option>Computer Science</option></select>
-<label>Title</label><input id="titleInput" placeholder="e.g. AQA Maths Past Papers"><label>Resource link</label><input id="urlInput" type="url" placeholder="https://..."><label>Topic / Tag</label><input id="tagInput" placeholder="e.g. Algebra"><label>Priority</label><select id="priorityInput"><option>High</option><option selected>Medium</option><option>Low</option></select><label>Rating</label><select id="ratingInput"><option value="1">1 / 5</option><option value="2">2 / 5</option><option selected value="3">3 / 5</option><option value="4">4 / 5</option><option value="5">5 / 5</option></select><label>Notes</label><textarea id="noteInput" placeholder="Why is this useful?"></textarea><button id="addResourceBtn" class="btn" style="width:100%">➕ Add Resource</button>
-<hr style="border:0;border-top:1px solid var(--border);margin:24px 0"><h2>Quick Actions</h2><div class="actions" style="display:grid"><button id="openSubjectBtn" class="btn secondary">📚 Open Selected Subject</button><button id="exportBtn" class="btn secondary">⬇ Export Library</button><button id="importBtn" class="btn secondary">⬆ Import Library</button><button id="archiveBtn" class="btn warning">🗄 View Archive</button><button id="recycleBinBtn" class="btn danger">♻ Recycle Bin</button><button id="clearLibraryBtn" class="btn danger">🗑 Clear Library</button><button id="toggleTabMode" class="btn secondary">🌐 New Tab</button><button id="resetFiltersBtn" class="btn secondary">↻ Reset Filters</button></div><input id="importFile" type="file" accept=".json" hidden></aside>
+
+<!-- RESOURCE MANAGEMENT -->
+
+<aside class="panel">
+
+<h2>Add Resource</h2>
+
+<label>Subject</label>
+
+<select id="subjectInput">
+
+<option value="">Choose Subject</option>
+<option>Maths</option>
+<option>English</option>
+<option>Biology</option>
+<option>Chemistry</option>
+<option>Physics</option>
+<option>History</option>
+<option>Geography</option>
+<option>Business</option>
+<option>Computer Science</option>
+
+</select>
+
+
+<label>Title</label>
+
+<input
+id="titleInput"
+placeholder="e.g. AQA Maths Past Papers"
+>
+
+
+<label>Resource link</label>
+
+<input
+id="urlInput"
+type="url"
+placeholder="https://..."
+>
+
+
+<label>Topic / Tag</label>
+
+<input
+id="tagInput"
+placeholder="e.g. Algebra"
+>
+
+
+<label>Priority</label>
+
+<select id="priorityInput">
+
+<option>High</option>
+<option selected>Medium</option>
+<option>Low</option>
+
+</select>
+
+
+<label>Rating</label>
+
+<select id="ratingInput">
+
+<option value="1">1 / 5</option>
+<option value="2">2 / 5</option>
+<option selected value="3">3 / 5</option>
+<option value="4">4 / 5</option>
+<option value="5">5 / 5</option>
+
+</select>
+
+
+<label>Notes</label>
+
+<textarea
+id="noteInput"
+placeholder="Why is this useful?"
+></textarea>
+
+
+<button
+id="addResourceBtn"
+class="btn"
+style="width:100%"
+>
+➕ Add Resource
+</button>
+
+
+<hr
+style="
+border:0;
+border-top:1px solid var(--border);
+margin:24px 0;
+">
+
+
+<h2>Quick Actions</h2>
+
+<div
+class="actions"
+style="display:grid"
+>
+
+<button
+id="openSubjectBtn"
+class="btn secondary"
+>
+📚 Open Selected Subject
+</button>
+
+<button
+id="exportBtn"
+class="btn secondary"
+>
+⬇ Export Library
+</button>
+
+<button
+id="importBtn"
+class="btn secondary"
+>
+⬆ Import Library
+</button>
+
+<button
+id="archiveBtn"
+class="btn warning"
+>
+🗄 View Archive
+</button>
+
+<button
+id="recycleBinBtn"
+class="btn danger"
+>
+♻ Recycle Bin
+</button>
+
+<button
+id="clearLibraryBtn"
+class="btn danger"
+>
+🗑 Clear Library
+</button>
+
+<button
+id="toggleTabMode"
+class="btn secondary"
+>
+🌐 New Tab
+</button>
+
+<button
+id="resetFiltersBtn"
+class="btn secondary"
+>
+↻ Reset Filters
+</button>
+
+</div>
+
+<input
+id="importFile"
+type="file"
+accept=".json"
+hidden
+>
+
+</aside>
+
+
+<!-- MAIN RESOURCE AREA -->
+
 <main>
- <section class="panel" id="premiumResourcesCard" style="margin-bottom:20px;">
-    <h2>⭐ Premium Resources</h2>
-    <p id="premiumResourcesText">
-        Unlock advanced resource tools and premium study materials.
-    </p>
-    <a href="subscription.html" id="premiumResourcesBtn" class="btn">
-        ⭐ Upgrade to Premium
-    </a>
-</section> 
- <section class="panel" id="premiumRevisionToolkit" style="margin-bottom:20px;">
-    <h2>🔒 Premium Revision Toolkit</h2>
 
-    <p id="premiumToolkitText">
-        Get access to advanced revision tools designed to make your study sessions more effective.
-    </p>
 
-    <div id="premiumToolkitLocked">
-        <div class="badge" style="margin-bottom:15px;">
-            🔒 Premium feature
-        </div>
+<!-- PREMIUM CARD -->
 
-        <ul>
-            <li>🎯 Advanced revision planning</li>
-            <li>📈 Smarter progress insights</li>
-            <li>🧠 Advanced study strategies</li>
-            <li>📚 Premium revision resources</li>
-        </ul>
-
-        <a href="subscription.html" class="btn">
-            ⭐ Unlock Premium
-        </a>
-    </div>
-
-<div id="premiumToolkitUnlocked" style="display:none;">
-    <div class="badge" style="margin-bottom:15px;">
-        ⭐ Premium unlocked
-    </div>
-
-    <h3>🎯 Smart Study Session Generator</h3>
-
-    <p>
-        Build a focused revision session based on your subject,
-        topic and available time.
-    </p>
-
-    <label>Subject</label>
-    <select id="premiumSubject">
-        <option value="">Choose Subject</option>
-        <option>Maths</option>
-        <option>English</option>
-        <option>Biology</option>
-        <option>Chemistry</option>
-        <option>Physics</option>
-        <option>History</option>
-        <option>Geography</option>
-        <option>Business</option>
-        <option>Computer Science</option>
-    </select>
-
-    <label>Topic</label>
-    <input
-        id="premiumTopic"
-        placeholder="e.g. Quadratic equations"
-    >
-
-    <label>Available time</label>
-    <select id="premiumTime">
-        <option value="25">25 minutes</option>
-        <option value="40">40 minutes</option>
-        <option value="60">60 minutes</option>
-        <option value="90">90 minutes</option>
-    </select>
-
-    <button
-        id="generatePremiumSession"
-        class="btn"
-        type="button"
-        style="margin-top:15px;"
-    >
-        🎯 Generate Session
-    </button>
-
-    <div
-        id="premiumSessionResult"
-        class="panel"
-        style="display:none;margin-top:20px;"
-    ></div>
-</div>
-  <div
-    id="savedPremiumSessions"
-    class="panel"
-    style="margin-top:20px;"
+<section
+class="panel"
+id="premiumResourcesCard"
+style="margin-bottom:20px;"
 >
-    <h3>🗂️ My Saved Sessions</h3>
 
-    <p class="muted">
-        Your recently generated Premium study sessions.
-    </p>
+<h2>⭐ Premium Resources</h2>
 
-    <div id="savedSessionsList">
-        <p class="muted">No saved sessions yet.</p>
-    </div>
+<p id="premiumResourcesText">
+Unlock advanced resource tools and premium study materials.
+</p>
 
-   <section
-    id="premiumStudyInsights"
-    class="panel"
-    style="margin-top:20px;"
+<a
+href="subscription.html"
+id="premiumResourcesBtn"
+class="btn"
 >
-    <h3>📊 Premium Study Insights</h3>
+⭐ Upgrade to Premium
+</a>
 
-    <div class="grid grid4">
-        <div class="stat">
-            <strong id="insightSessions">0</strong>
-            <span>Sessions</span>
-        </div>
-
-        <div class="stat">
-            <strong id="insightMinutes">0</strong>
-            <span>Minutes Planned</span>
-        </div>
-
-        <div class="stat">
-            <strong id="insightSubjects">0</strong>
-            <span>Subjects</span>
-        </div>
-
-        <div class="stat">
-            <strong id="insightLatest">—</strong>
-            <span>Latest Topic</span>
-        </div>
-    </div>
-
-    <p
-        id="insightMessage"
-        class="muted"
-        style="margin-top:15px;"
-    >
-        Generate some Premium study sessions to see your insights.
-    </p>
 </section>
 
-    <button
-        id="clearSavedSessions"
-        class="btn secondary"
-        type="button"
-        style="margin-top:15px;"
-    >
-        🗑 Clear Session History
-    </button>
+
+<!-- PREMIUM TOOLKIT -->
+
+<section
+class="panel"
+id="premiumRevisionToolkit"
+style="margin-bottom:20px;"
+>
+
+<h2>🔒 Premium Revision Toolkit</h2>
+
+<p id="premiumToolkitText">
+Get access to advanced revision tools designed to make your study sessions more effective.
+</p>
+
+
+<!-- FREE USER -->
+
+<div id="premiumToolkitLocked">
+
+<div
+class="badge"
+style="margin-bottom:15px;"
+>
+🔒 Premium feature
 </div>
 
-  <section
-    id="premiumWeakTopics"
-    class="panel"
-    style="margin-top:20px;"
+<ul>
+
+<li>🎯 Advanced revision planning</li>
+<li>📈 Smarter progress insights</li>
+<li>🧠 Advanced study strategies</li>
+<li>📚 Premium revision resources</li>
+
+</ul>
+
+<a
+href="subscription.html"
+class="btn"
 >
-    <h3>🧠 Weak-Topic Detector</h3>
+⭐ Unlock Premium
+</a>
 
-    <p class="muted">
-        See which topics are appearing most often in your revision sessions.
-    </p>
+</div>
 
-    <div id="weakTopicsList">
-        <p class="muted">Generate more study sessions to analyse your topics.</p>
-    </div>
+
+<!-- PREMIUM USER -->
+
+<div
+id="premiumToolkitUnlocked"
+style="display:none;"
+>
+
+<div
+class="badge"
+style="margin-bottom:15px;"
+>
+⭐ Premium unlocked
+</div>
+
+
+<!-- SESSION GENERATOR -->
+
+<h3>🎯 Smart Study Session Generator</h3>
+
+<p>
+Build a focused revision session based on your subject,
+topic and available time.
+</p>
+
+
+<label>Subject</label>
+
+<select id="premiumSubject">
+
+<option value="">Choose Subject</option>
+<option>Maths</option>
+<option>English</option>
+<option>Biology</option>
+<option>Chemistry</option>
+<option>Physics</option>
+<option>History</option>
+<option>Geography</option>
+<option>Business</option>
+<option>Computer Science</option>
+
+</select>
+
+
+<label>Topic</label>
+
+<input
+id="premiumTopic"
+placeholder="e.g. Quadratic equations"
+>
+
+
+<label>Available time</label>
+
+<select id="premiumTime">
+
+<option value="25">25 minutes</option>
+<option value="40">40 minutes</option>
+<option value="60">60 minutes</option>
+<option value="90">90 minutes</option>
+
+</select>
+
+
+<button
+id="generatePremiumSession"
+class="btn"
+type="button"
+style="margin-top:15px;"
+>
+🎯 Generate Session
+</button>
+
+
+<div
+id="premiumSessionResult"
+class="panel"
+style="display:none;margin-top:20px;"
+></div>
+
+
+<!-- SAVED SESSIONS -->
+
+<div
+id="savedPremiumSessions"
+class="panel"
+style="margin-top:20px;"
+>
+
+<h3>🗂️ My Saved Sessions</h3>
+
+<p class="muted">
+Your recently generated Premium study sessions.
+</p>
+
+<div id="savedSessionsList">
+
+<p class="muted">
+No saved sessions yet.
+</p>
+
+</div>
+
+<button
+id="clearSavedSessions"
+class="btn secondary"
+type="button"
+style="margin-top:15px;"
+>
+🗑 Clear Session History
+</button>
+
+</div>
+
+
+<!-- STUDY INSIGHTS -->
+
+<section
+id="premiumStudyInsights"
+class="panel"
+style="margin-top:20px;"
+>
+
+<h3>📊 Premium Study Insights</h3>
+
+<div class="grid grid4">
+
+<div class="stat">
+<strong id="insightSessions">0</strong>
+<span>Sessions</span>
+</div>
+
+<div class="stat">
+<strong id="insightMinutes">0</strong>
+<span>Minutes Planned</span>
+</div>
+
+<div class="stat">
+<strong id="insightSubjects">0</strong>
+<span>Subjects</span>
+</div>
+
+<div class="stat">
+<strong id="insightLatest">—</strong>
+<span>Latest Topic</span>
+</div>
+
+</div>
+
+<p
+id="insightMessage"
+class="muted"
+style="margin-top:15px;"
+>
+Generate some Premium study sessions to see your insights.
+</p>
+
 </section>
-  
+
+
+<!-- WEAK TOPICS -->
+
+<section
+id="premiumWeakTopics"
+class="panel"
+style="margin-top:20px;"
+>
+
+<h3>🧠 Weak-Topic Detector</h3>
+
+<p class="muted">
+See which topics are appearing most often in your revision sessions.
+</p>
+
+<div id="weakTopicsList">
+
+<p class="muted">
+Generate more study sessions to analyse your topics.
+</p>
+
+</div>
+
 </section>
-  <div class="toolbar"><input id="searchInput" placeholder="Search title, subject, tag, notes or URL"><select id="subjectFilter"><option>All Subjects</option><option>Maths</option><option>English</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option><option>Geography</option><option>Business</option><option>Computer Science</option></select><select id="sortSelect"><option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="alphabetical">A-Z</option><option value="mostOpened">Most Opened</option><option value="recentlyEdited">Recently Edited</option><option value="favourites">Favourites First</option><option value="rating">Highest Rated</option><option value="priority">Highest Priority</option></select></div><div id="resultsText" class="muted" style="margin-bottom:15px">0 resources</div><div id="resourceGrid" class="grid"></div></main></div></div><script src="storage.js"></script><script src="resources.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+
+</div>
+
+</section>
+
+
+<!-- SEARCH / FILTERS -->
+
+<div class="toolbar">
+
+<input
+id="searchInput"
+placeholder="Search title, subject, tag, notes or URL"
+>
+
+<select id="subjectFilter">
+
+<option>All Subjects</option>
+<option>Maths</option>
+<option>English</option>
+<option>Biology</option>
+<option>Chemistry</option>
+<option>Physics</option>
+<option>History</option>
+<option>Geography</option>
+<option>Business</option>
+<option>Computer Science</option>
+
+</select>
+
+
+<select id="sortSelect">
+
+<option value="newest">Newest First</option>
+<option value="oldest">Oldest First</option>
+<option value="alphabetical">A-Z</option>
+<option value="mostOpened">Most Opened</option>
+<option value="recentlyEdited">Recently Edited</option>
+<option value="favourites">Favourites First</option>
+<option value="rating">Highest Rated</option>
+<option value="priority">Highest Priority</option>
+
+</select>
+
+</div>
+
+
+<div
+id="resultsText"
+class="muted"
+style="margin-bottom:15px;"
+>
+0 resources
+</div>
+
+
+<div
+id="resourceGrid"
+class="grid"
+></div>
+
+
+</main>
+
+</div>
+
+</div>
+
+
+<!-- SCRIPTS -->
+
+<script src="storage.js"></script>
+<script src="resources.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+
 <script src="js/supabase.js"></script>
-  <script src="js/premium.js"></script>
-<script src="js/account-status.js"></script></body></html>
+<script src="js/premium.js"></script>
+<script src="js/account-status.js"></script>
+
+</body>
+</html>
