@@ -26,3 +26,21 @@ table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px s
 footer{padding:40px 0;color:var(--muted);text-align:center}
 @media(max-width:950px){.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
 @media(max-width:650px){.container{width:min(100% - 20px,1280px)}.grid4,.grid3{grid-template-columns:1fr}.panel,.card{padding:17px}}
+/* Premium card spacing */
+.premium-card {
+  padding: 42px 32px;
+}
+
+.premium-card h2 {
+  margin-bottom: 18px;
+}
+
+.premium-card p {
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.premium-card .upgrade-btn {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
