@@ -7,7 +7,6 @@
         if (!window.supabaseClient) return false;
 
         try {
-
             const {
                 data: { session }
             } = await window.supabaseClient.auth.getSession();
@@ -26,11 +25,12 @@
                 return false;
             }
 
-            return data &&
-                ["active", "trialing"].includes(data.status);
+            return !!(
+                data &&
+                ["active", "trialing"].includes(data.status)
+            );
 
         } catch (error) {
-
             console.error("Premium check error:", error);
             return false;
         }
