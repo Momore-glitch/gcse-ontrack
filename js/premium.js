@@ -78,9 +78,24 @@
     }
 
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        updatePremiumResources
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+        await updatePremiumResources();
+        await protectPremiumPack();
+    }
+);
+    async function protectPremiumPack() {
+    const pack = document.getElementById("premiumResourcePack");
+    if (!pack) return;
+
+    const premium = await window.isPremiumUser();
+
+    if (premium) {
+        pack.style.display = "block";
+    } else {
+        pack.style.display = "block";
+    }
+}
 
 })();
