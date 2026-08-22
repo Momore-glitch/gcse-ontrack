@@ -174,14 +174,6 @@ async function protectPremiumPack() {
     });
 }
 
-    document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
-        await updatePremiumResources();
-        await protectPremiumPack();
-        setupPremiumSessionGenerator();
-    }
-);
 
     function loadSavedPremiumSessions() {
     const list = document.getElementById("savedSessionsList");
@@ -260,5 +252,19 @@ function updatePremiumStudyInsights() {
             `You've planned ${totalMinutes} minutes across ${subjectList.length} subject${subjectList.length === 1 ? "" : "s"}. Keep your sessions focused and consistent.`;
     }
 }
+
+    document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+        await updatePremiumResources();
+        await protectPremiumPack();
+        setupPremiumSessionGenerator();
+
+        if (await window.isPremiumUser()) {
+            loadSavedPremiumSessions();
+            updatePremiumStudyInsights();
+        }
+    }
+);
     
 })();
