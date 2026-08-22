@@ -219,4 +219,46 @@ async function protectPremiumPack() {
     });
 }
 
+
+function updatePremiumStudyInsights() {
+    const history = JSON.parse(
+        localStorage.getItem("premiumStudySessions") || "[]"
+    );
+
+    const sessions = document.getElementById("insightSessions");
+    const minutes = document.getElementById("insightMinutes");
+    const subjects = document.getElementById("insightSubjects");
+    const latest = document.getElementById("insightLatest");
+    const message = document.getElementById("insightMessage");
+
+    if (!sessions || !minutes || !subjects || !latest) return;
+
+    const totalMinutes = history.reduce(
+        (total, session) => total + Number(session.time || 0),
+        0
+    );
+
+    const subjectList = [
+        ...new Set(history.map(session => session.subject))
+    ];
+
+    sessions.textContent = history.length;
+    minutes.textContent = totalMinutes;
+    subjects.textContent = subjectList.length;
+    latest.textContent = history.length
+        ? history[0].topic
+        : "—";
+
+    if (history.length === 0) {
+        message.textContent =
+            "Generate your first Premium study session to start building your study insights.";
+    } else if (history.length < 3) {
+        message.textContent =
+            "Good start. Keep generating sessions to build a clearer picture of your revision.";
+    } else {
+        message.textContent =
+            `You've planned ${totalMinutes} minutes across ${subjectList.length} subject${subjectList.length === 1 ? "" : "s"}. Keep your sessions focused and consistent.`;
+    }
+}
+    
 })();
