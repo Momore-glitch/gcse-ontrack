@@ -1,34 +1,86 @@
 /* GCSE OnTrack — Premium access */
 (function () {
-  "use strict";
+    "use strict";
 
-  window.isPremiumUser = async function () {
-    if (!window.supabaseClient) return false;
+    window.isPremiumUser = async function () {
 
-    try {
-      const {
-        data: { session }
-      } = await window.supabaseClient.auth.getSession();
+        if (!window.supabaseClient) return false;
 
-      if (!session) return false;
+        try {
 
-      const { data, error } = await window.supabaseClient
-        .from("subscriptions")
-        .select("status,current_period_end,cancel_at_period_end")
-        .eq("user_id", session.user.id)
-        .maybeSingle();
+            const {
+                data: { session }
+            } = await window.supabaseClient.auth.getSession();
 
-      if (error) {
-        console.error("Premium check failed:", error);
-        return false;
-      }
+            if (!session) return false;
 
-      if (!data) return false;
+            const { data, error } =
+                await window.supabaseClient
+                    .from("subscriptions")
+                    .select("status,current_period_end,cancel_at_period_end")
+                    .eq("user_id", session.user.id)
+                    .maybeSingle();
 
-      return ["active", "trialing"].includes(data.status);
-    } catch (error) {
-      console.error("Premium check error:", error);
-      return false;
+            if (error) {
+                console.error("Premium check failed:", error);
+                return false;
+            }
+
+            return data &&
+                ["active", "trialing"].includes(data.status);
+
+        } catch (error) {
+
+            console.error("Premium check error:", error);
+            return false;
+        }
+    };
+
+
+    async function updatePremiumResources() {
+
+        const card =
+            document.getElementById("premiumResourcesCard");
+
+        const text =
+            document.getElementById("premiumResourcesText");
+
+        const button =
+            document.getElementById("premiumResourcesBtn");
+
+        if (!card || !text || !button) return;
+
+        const premium =
+            await window.isPremiumUser();
+
+        if (premium) {
+
+            text.textContent =
+                "⭐ Your Premium access is active. Premium resources and advanced study tools are available to you.";
+
+            button.textContent =
+                "⭐ Premium Active";
+
+            button.href =
+                "subscription.html";
+
+        } else {
+
+            text.textContent =
+                "Unlock advanced resource tools and premium study materials.";
+
+            button.textContent =
+                "⭐ Upgrade to Premium";
+
+            button.href =
+                "subscription.html";
+        }
     }
-  };
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        updatePremiumResources
+    );
+
 })();
