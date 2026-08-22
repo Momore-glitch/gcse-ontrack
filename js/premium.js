@@ -132,18 +132,44 @@ async function protectPremiumPack() {
             ];
         }
 
+        const savedSession = {
+            subject,
+            topic,
+            time,
+            steps: session,
+            created: new Date().toISOString()
+        };
+
+        const history =
+            JSON.parse(
+                localStorage.getItem("premiumStudySessions") || "[]"
+            );
+
+        history.unshift(savedSession);
+
+        localStorage.setItem(
+            "premiumStudySessions",
+            JSON.stringify(history.slice(0, 20))
+        );
+
         result.style.display = "block";
 
         result.innerHTML = `
             <h3>📚 ${subject}: ${topic}</h3>
             <p><strong>${time}-minute Premium session</strong></p>
+
             <ol>
                 ${session.map(step => `<li>${step}</li>`).join("")}
             </ol>
+
             <p>
-                <strong>Rule:</strong> Don't just reread.
-                Test yourself, find the gaps, then fix them.
+                <strong>Rule:</strong>
+                Don't just reread. Test yourself, find the gaps, then fix them.
             </p>
+
+            <div class="badge">
+                ✅ Session saved
+            </div>
         `;
     });
 }
