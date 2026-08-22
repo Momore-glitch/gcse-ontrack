@@ -53,13 +53,7 @@ async function protectPremiumPack() {
     }
 }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async function () {
-        await updatePremiumResources();
-        await protectPremiumPack();
-    }
-);
+
     async function protectPremiumPack() {
     const pack = document.getElementById("premiumResourcePack");
     if (!pack) return;
@@ -153,5 +147,14 @@ document.addEventListener(
         `;
     });
 }
+
+    document.addEventListener(
+    "DOMContentLoaded",
+    async function () {
+        await updatePremiumResources();
+        await protectPremiumPack();
+        setupPremiumSessionGenerator();
+    }
+);
 
 })();
