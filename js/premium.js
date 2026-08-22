@@ -183,4 +183,40 @@ async function protectPremiumPack() {
     }
 );
 
+    function loadSavedPremiumSessions() {
+    const list = document.getElementById("savedSessionsList");
+    const clearButton = document.getElementById("clearSavedSessions");
+
+    if (!list) return;
+
+    const history = JSON.parse(
+        localStorage.getItem("premiumStudySessions") || "[]"
+    );
+
+    if (!history.length) {
+        list.innerHTML =
+            '<p class="muted">No saved sessions yet.</p>';
+    } else {
+        list.innerHTML = history.map((session, index) => `
+            <div class="panel" style="margin-top:12px;">
+                <strong>${session.subject}: ${session.topic}</strong>
+                <p class="muted">
+                    ${session.time}-minute session
+                </p>
+
+                <ol>
+                    ${session.steps
+                        .map(step => `<li>${step}</li>`)
+                        .join("")}
+                </ol>
+            </div>
+        `).join("");
+    }
+
+    clearButton?.addEventListener("click", function () {
+        localStorage.removeItem("premiumStudySessions");
+        loadSavedPremiumSessions();
+    });
+}
+
 })();
