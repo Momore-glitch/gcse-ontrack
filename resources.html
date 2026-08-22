@@ -44,19 +44,61 @@
         </a>
     </div>
 
-    <div id="premiumToolkitUnlocked" style="display:none;">
-        <div class="badge" style="margin-bottom:15px;">
-            ⭐ Premium unlocked
-        </div>
-
-        <p>
-            Your advanced revision toolkit is ready.
-        </p>
-
-        <button class="btn" type="button">
-            🎯 Open Revision Toolkit
-        </button>
+<div id="premiumToolkitUnlocked" style="display:none;">
+    <div class="badge" style="margin-bottom:15px;">
+        ⭐ Premium unlocked
     </div>
+
+    <h3>🎯 Smart Study Session Generator</h3>
+
+    <p>
+        Build a focused revision session based on your subject,
+        topic and available time.
+    </p>
+
+    <label>Subject</label>
+    <select id="premiumSubject">
+        <option value="">Choose Subject</option>
+        <option>Maths</option>
+        <option>English</option>
+        <option>Biology</option>
+        <option>Chemistry</option>
+        <option>Physics</option>
+        <option>History</option>
+        <option>Geography</option>
+        <option>Business</option>
+        <option>Computer Science</option>
+    </select>
+
+    <label>Topic</label>
+    <input
+        id="premiumTopic"
+        placeholder="e.g. Quadratic equations"
+    >
+
+    <label>Available time</label>
+    <select id="premiumTime">
+        <option value="25">25 minutes</option>
+        <option value="40">40 minutes</option>
+        <option value="60">60 minutes</option>
+        <option value="90">90 minutes</option>
+    </select>
+
+    <button
+        id="generatePremiumSession"
+        class="btn"
+        type="button"
+        style="margin-top:15px;"
+    >
+        🎯 Generate Session
+    </button>
+
+    <div
+        id="premiumSessionResult"
+        class="panel"
+        style="display:none;margin-top:20px;"
+    ></div>
+</div>
 </section>
   <div class="toolbar"><input id="searchInput" placeholder="Search title, subject, tag, notes or URL"><select id="subjectFilter"><option>All Subjects</option><option>Maths</option><option>English</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option><option>Geography</option><option>Business</option><option>Computer Science</option></select><select id="sortSelect"><option value="newest">Newest First</option><option value="oldest">Oldest First</option><option value="alphabetical">A-Z</option><option value="mostOpened">Most Opened</option><option value="recentlyEdited">Recently Edited</option><option value="favourites">Favourites First</option><option value="rating">Highest Rated</option><option value="priority">Highest Priority</option></select></div><div id="resultsText" class="muted" style="margin-bottom:15px">0 resources</div><div id="resourceGrid" class="grid"></div></main></div></div><script src="storage.js"></script><script src="resources.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="js/supabase.js"></script>
