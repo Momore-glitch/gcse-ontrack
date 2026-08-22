@@ -1,22 +1,107 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Premium | GCSE OnTrack</title><link rel="stylesheet" href="css/styles.css">
-</head><body><div class="container">
-<nav><a href="index.html">🏠 Home</a><a href="plan.html">📝 Plan</a><a href="resources.html">📚 Resources</a><a href="progress.html">📊 Progress</a><a href="timetable.html">🗓 Timetable</a><a href="guides.html">📖 Guides</a><a href="account.html">👤 Account</a><a href="subscription.html">⭐ Premium</a></nav>
-<header class="pageHeader"><h1>⭐ GCSE OnTrack Premium</h1><p>Unlock premium features.</p></header>
-<section class="panel"><div id="subscriptionStatus">Checking subscription…</div></section>
-<div class="grid grid2" style="margin-top:20px">
-<section class="panel"><h2>Free</h2><ul><li>Revision planning</li><li>Resource library</li><li>Progress tracking</li><li>Timetable</li><li>Core guides</li></ul></section>
-<section class="panel"><h2>⭐ Premium</h2><ul><li>Premium resources</li><li>Advanced planning</li><li>Premium guides</li><li>Future premium tools</li></ul>
-<button id="upgradeBtn" class="btn">Upgrade to Premium</button>
-<button id="manageBtn" class="btn secondary" style="margin-top:10px;display:none">Manage Subscription</button>
-</section></div>
-<div id="subscriptionMessage" class="notice" style="display:none;margin-top:20px"></div>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Premium | GCSE OnTrack</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="plan.html">📝 Plan</a>
+<a href="resources.html">📚 Resources</a>
+<a href="progress.html">📊 Progress</a>
+<a href="timetable.html">🗓 Timetable</a>
+<a href="guides.html">📖 Guides</a>
+<a href="account.html">👤 Account</a>
+<a href="subscription.html">⭐ Premium</a>
+</nav>
+
+<header class="pageHeader">
+<h1>⭐ GCSE OnTrack Premium</h1>
+<p>Unlock more powerful tools to make your revision smarter and more focused.</p>
+</header>
+
+
+<section class="panel">
+
+<div id="subscriptionStatus">
+Checking subscription…
 </div>
+
+</section>
+
+
+<div class="grid grid2" style="margin-top:20px">
+
+
+<section class="panel">
+
+<h2>Free</h2>
+
+<ul>
+<li>Revision planning</li>
+<li>Resource library</li>
+<li>Progress tracking</li>
+<li>Timetable</li>
+<li>Core guides</li>
+</ul>
+
+</section>
+
+
+<section class="panel">
+
+<h2>⭐ Premium</h2>
+
+<ul>
+<li>🎯 Smart Study Session Generator</li>
+<li>🗂️ Saved study sessions</li>
+<li>📊 Premium study insights</li>
+<li>🧠 Weak-topic detection</li>
+<li>📚 Premium resources</li>
+<li>🚀 Future premium tools</li>
+</ul>
+
+<button
+id="upgradeBtn"
+class="btn"
+>
+⭐ Upgrade to Premium
+</button>
+
+<button
+id="manageBtn"
+class="btn secondary"
+style="margin-top:10px;display:none"
+>
+Manage Subscription
+</button>
+
+</section>
+
+</div>
+
+
+<div
+id="subscriptionMessage"
+class="notice"
+style="display:none;margin-top:20px"
+></div>
+
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
 <script src="js/supabase.js"></script>
 <script src="js/premium.js"></script>
 <script src="js/subscriptions.js"></script>
+
 </body>
 </html>
