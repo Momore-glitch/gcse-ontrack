@@ -36,47 +36,22 @@
         }
     };
 
+async function protectPremiumPack() {
+    const locked = document.getElementById("premiumToolkitLocked");
+    const unlocked = document.getElementById("premiumToolkitUnlocked");
 
-    async function updatePremiumResources() {
+    if (!locked || !unlocked) return;
 
-        const card =
-            document.getElementById("premiumResourcesCard");
+    const premium = await window.isPremiumUser();
 
-        const text =
-            document.getElementById("premiumResourcesText");
-
-        const button =
-            document.getElementById("premiumResourcesBtn");
-
-        if (!card || !text || !button) return;
-
-        const premium =
-            await window.isPremiumUser();
-
-        if (premium) {
-
-            text.textContent =
-                "⭐ Your Premium access is active. Premium resources and advanced study tools are available to you.";
-
-            button.textContent =
-                "⭐ Premium Active";
-
-            button.href =
-                "subscription.html";
-
-        } else {
-
-            text.textContent =
-                "Unlock advanced resource tools and premium study materials.";
-
-            button.textContent =
-                "⭐ Upgrade to Premium";
-
-            button.href =
-                "subscription.html";
-        }
+    if (premium) {
+        locked.style.display = "none";
+        unlocked.style.display = "block";
+    } else {
+        locked.style.display = "block";
+        unlocked.style.display = "none";
     }
-
+}
 
 document.addEventListener(
     "DOMContentLoaded",
