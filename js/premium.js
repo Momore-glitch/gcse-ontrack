@@ -253,7 +253,46 @@ function updatePremiumStudyInsights() {
     }
 }
 
-    document.addEventListener(
+    
+    function updateWeakTopics() {
+    const list = document.getElementById("weakTopicsList");
+
+    if (!list) return;
+
+    const history = JSON.parse(
+        localStorage.getItem("premiumStudySessions") || "[]"
+    );
+
+    if (!history.length) {
+        list.innerHTML =
+            '<p class="muted">Generate study sessions to start detecting weak topics.</p>';
+        return;
+    }
+
+    const topicCounts = {};
+
+    history.forEach(session => {
+        const key = `${session.subject} — ${session.topic}`;
+
+        topicCounts[key] =
+            (topicCounts[key] || 0) + 1;
+    });
+
+    const ranked = Object.entries(topicCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
+
+    list.innerHTML = ranked.map(([topic, count], index) => `
+        <div class="panel" style="margin-top:10px;">
+            <strong>${index + 1}. ${topic}</strong>
+            <p class="muted">
+                Planned ${count} time${count === 1 ? "" : "s"}
+            </p>
+        </div>
+    `).join("");
+}
+
+document.addEventListener(
     "DOMContentLoaded",
     async function () {
         await updatePremiumResources();
@@ -263,6 +302,7 @@ function updatePremiumStudyInsights() {
         if (await window.isPremiumUser()) {
             loadSavedPremiumSessions();
             updatePremiumStudyInsights();
+            updateWeakTopics();
         }
     }
 );
