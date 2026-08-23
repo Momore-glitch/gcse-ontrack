@@ -38,8 +38,8 @@
     /* HOME / PREMIUM RESOURCE CARD */
 
     async function updatePremiumResources() {
-        const text = document.getElementById("premiumResourcesText");
-        const button = document.getElementById("premiumResourcesBtn");
+       const text = document.getElementById("premiumCardText");
+const button = document.getElementById("premiumHomeBtn");
 
         if (!text || !button) return;
 
