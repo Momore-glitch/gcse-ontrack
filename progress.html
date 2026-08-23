@@ -17,7 +17,39 @@
 <button class="btn secondary small" data-timer-preset="25">25 min</button>
 <button class="btn secondary small" data-timer-preset="45">45 min</button>
 <button class="btn secondary small" data-timer-preset="60">60 min</button>
-</div></section><section class="panel"><h2>Subject Progress</h2><input id="progressSubject" placeholder="e.g. Maths"><button id="addSubject" class="btn">Add Subject</button><p id="progressSummary" class="muted" style="margin-top:15px"></p><div id="subjectProgress" class="grid" style="margin-top:15px"></div></section></div><div class="panel" style="margin-top:20px"><h2>Recent Activity</h2><ul id="historyList"></ul></div></div><div id="premiumErrorBankHost"></div><script src="js/storage.js"></script>
+</div></section><section class="panel"><h2>Subject Progress</h2><input id="progressSubject" placeholder="e.g. Maths"><button id="addSubject" class="btn">Add Subject</button><p id="progressSummary" class="muted" style="margin-top:15px"></p><div id="subjectProgress" class="grid" style="margin-top:15px"></div></section></div><div class="panel" style="margin-top:20px"><h2>Recent Activity</h2><ul id="historyList"></ul></div></div><div class="panel" style="margin-top:20px">
+    <h2>🎯 Premium Study Insights</h2>
+    <p id="insightMessage" class="muted">
+        Your Premium study insights will appear here as you revise.
+    </p>
+
+    <div class="grid grid4">
+        <div class="panel stat">
+            <h3>Sessions</h3>
+            <strong id="insightSessions">0</strong>
+        </div>
+
+        <div class="panel stat">
+            <h3>Minutes</h3>
+            <strong id="insightMinutes">0</strong>
+        </div>
+
+        <div class="panel stat">
+            <h3>Subjects</h3>
+            <strong id="insightSubjects">0</strong>
+        </div>
+
+        <div class="panel stat">
+            <h3>Latest Topic</h3>
+            <strong id="insightLatest">—</strong>
+        </div>
+    </div>
+
+    <h3 style="margin-top:20px">🔥 Topics you're focusing on</h3>
+    <div id="weakTopicsList">
+        <p class="muted">No Premium study data yet.</p>
+    </div>
+</div><div id="premiumErrorBankHost"></div><script src="js/storage.js"></script>
 <script src="js/progress.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
