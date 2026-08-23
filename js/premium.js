@@ -60,6 +60,29 @@
         }
     }
 
+    async function updateResourcesPagePremiumCard() {
+    const text = document.getElementById("premiumResourcesText");
+    const button = document.getElementById("premiumResourcesBtn");
+
+    if (!text || !button) return;
+
+    const premium = await window.isPremiumUser();
+
+    if (premium) {
+        text.textContent =
+            "⭐ Premium access is active. Your advanced resources and study tools are unlocked.";
+
+        button.textContent = "⭐ Premium Unlocked";
+        button.href = "subscription.html";
+    } else {
+        text.textContent =
+            "Unlock advanced resource tools and premium study materials.";
+
+        button.textContent = "⭐ Upgrade to Premium";
+        button.href = "subscription.html";
+    }
+}
+
 
     /* PREMIUM TOOLKIT LOCK */
 
@@ -684,9 +707,11 @@
         "DOMContentLoaded",
         async function () {
 
-            await updatePremiumResources();
+       await updatePremiumResources();
 
-            await protectPremiumPack();
+await updateResourcesPagePremiumCard();
+
+await protectPremiumPack();
 
             setupPremiumSessionGenerator();
 
