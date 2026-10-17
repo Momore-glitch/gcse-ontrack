@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GCSE Papers & Video Lessons | GCSE OnTrack</title>
+  <meta name="description" content="Find subject-specific GCSE past papers, mark schemes and direct topic video lessons for Maths, English, Science, History, Business and BTEC Digital IT.">
+  <meta name="theme-color" content="#f4f7fc">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .resource-toolbar { display:grid; grid-template-columns:minmax(0,2fr) minmax(210px,1fr); gap:14px; }
+    .resource-card { display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+    .resource-card h3 { margin:2px 0 0; }
+    .resource-card p { margin:0; }
+    .resource-card .actions { margin-top:auto; padding-top:5px; width:100%; }
+    .resource-card .btn { text-align:center; }
+    .resource-card[hidden] { display:none !important; }
+    .lesson-thumb { display:block; position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px; background:#e7edfa; }
+    .lesson-thumb img { display:block; width:100%; height:100%; object-fit:cover; }
+    .lesson-thumb span { position:absolute; left:12px; bottom:12px; color:white; background:rgba(20,33,61,.9); padding:7px 10px; border-radius:9px; font-weight:800; font-size:.85rem; }
+    .resource-card .badge { white-space:normal; }
+    .resource-intro { display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
+    .resource-intro .badge { background:#eaf0ff; color:#2448d8; }
+    .step-list { padding-left:22px; }
+    .step-list li { margin:8px 0; }
+    @media(max-width:650px) { .resource-toolbar { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav aria-label="Main navigation">
+    <a href="index.html">🏠 Home</a>
+    <a href="account.html">👤 Account</a>
+    <a href="plan.html">📝 Plan</a>
+    <a href="resources.html">📚 My Resources</a>
+    <a href="past-papers.html" aria-current="page">📄 Papers & Videos</a>
+    <a href="progress.html">📊 Progress</a>
+    <a href="timetable.html">🗓 Timetable</a>
+    <a href="guides.html">📖 Guides</a>
+  </nav>
+
+  <main>
+    <header class="pageHeader">
+      <span class="eyebrow">Your GCSE study library</span>
+      <h1>Find the right paper. Watch the right lesson.</h1>
+      <p>Choose your subject to open its exam-board assessment page, or launch a selected topic video directly. Use the paper, mark your answers, then record what needs more work.</p>
+      <div class="resource-intro" aria-label="Library features">
+        <span class="badge">✓ Subject-specific paper links</span>
+        <span class="badge">✓ Direct video lessons</span>
+        <span class="badge">✓ Free to access through linked providers</span>
+      </div>
+    </header>
+
+    <section class="panel" style="margin-bottom:26px" aria-label="Search and filter resources">
+      <div class="resource-toolbar">
+        <div>
+          <label for="resourceSearch">Search subjects, topics or resources</label>
+          <input id="resourceSearch" type="search" placeholder="e.g. Biology cells, English Paper 1, break-even" autocomplete="off">
+        </div>
+        <div>
+          <label for="resourceFilter">Filter library</label>
+          <select id="resourceFilter">
+            <option value="all">All resources</option>
+            <option value="papers">Past papers & mark schemes</option>
+            <option value="videos">Topic videos</option>
+            <option value="maths">Maths</option>
+            <option value="english">English</option>
+            <option value="biology">Biology</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+            <option value="history">History</option>
+            <option value="business">Business</option>
+            <option value="it">BTEC Digital IT</option>
+            <option value="other">Other exam boards</option>
+          </select>
+        </div>
+      </div>
+      <p id="resourceCount" class="muted" role="status" aria-live="polite" style="margin:0">Browse resources by subject or use the search above.</p>
+    </section>
+
+    <section aria-labelledby="papersHeading" style="margin-bottom:30px">
+      <div class="section-heading"><div><h2 id="papersHeading">Past papers & mark schemes</h2><p>These links open the relevant qualification's assessment materials—not a general homepage. On the exam-board page, choose the exam series and paper you need.</p></div></div>
+      <div class="grid grid3" id="paperGrid">
+        <article class="card resource-card" data-kind="papers" data-subject="biology" data-tags="aqa biology gcse 8461 triple science combined science past paper question paper mark scheme examiner report">
+          <span class="badge">AQA · GCSE Biology 8461</span><h3>Biology past papers</h3>
+          <p class="muted">Question papers, mark schemes and examiner resources for AQA GCSE Biology.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/biology/gcse/biology-8461/assessment-resources" target="_blank" rel="noopener noreferrer">Open Biology papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="chemistry" data-tags="aqa chemistry gcse 8462 triple science combined science past paper question paper mark scheme examiner report">
+          <span class="badge">AQA · GCSE Chemistry 8462</span><h3>Chemistry past papers</h3>
+          <p class="muted">Open the Chemistry assessment library for papers, mark schemes and assessment resources.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/chemistry/gcse/chemistry-8462/assessment-resources" target="_blank" rel="noopener noreferrer">Open Chemistry papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="physics" data-tags="aqa physics gcse 8463 triple science combined science past paper question paper mark scheme examiner report">
+          <span class="badge">AQA · GCSE Physics 8463</span><h3>Physics past papers</h3>
+          <p class="muted">Find papers and mark schemes for AQA GCSE Physics, including Physics-only topics.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/physics/gcse/physics-8463/assessment-resources" target="_blank" rel="noopener noreferrer">Open Physics papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="maths" data-tags="pearson edexcel maths mathematics gcse 9-1 past papers question papers mark schemes foundation higher">
+          <span class="badge">Pearson Edexcel · GCSE Maths</span><h3>Maths past papers</h3>
+          <p class="muted">Opens Pearson's past-paper finder pre-filtered for GCSE Mathematics (9–1). Select the series and paper.</p>
+          <div class="actions"><a class="btn" href="https://qualifications.pearson.com/en/support/support-topics/exams/past-papers.html?Qualification-Family=GCSE&amp;Qualification-Subject=Mathematics%2B%289-1%29%2Bfrom%2B2015&amp;Specification-Code=Pearson-UK%3ASpecification-Code%2Fgcse15-maths&amp;Status=Pearson-UK%3AStatus%2FLive" target="_blank" rel="noopener noreferrer">Open Edexcel Maths papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="english" data-tags="aqa english language gcse 8700 paper 1 paper 2 creative writing reading past papers mark scheme">
+          <span class="badge">AQA · GCSE English Language 8700</span><h3>English Language papers</h3>
+          <p class="muted">Assessment materials for Paper 1, Paper 2 and mark-scheme practice.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/english/gcse/english-8700/assessment-resources" target="_blank" rel="noopener noreferrer">Open English Language papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="english" data-tags="aqa english literature gcse 8702 poetry shakespeare modern text past papers mark schemes">
+          <span class="badge">AQA · GCSE English Literature 8702</span><h3>English Literature assessment</h3>
+          <p class="muted">Find assessment materials for the Literature qualification, including sample papers and mark schemes.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/english/gcse/english-8702/assessment-resources" target="_blank" rel="noopener noreferrer">Open Literature papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="history" data-tags="aqa history gcse 8145 health people elizabethan germany conflict tension 1918 1939 past papers mark scheme">
+          <span class="badge">AQA · GCSE History 8145</span><h3>History assessment materials</h3>
+          <p class="muted">Open the History assessment library, then filter for your paper, option and exam series.</p>
+          <div class="actions"><a class="btn" href="https://www.aqa.org.uk/subjects/history/gcse/history-8145/assessment-resources" target="_blank" rel="noopener noreferrer">Open History papers ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="business" data-tags="pearson edexcel business gcse 2017 1bs0 paper 1 paper 2 finance marketing operations mark scheme sample assessment">
+          <span class="badge">Pearson Edexcel · GCSE Business</span><h3>Business exam materials</h3>
+          <p class="muted">The specific GCSE Business qualification page contains course materials and sample assessment resources.</p>
+          <div class="actions"><a class="btn" href="https://qualifications.pearson.com/en/qualifications/edexcel-gcses/business-2017.html" target="_blank" rel="noopener noreferrer">Open Edexcel Business materials ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="it" data-tags="pearson btec tech award digital information technology 2022 component 1 component 2 component 3 effective digital working practices assessment sample papers">
+          <span class="badge">Pearson · BTEC Digital IT</span><h3>BTEC Digital IT assessments</h3>
+          <p class="muted">Find sample assessment materials and course resources for the 2022 BTEC Tech Award. Check your component and assessment version.</p>
+          <div class="actions"><a class="btn" href="https://qualifications.pearson.com/en/qualifications/btec-tech-awards/digital-information-technology-2022.html" target="_blank" rel="noopener noreferrer">Open BTEC Digital IT materials ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="other" data-tags="ocr gcse past papers mark schemes other exam boards">
+          <span class="badge">Other exam board</span><h3>OCR past papers</h3><p class="muted">For students taking an OCR qualification, open its past-paper finder.</p><div class="actions"><a class="btn secondary" href="https://www.ocr.org.uk/qualifications/past-paper-finder/" target="_blank" rel="noopener noreferrer">Open OCR finder ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="other" data-tags="wjec eduqas gcse past papers mark schemes wales">
+          <span class="badge">Other exam board</span><h3>WJEC / Eduqas papers</h3><p class="muted">For WJEC and Eduqas courses, open the relevant exam-board materials.</p><div class="actions"><a class="btn secondary" href="https://www.wjec.co.uk/home/past-papers/" target="_blank" rel="noopener noreferrer">Open WJEC papers ↗</a><a class="btn secondary" href="https://www.eduqas.co.uk/" target="_blank" rel="noopener noreferrer">Open Eduqas ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="papers" data-subject="other" data-tags="ccea gcse past papers mark schemes northern ireland">
+          <span class="badge">Other exam board</span><h3>CCEA past papers</h3><p class="muted">Find past papers and mark schemes for CCEA qualifications.</p><div class="actions"><a class="btn secondary" href="https://apps.ccea.org.uk/pastpapers/" target="_blank" rel="noopener noreferrer">Open CCEA finder ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="videosHeading" style="margin-bottom:30px">
+      <div class="section-heading"><div><h2 id="videosHeading">Watch a specific topic lesson</h2><p>Each card opens the named video directly. After watching, close the notes and try to explain the idea or answer a few questions from memory.</p></div></div>
+      <div class="grid grid3" id="videoGrid">
+        <article class="card resource-card" data-kind="videos" data-subject="maths" data-tags="maths ratio fractions percentages corbettmaths video">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=w_J_WQnAqjE" target="_blank" rel="noopener noreferrer" aria-label="Watch GCSE Maths: expressing ratios as fractions or percentages"><img src="https://i.ytimg.com/vi/w_J_WQnAqjE/hqdefault.jpg" alt="GCSE Maths video thumbnail: ratios, fractions and percentages" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">Maths · Corbettmaths</span><h3>Expressing ratios as fractions or percentages</h3><p class="muted">A focused worked-example video for a common GCSE ratio skill.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=w_J_WQnAqjE" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="english" data-tags="english language aqa paper 1 question 2 language analysis writer effect quotation">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=L_dE68iUg-k" target="_blank" rel="noopener noreferrer" aria-label="Watch AQA English Language Paper 1 Question 2 lesson"><img src="https://i.ytimg.com/vi/L_dE68iUg-k/hqdefault.jpg" alt="AQA English Language Paper 1 Question 2 lesson thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">English Language · AQA</span><h3>Paper 1 Question 2: analysing language</h3><p class="muted">Practise explaining how a writer's word choices create an effect, using specific evidence.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=L_dE68iUg-k" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="biology" data-tags="biology aqa cell biology cell types cell structure organelles animal plant bacteria cognito">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=qHkUOlC8Nbo" target="_blank" rel="noopener noreferrer" aria-label="Watch GCSE Biology: cell types and cell structure"><img src="https://i.ytimg.com/vi/qHkUOlC8Nbo/hqdefault.jpg" alt="GCSE Biology cell structure video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">Biology · Cognito</span><h3>Cell types and cell structure</h3><p class="muted">Compare animal, plant and bacterial cells and review the functions of sub-cellular structures.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=qHkUOlC8Nbo" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="chemistry" data-tags="chemistry aqa atoms ions atomic structure protons electrons neutrons cognito">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=fN8kH9Vvqo0" target="_blank" rel="noopener noreferrer" aria-label="Watch GCSE Chemistry: atoms and ions"><img src="https://i.ytimg.com/vi/fN8kH9Vvqo0/hqdefault.jpg" alt="GCSE Chemistry atoms and ions video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">Chemistry · Cognito</span><h3>Atoms and ions</h3><p class="muted">Review atomic structure, ion formation and what nuclear symbols tell you.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=fN8kH9Vvqo0" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="physics" data-tags="physics aqa electric fields charge attraction repulsion triple science cognito">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=_v4ugAwV59U" target="_blank" rel="noopener noreferrer" aria-label="Watch GCSE Physics: electric fields"><img src="https://i.ytimg.com/vi/_v4ugAwV59U/hqdefault.jpg" alt="GCSE Physics electric fields video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">Physics · Cognito</span><h3>Electric fields</h3><p class="muted">Understand electric field lines, electrostatic forces and charge interactions. Check whether this topic is on your course.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=_v4ugAwV59U" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="history" data-tags="history aqa conflict tension 1918 1939 big three treaty versailles peacemakers">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=L-xL62P4SoI" target="_blank" rel="noopener noreferrer" aria-label="Watch AQA History: Conflict and Tension 1918 to 1939, the Big Three"><img src="https://i.ytimg.com/vi/L-xL62P4SoI/hqdefault.jpg" alt="AQA History Conflict and Tension video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">History · AQA</span><h3>Conflict and Tension 1918–1939: the Big Three</h3><p class="muted">Revise the aims of Wilson, Clemenceau and Lloyd George at the Paris Peace Conference.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=L-xL62P4SoI" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="business" data-tags="business edexcel break even analysis margin safety profit calculation contribution">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=it_6ASXODwk" target="_blank" rel="noopener noreferrer" aria-label="Watch GCSE Business break-even analysis video"><img src="https://i.ytimg.com/vi/it_6ASXODwk/hqdefault.jpg" alt="GCSE Business break-even video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">Business · Edexcel</span><h3>Break-even analysis</h3><p class="muted">Work through break-even calculations and connect the result to business decisions.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=it_6ASXODwk" target="_blank" rel="noopener noreferrer">Watch this video ↗</a></div>
+        </article>
+        <article class="card resource-card" data-kind="videos" data-subject="it" data-tags="btec digital information technology cloud storage digital working practices component 3">
+          <a class="lesson-thumb" href="https://www.youtube.com/watch?v=trE225jQ7Lk" target="_blank" rel="noopener noreferrer" aria-label="Watch BTEC Digital IT lesson on cloud storage"><img src="https://i.ytimg.com/vi/trE225jQ7Lk/hqdefault.jpg" alt="BTEC Digital IT cloud storage video thumbnail" loading="lazy"><span>▶ Watch lesson</span></a>
+          <span class="badge">BTEC Digital IT</span><h3>Cloud storage</h3><p class="muted">Review the purpose of cloud storage and consider its benefits and limitations for organisations.</p><div class="actions"><a class="btn" href="https://www.youtube.com/watch?v=trE225jQ7Lk" target="_blank" rel="noopener noreferrer">Watch this video ↗</a><a class="btn secondary" href="https://qualifications.pearson.com/en/qualifications/btec-tech-awards/digital-information-technology-2022.html" target="_blank" rel="noopener noreferrer">Course materials ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-bottom:24px">
+      <h2>Turn a paper or lesson into progress</h2>
+      <ol class="step-list">
+        <li><strong>Attempt:</strong> answer questions before looking at the mark scheme.</li>
+        <li><strong>Mark:</strong> use the official mark scheme and record your score honestly.</li>
+        <li><strong>Find the gap:</strong> note the topic or exam skill that cost you marks.</li>
+        <li><strong>Practise:</strong> watch a focused explanation, then answer fresh questions without notes.</li>
+        <li><strong>Keep the next action:</strong> save useful links in My Resources or plan the next session.</li>
+      </ol>
+      <div class="actions"><a class="btn" href="resources.html">Organise my resources →</a><a class="btn secondary" href="plan.html">Plan my revision →</a><a class="btn secondary" href="progress.html">Track progress →</a></div>
+      <p class="muted" style="margin:14px 0 0">GCSE OnTrack links to materials maintained by exam boards and learning providers. Paper availability varies; recent papers may be restricted. Check your exact exam board, qualification and course specification before practising.</p>
+    </section>
+  </main>
+  <footer>GCSE OnTrack · The right resource, a clear next step, steady progress.</footer>
+</div>
+<script>
+(() => {
+  const search = document.getElementById('resourceSearch');
+  const filter = document.getElementById('resourceFilter');
+  const cards = [...document.querySelectorAll('.resource-card')];
+  const count = document.getElementById('resourceCount');
+  function update() {
+    const query = search.value.trim().toLowerCase();
+    const mode = filter.value;
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const searchText = `${card.textContent} ${card.dataset.tags || ''} ${card.dataset.subject || ''}`.toLowerCase();
+      const subjectMatch = mode === 'all' || mode === card.dataset.kind || mode === card.dataset.subject || (mode === 'other' && card.dataset.subject === 'other');
+      const visible = subjectMatch && searchText.includes(query);
+      card.hidden = !visible;
+      if (visible) visibleCount++;
+    });
+    count.textContent = visibleCount ? `${visibleCount} resource${visibleCount === 1 ? '' : 's'} found` : 'No matching resources. Try another topic or filter.';
+  }
+  search.addEventListener('input', update);
+  filter.addEventListener('change', update);
+  update();
+})();
+</script>
+</body>
+</html>
