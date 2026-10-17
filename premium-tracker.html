@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Premium Revision Evidence | GCSE OnTrack</title>
+<meta name="description" content="Record GCSE past-paper attempts, scores, resources and next steps to make revision more targeted.">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+  <nav aria-label="Main navigation">
+    <a href="index.html">🏠 Home</a><a href="account.html">👤 Account</a><a href="plan.html">📝 Plan</a><a href="resources.html">📚 Resources</a><a href="progress.html">📊 Progress</a><a href="timetable.html">🗓 Timetable</a><a href="guides.html">📖 Guides</a><a href="subscription.html">⭐ Premium</a>
+  </nav>
+  <header class="pageHeader">
+    <span class="eyebrow">Premium tool</span>
+    <h1>Revision evidence tracker</h1>
+    <p>Track past papers and the resources you use. Turn your own results into specific next steps instead of guessing what to revise.</p>
+  </header>
+
+  <section id="accessGate" class="panel" aria-live="polite">
+    <h2>Checking Premium access…</h2><p class="muted">Please wait while we check your account.</p>
+  </section>
+
+  <main id="trackerApp" hidden>
+    <div class="notice" style="margin-bottom:20px"><strong>Your data stays in this browser.</strong> This zero-cost version does not sync to other devices. Export a backup regularly. Use your own notes rather than entering private information about other people.</div>
+    <section class="grid grid4" aria-label="Revision summary">
+      <div class="panel stat"><h3>Past papers logged</h3><strong id="paperTotal">0</strong></div>
+      <div class="panel stat"><h3>Resources logged</h3><strong id="resourceTotal">0</strong></div>
+      <div class="panel stat"><h3>Average recorded score</h3><strong id="averageScore">—</strong></div>
+      <div class="panel stat"><h3>Topics to review</h3><strong id="reviewTopicTotal">0</strong></div>
+    </section>
+
+    <section class="grid grid2" style="margin-top:20px;align-items:start">
+      <div class="panel">
+        <h2>Log a paper or resource</h2>
+        <p class="muted">Record enough detail that future-you knows what happened and what to do next.</p>
+        <form id="evidenceForm">
+          <label for="recordKind">What are you recording?</label>
+          <select id="recordKind" required><option value="paper">Past paper / exam-question practice</option><option value="resource">Revision resource used</option></select>
+          <label for="recordSubject">Subject</label>
+          <input id="recordSubject" list="subjectOptions" required maxlength="60" placeholder="e.g. Biology">
+          <datalist id="subjectOptions"><option>Maths</option><option>English Language</option><option>English Literature</option><option>Biology</option><option>Chemistry</option><option>Physics</option><option>History</option><option>Business</option><option>IT</option></datalist>
+          <label for="recordBoard">Exam board (optional)</label>
+          <input id="recordBoard" maxlength="40" placeholder="e.g. AQA, Edexcel, Pearson BTEC">
+          <label for="recordTitle">Paper or resource name</label>
+          <input id="recordTitle" required maxlength="140" placeholder="e.g. AQA Biology Paper 1, June 2024">
+          <label for="recordTopic">Topic(s) practised</label>
+          <input id="recordTopic" required maxlength="120" placeholder="e.g. Cell biology / microscopy">
+          <div id="scoreWrap">
+            <label for="recordScore">Score (%) — leave blank if not marked yet</label>
+            <input id="recordScore" type="number" min="0" max="100" step="0.5" inputmode="decimal" placeholder="e.g. 62">
+          </div>
+          <label for="recordDate">Date used</label>
+          <input id="recordDate" type="date" required>
+          <label for="recordUrl">Resource link (optional)</label>
+          <input id="recordUrl" type="url" maxlength="500" placeholder="https://...">
+          <label for="recordMistakes">What did you find difficult? (optional)</label>
+          <textarea id="recordMistakes" rows="3" maxlength="1200" placeholder="Which questions or ideas caused problems?"></textarea>
+          <label for="recordNext">Next action (optional, but recommended)</label>
+          <textarea id="recordNext" rows="3" maxlength="700" placeholder="e.g. revise required practicals, then retry questions 4–6"></textarea>
+          <div class="actions"><button class="btn" type="submit">Save record</button><button class="btn secondary" type="reset">Clear form</button></div>
+          <p id="formMessage" class="muted" role="status" style="margin:12px 0 0"></p>
+        </form>
+      </div>
+      <div class="panel">
+        <h2>What your data suggests</h2>
+        <p class="muted">These are revision signals based on the records you enter, not grade predictions. A small sample can be misleading.</p>
+        <div id="recommendations"><div class="empty">Log a scored paper to start building evidence.</div></div>
+        <hr style="margin:22px 0">
+        <h3>Backup your records</h3>
+        <p class="muted">Export a JSON backup before changing browser, device or clearing website data.</p>
+        <div class="actions"><button id="exportRecords" class="btn secondary" type="button">Export backup</button><button id="importRecordsBtn" class="btn secondary" type="button">Import backup</button><button id="clearRecords" class="btn danger" type="button">Clear all</button></div>
+        <input id="importRecordsFile" type="file" accept="application/json,.json" hidden>
+        <p id="backupMessage" class="muted" role="status" style="margin-top:12px"></p>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px">
+      <div class="section-heading" style="margin-top:0"><div><h2>Your revision record</h2><p>Newest records appear first.</p></div><span class="badge" id="recordCountBadge">0 records</span></div>
+      <div class="toolbar"><input id="recordSearch" type="search" aria-label="Search records" placeholder="Search subject, topic or resource…"><select id="kindFilter" aria-label="Filter record type"><option value="all">All records</option><option value="paper">Past papers</option><option value="resource">Resources</option></select></div>
+      <div id="recordList"><div class="empty"><h3>No records yet</h3><p>Log your first paper or resource above. One useful record is enough to begin.</p></div></div>
+    </section>
+  </main>
+  <footer>GCSE OnTrack · Use evidence to choose your next revision step.</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/premium-tracker.js"></script>
+<script src="js/account-status.js"></script>
+</body>
+</html>

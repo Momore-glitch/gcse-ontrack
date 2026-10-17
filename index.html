@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GCSE OnTrack | Get Your GCSE Revision Under Control</title>
+<meta name="description" content="Plan GCSE revision, organise the resources you already use, build a timetable and track your progress with GCSE OnTrack.">
+<meta name="theme-color" content="#f4f7fc">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+  <nav aria-label="Main navigation">
+    <a href="index.html" aria-current="page">🏠 Home</a>
+    <a href="account.html">👤 Account</a>
+    <a href="plan.html">📝 Plan</a>
+    <a href="resources.html">📚 Resources</a>
+    <a href="progress.html">📊 Progress</a>
+    <a href="timetable.html">🗓 Timetable</a>
+    <a href="guides.html">📖 Guides</a>
+  </nav>
+
+  <main>
+    <section class="hero-shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Made for UK GCSE students</span>
+        <h1 id="hero-title">Get your GCSE revision <span class="accent">under control.</span></h1>
+        <p>Know what to work on, keep your resources organised and see the progress you're making — without replacing the revision websites you already trust.</p>
+        <div class="actions hero-actions">
+          <a class="btn" href="plan.html">Make my revision plan <span aria-hidden="true">→</span></a>
+          <a class="btn secondary" href="resources.html">Organise my resources</a>
+        </div>
+        <span class="helper">Start with the free tools. Your core revision data stays in this browser.</span>
+      </div>
+
+      <aside class="hero-panel" aria-label="Suggested first steps">
+        <div class="hero-panel-top">
+          <span class="badge">YOUR NEXT STEP</span>
+          <span>Start simple</span>
+        </div>
+        <h2>Turn “I need to revise” into a clear next action.</h2>
+        <p>Use this simple order if your revision feels disorganised:</p>
+        <ol class="mini-steps">
+          <li>Choose your exam date and weekly study time.</li>
+          <li>Save the videos, notes and past papers you actually use.</li>
+          <li>Record practice results and decide what to revisit.</li>
+        </ol>
+        <a href="progress.html">See your progress tools →</a>
+      </aside>
+    </section>
+
+    <section aria-labelledby="tools-title">
+      <div class="section-heading">
+        <div><h2 id="tools-title">Everything has a clear place</h2><p>Pick the tool that matches what you need to do next.</p></div>
+      </div>
+      <div class="grid grid3">
+        <a class="card feature-card" href="plan.html"><span class="feature-icon" aria-hidden="true">📝</span><h3>Revision plan</h3><p>Map subjects and available study time around your exam date.</p></a>
+        <a class="card feature-card" href="resources.html"><span class="feature-icon" aria-hidden="true">📚</span><h3>Resource library</h3><p>Save and find the notes, links and videos you already trust.</p></a>
+        <a class="card feature-card" href="progress.html"><span class="feature-icon" aria-hidden="true">📊</span><h3>Progress tracker</h3><p>Log study activity, set targets and build a clearer picture over time.</p></a>
+        <a class="card feature-card" href="timetable.html"><span class="feature-icon" aria-hidden="true">🗓️</span><h3>Weekly timetable</h3><p>Give your revision a realistic place in the week.</p></a>
+        <a class="card feature-card" href="guides.html"><span class="feature-icon" aria-hidden="true">📖</span><h3>Revision guides</h3><p>Use practical study methods to make sessions more purposeful.</p></a>
+        <a class="card feature-card" href="premium-tracker.html"><span class="feature-icon" aria-hidden="true">🎯</span><h3>Premium evidence tracker</h3><p>Log past-paper scores, topic gaps, resources used and your next action.</p></a>
+      </div>
+    </section>
+
+    <section aria-labelledby="workflow-title">
+      <div class="section-heading"><div><h2 id="workflow-title">A simple way to use OnTrack</h2><p>You don't need to set everything up at once.</p></div></div>
+      <div class="step-grid">
+        <article class="step-card"><span class="step-number">1</span><h3>Plan one week</h3><p>Choose a realistic amount of time and focus on your most important subjects.</p></article>
+        <article class="step-card"><span class="step-number">2</span><h3>Keep useful resources</h3><p>Save links and notes so you spend less time searching and more time studying.</p></article>
+        <article class="step-card"><span class="step-number">3</span><h3>Learn from your practice</h3><p>Record what went well, what went wrong and what you will do differently next.</p></article>
+      </div>
+    </section>
+
+    <section class="premium-banner" id="premiumCard" aria-labelledby="premium-title">
+      <div>
+        <span class="eyebrow">For students who want deeper insight</span>
+        <h2 id="premium-title">Make every practice session more useful.</h2>
+        <p id="premiumCardText">Premium tools help you organise study sessions, record past-paper evidence, learn from mistakes and decide what to revisit next.</p>
+      </div>
+      <a id="premiumHomeBtn" href="subscription.html" class="btn">Explore Premium →</a>
+    </section>
+
+    <section class="panel" style="margin-top:22px">
+      <h2>One important note about your data</h2>
+      <p class="muted" style="margin-bottom:0">The current planning, resource and tracking tools save data in this browser. They do not automatically sync between devices, so use the available export/backup options for anything you can't afford to lose.</p>
+    </section>
+  </main>
+
+  <footer>GCSE OnTrack · Less time organising. More purposeful revision.</footer>
+</div>
+<script src="storage.js"></script>
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/home-premium.js"></script>
+<script src="js/account-status.js"></script>
+</body>
+</html>
