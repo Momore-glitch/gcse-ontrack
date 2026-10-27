@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Account | GCSE OnTrack</title>
+<meta name="description" content="Create a GCSE OnTrack account or sign in to manage account and Premium access.">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/site-engagement.css">
+</head>
+<body>
+<div class="container">
+<nav aria-label="Main navigation">
+<a href="index.html">🏠 Home</a><a href="plan.html">📝 Plan</a><a href="resources.html">📚 Resources</a><a href="past-papers.html">📄 Papers & Videos</a><a href="progress.html">📊 Progress</a><a href="timetable.html">🗓 Timetable</a><a href="guides.html">📖 Guides</a><a href="account.html" aria-current="page">👤 Account</a>
+</nav>
+<header class="pageHeader"><span class="eyebrow">Free to get started</span><h1>Welcome to GCSE OnTrack</h1><p>Create a free account or sign in. You do not need payment details to create an account. Your revision plans, resource library and progress tracker still save in this browser and do not automatically sync to other devices.</p></header>
+<section class="panel" style="margin-bottom:18px"><h2>Why create an account?</h2><p class="muted" style="margin-bottom:0">An account lets you sign in securely and manage access to account-based features, including Premium when you're ready. Your core revision tools remain free to use without an account.</p></section>
+<div class="grid grid2" style="align-items:start">
+<section class="panel"><h2>Create your free account</h2><p class="muted">New to OnTrack? Use an email address you can access and choose a password of at least 8 characters.</p><form id="signupForm">
+<label for="signupEmail">Email address</label><input id="signupEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+<label for="signupPassword">Create password</label><input id="signupPassword" type="password" minlength="8" autocomplete="new-password" required placeholder="At least 8 characters">
+<label class="account-show-password" style="display:flex;align-items:center;gap:8px;font-weight:500"><input id="showSignupPassword" type="checkbox" style="width:auto;min-height:0;margin:0"> Show password</label>
+<button class="btn" type="submit">Create free account</button></form><p class="muted" style="font-size:.85rem;margin-top:12px">If email confirmation is enabled, check your inbox and use the confirmation link to finish setting up your account.</p></section>
+<section class="panel"><h2>Already have an account?</h2><p class="muted">Sign in to access your account and subscription status.</p><form id="loginForm">
+<label for="loginEmail">Email address</label><input id="loginEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+<label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" required>
+<label class="account-show-password" style="display:flex;align-items:center;gap:8px;font-weight:500"><input id="showLoginPassword" type="checkbox" style="width:auto;min-height:0;margin:0"> Show password</label>
+<button class="btn" type="submit">Sign in</button></form>
+<button id="resetPassword" class="btn secondary" style="margin-top:12px">Forgot password?</button></section>
+</div>
+<div id="accountMessage" class="notice" style="display:none;margin-top:20px" role="status" aria-live="polite"></div>
+<section id="loggedInPanel" class="panel" style="display:none;margin-top:20px"><h2>Account status</h2><p>Signed in as <strong id="accountEmail"></strong></p><button id="logoutBtn" class="btn danger">Log out</button></section>
+<footer>GCSE OnTrack · Your planning and resource data remains in this browser unless separately backed up.</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script><script src="js/account.js"></script>
+<script>
+  document.getElementById('showSignupPassword')?.addEventListener('change', event => { document.getElementById('signupPassword').type = event.target.checked ? 'text' : 'password'; });
+  document.getElementById('showLoginPassword')?.addEventListener('change', event => { document.getElementById('loginPassword').type = event.target.checked ? 'text' : 'password'; });
+</script>
+<script src="js/account-status.js"></script>
+</body></html>
