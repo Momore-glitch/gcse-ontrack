@@ -1,0 +1,424 @@
+/* GCSE OnTrack brand theme — charcoal, warm ivory and academic gold.
+   This is loaded from both shared stylesheets to theme every existing page. */
+
+:root {
+  color-scheme: light;
+  --bg: #f6f5f1;
+  --surface: #ffffff;
+  --surface2: #f5f0e5;
+  --surface3: #eee6d2;
+  --primary: #c59628;
+  --primary2: #a67812;
+  --success: #28724b;
+  --warning: #a96f16;
+  --danger: #b83a36;
+  --text: #202329;
+  --muted: #696a6c;
+  --border: #e5dfd2;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(31, 34, 39, .07);
+}
+
+html, body {
+  background-color: #f6f5f1;
+}
+
+body {
+  background:
+    radial-gradient(circle at 92% 0%, rgba(197, 150, 40, .10), transparent 26rem),
+    linear-gradient(180deg, #faf9f6 0%, #f4f2ed 100%);
+  color: #202329;
+}
+
+.container nav {
+  align-items: center;
+  gap: 5px;
+  padding: 12px 0 16px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e4ddce;
+}
+
+.container nav::before {
+  content: "GCSE ONTRACK";
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 22px 0 53px;
+  margin-right: auto;
+  background-image: url("../assets/gcse-ontrack-mark.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 43px 47px;
+  color: #202329;
+  font-size: .79rem;
+  font-weight: 950;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+
+.container nav a {
+  color: #62615d;
+  font-size: .87rem;
+  font-weight: 750;
+  padding: 9px 11px;
+  border-radius: 9px;
+}
+
+.container nav a:hover,
+.container nav a.active,
+.container nav a[aria-current="page"] {
+  color: #7f5b0f;
+  background: #f2e8cf;
+}
+
+h1, h2, h3, h4 {
+  color: #202329;
+}
+
+.pageHeader h1,
+.hero-copy h1 {
+  letter-spacing: -.045em;
+}
+
+.eyebrow {
+  color: #967018;
+  letter-spacing: .12em;
+}
+
+.accent {
+  color: #b6871d;
+}
+
+.panel, .card {
+  border-color: #e5dfd2;
+  box-shadow: 0 8px 24px rgba(31, 34, 39, .055);
+  border-radius: 16px;
+}
+
+a.card:hover,
+.card[role="link"]:hover {
+  border-color: #d4b66d;
+  box-shadow: 0 14px 32px rgba(72, 55, 19, .10);
+}
+
+.hero-shell {
+  gap: 22px;
+}
+
+.hero-copy {
+  border-color: #e3d7bc;
+  background: linear-gradient(135deg, #fff 0%, #faf7ef 100%);
+  box-shadow: 0 14px 38px rgba(41, 37, 27, .07);
+}
+
+.hero-panel {
+  background: linear-gradient(145deg, #292c32 0%, #191b20 100%);
+  border: 1px solid #373a40;
+  box-shadow: 0 16px 36px rgba(25, 27, 32, .18);
+}
+
+.hero-panel h2,
+.hero-panel p,
+.hero-panel span,
+.hero-panel strong {
+  color: #f8f6f0;
+}
+
+.hero-panel .badge {
+  color: #27231a;
+  background: #d7ad4b;
+}
+
+.dashboard-metric {
+  background: rgba(255, 255, 255, .075);
+  border-color: rgba(255, 255, 255, .13);
+}
+
+.dashboard-metric strong {
+  color: #e3bd65;
+}
+
+.dashboard-metric span,
+.dashboard-footnote {
+  color: #d6d2c8;
+}
+
+.btn,
+button.btn {
+  color: #211f1b;
+  background: #d0a13c;
+  border-color: #c59628;
+  font-weight: 850;
+  box-shadow: 0 4px 12px rgba(153, 111, 23, .13);
+}
+
+.btn:hover,
+button.btn:hover {
+  color: #171717;
+  background: #e0b957;
+  border-color: #bd8e25;
+  box-shadow: 0 7px 18px rgba(153, 111, 23, .20);
+}
+
+.btn.secondary,
+button.btn.secondary {
+  color: #39362e;
+  background: #f5f0e5;
+  border-color: #e3d8bf;
+  box-shadow: none;
+}
+
+.btn.secondary:hover,
+button.btn.secondary:hover {
+  background: #eee5d2;
+}
+
+.btn.danger,
+button.btn.danger {
+  color: #fff;
+  background: #b83a36;
+  border-color: #a72f2b;
+}
+
+.btn.success,
+button.btn.success {
+  color: #fff;
+  background: #28724b;
+  border-color: #226542;
+}
+
+.badge {
+  color: #72520f;
+  background: #f2e8cf;
+}
+
+input, select, textarea {
+  border-color: #d9d1c2;
+  background: #fffefa;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #c59628;
+  box-shadow: 0 0 0 3px rgba(197, 150, 40, .15);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(197, 150, 40, .52);
+  outline-offset: 3px;
+}
+
+.progressbar {
+  background: #eee8dc;
+}
+
+.progressbar > span {
+  background: linear-gradient(90deg, #a87917, #e0bb63);
+}
+
+.premium-banner {
+  border-color: #dfd0a9;
+  background: linear-gradient(120deg, #f7f0df 0%, #fffdf8 78%);
+}
+
+.step-number {
+  color: #6f4d08;
+  background: #f1e4c3;
+}
+
+footer {
+  color: #77736a;
+}
+
+/* New free Revision Mission feature */
+.mission-hero {
+  padding: clamp(24px, 4vw, 38px);
+  border: 1px solid #dfd2b5;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff 0%, #f7f1e3 100%);
+  box-shadow: var(--shadow);
+}
+
+.mission-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.mission-form {
+  display: grid;
+  gap: 12px;
+}
+
+.mission-form label {
+  margin-bottom: 5px;
+}
+
+.mission-form input,
+.mission-form select {
+  margin-bottom: 0;
+}
+
+.mission-workspace[hidden] {
+  display: none !important;
+}
+
+.mission-timer {
+  padding: 22px;
+  border-radius: 17px;
+  color: #fbf7ec;
+  text-align: center;
+  background: linear-gradient(145deg, #292c32, #191b20);
+  border: 1px solid #3b3d40;
+}
+
+.mission-timer-label {
+  color: #d7bd7e;
+  font-size: .78rem;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.mission-clock {
+  display: block;
+  margin: 5px 0 12px;
+  color: #f0cf81;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.mission-timer .btn.secondary {
+  color: #f6f0e3;
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.18);
+}
+
+.mission-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 18px 0 10px;
+  color: #6b6250;
+  font-size: .88rem;
+  font-weight: 800;
+}
+
+.mission-step-list {
+  display: grid;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  counter-reset: mission;
+}
+
+.mission-step {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid #e5dfd2;
+  border-radius: 13px;
+  background: #fffefa;
+}
+
+.mission-step.done {
+  background: #f5f2e9;
+  border-color: #c9b477;
+}
+
+.mission-step input {
+  width: 19px;
+  min-height: 19px;
+  margin: 3px 0 0;
+  accent-color: #a87917;
+}
+
+.mission-step h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.mission-step p {
+  margin: 0;
+  color: #696a6c;
+  font-size: .89rem;
+}
+
+.mission-step-time {
+  display: inline-block;
+  margin-top: 8px;
+  color: #805e18;
+  font-size: .78rem;
+  font-weight: 850;
+}
+
+.mission-history-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid #e8e2d6;
+}
+
+.mission-history-item:last-child {
+  border-bottom: 0;
+}
+
+.mission-status {
+  min-height: 1.5em;
+  margin: 10px 0 0;
+  color: #785914;
+  font-weight: 700;
+}
+
+.mission-note {
+  margin-top: 16px;
+}
+
+.mission-note textarea {
+  margin-bottom: 0;
+}
+
+.mission-empty {
+  color: #77736a;
+  border: 1px dashed #d8ceba;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .container nav::before {
+    width: 100%;
+    margin: 0 0 7px;
+    padding-left: 52px;
+  }
+
+  .container nav {
+    gap: 4px;
+  }
+
+  .container nav a {
+    padding: 8px 9px;
+    font-size: .82rem;
+  }
+
+  .mission-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gco-mission-card {
+  border-color: #d5bd83;
+  background: linear-gradient(145deg, #fffdf8, #f5eddc);
+}
+.gco-mission-card .feature-icon {
+  color: #76540d;
+  background: #efe2c2;
+}
