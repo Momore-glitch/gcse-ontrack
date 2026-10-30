@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Revision Mission | GCSE OnTrack</title>
+  <meta name="description" content="Build a focused GCSE revision session for one subject and topic. Free, guided and saved in your browser.">
+  <meta name="theme-color" content="#f6f5f1">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/brand-theme.css">
+</head>
+<body>
+<div class="container">
+  <nav aria-label="Main navigation">
+    <a href="index.html">🏠 Home</a>
+    <a href="plan.html">📝 Plan</a>
+    <a href="resources.html">📚 Resources</a>
+    <a href="past-papers.html">📄 Papers & Videos</a>
+    <a href="progress.html">📊 Progress</a>
+    <a href="mission.html" aria-current="page">🎯 Mission</a>
+    <a href="timetable.html">🗓 Timetable</a>
+    <a href="guides.html">📖 Guides</a>
+    <a href="account.html">👤 Account</a>
+  </nav>
+
+  <main>
+    <header class="pageHeader">
+      <span class="eyebrow">Free study tool · No account required</span>
+      <h1>Your next <span class="accent">Revision Mission.</span></h1>
+      <p>Choose one subject and one topic. OnTrack will turn it into a clear, timed session with a beginning, focused practice and a useful finish.</p>
+    </header>
+
+    <section class="mission-hero" aria-labelledby="mission-start-title">
+      <div class="mission-layout">
+        <div>
+          <span class="badge">STUDY WITH PURPOSE</span>
+          <h2 id="mission-start-title" style="margin-top:14px">Make the next session count.</h2>
+          <p class="muted">You don't need to plan an entire week before you begin. Build one manageable session, complete the steps and record what you learned.</p>
+          <p class="muted" style="margin-bottom:0"><strong>Designed for GCSE students:</strong> active recall, exam practice and correcting mistakes.</p>
+        </div>
+
+        <form id="missionForm" class="mission-form">
+          <div>
+            <label for="missionSubject">Subject</label>
+            <select id="missionSubject" required>
+              <option value="">Choose a subject</option>
+              <option>Maths</option>
+              <option>English Language</option>
+              <option>English Literature</option>
+              <option>Biology</option>
+              <option>Chemistry</option>
+              <option>Physics</option>
+              <option>History</option>
+              <option>Business</option>
+              <option>IT / Computer Science</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="missionTopic">Specific topic</label>
+            <input id="missionTopic" maxlength="100" required placeholder="e.g. Simultaneous equations">
+          </div>
+
+          <div>
+            <label for="missionMethod">What do you need most?</label>
+            <select id="missionMethod">
+              <option value="recall">Remember and understand the content</option>
+              <option value="exam">Practise exam-style questions</option>
+              <option value="mistake">Fix something I keep getting wrong</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="missionDuration">Available time</label>
+            <select id="missionDuration">
+              <option value="15">15 minutes</option>
+              <option value="25" selected>25 minutes</option>
+              <option value="40">40 minutes</option>
+            </select>
+          </div>
+
+          <button class="btn" type="submit">Build my revision mission →</button>
+          <p class="muted" style="font-size:.82rem;margin:0">Your mission and completion history stay in this browser. No payment or sign-in needed.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="missionWorkspace" class="panel mission-workspace" style="margin-top:20px" hidden aria-labelledby="missionWorkspaceTitle">
+      <div class="section-heading" style="margin-top:0">
+        <div>
+          <span class="eyebrow">YOUR SESSION</span>
+          <h2 id="missionWorkspaceTitle">Your revision mission</h2>
+          <p id="missionSubtitle" class="muted"></p>
+        </div>
+        <button id="newMission" type="button" class="btn secondary">New mission</button>
+      </div>
+
+      <div class="mission-layout">
+        <div>
+          <div class="mission-timer">
+            <div class="mission-timer-label">Focused study time</div>
+            <output id="missionClock" class="mission-clock" aria-live="off">25:00</output>
+            <div class="actions" style="justify-content:center">
+              <button id="missionStart" type="button" class="btn">▶ Start</button>
+              <button id="missionPause" type="button" class="btn secondary">⏸ Pause</button>
+              <button id="missionReset" type="button" class="btn secondary">↻ Reset</button>
+            </div>
+            <p id="missionTimerStatus" style="margin:12px 0 0;color:#eee5d0" role="status" aria-live="polite">Ready when you are.</p>
+          </div>
+
+          <div class="mission-note">
+            <label for="missionReflection">One thing I learned or need to revisit (optional)</label>
+            <textarea id="missionReflection" rows="4" maxlength="500" placeholder="Write a short note for yourself. It stays in this browser."></textarea>
+          </div>
+
+          <div class="actions" style="margin-top:14px">
+            <button id="finishMission" type="button" class="btn success">Finish this session</button>
+          </div>
+          <p id="missionStatus" class="mission-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div>
+          <div class="mission-progress">
+            <span>Your mission steps</span>
+            <strong id="missionProgressText">0 of 4 complete</strong>
+          </div>
+          <div class="progressbar" role="progressbar" aria-label="Mission completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="missionProgressBar">
+            <span id="missionProgressFill" style="width:0%"></span>
+          </div>
+          <ol id="missionSteps" class="mission-step-list" style="margin-top:14px"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:20px" aria-labelledby="missionHistoryTitle">
+      <div class="section-heading" style="margin-top:0">
+        <div>
+          <h2 id="missionHistoryTitle">Your recent missions</h2>
+          <p class="muted">A simple record of sessions you have finished on this device.</p>
+        </div>
+      </div>
+      <div id="missionHistory" aria-live="polite">
+        <div class="mission-empty">Your completed sessions will appear here.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>GCSE OnTrack · Build the habit. Learn from the work. Choose the next step.</footer>
+</div>
+
+<script src="js/revision-mission.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/account-status.js"></script>
+</body>
+</html>
