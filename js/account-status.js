@@ -1,72 +1,100 @@
-/* GCSE OnTrack — Global Account Status + shared engagement tools loader */
+/* GCSE OnTrack — Global account status, brand navigation and homepage feature card. */
 (() => {
   "use strict";
 
-  // Load shared feedback/analytics UI on pages that include this global script.
-  // Requires the SQL in supabase/engagement.sql.
+  // Load the shared feedback UI and stylesheet where this script is present.
   try {
     const ownScript = document.currentScript;
-    const base = new URL(
-      "../",
-      ownScript && ownScript.src ? ownScript.src : location.href
-    );
+    const siteRoot = new URL("../", ownScript && ownScript.src ? ownScript.src : location.href);
 
-    if (
-      !document.querySelector(
-        'link[data-gco-engagement-css], link[href*=' +
-          JSON.stringify("site-engagement.css") +
-          "]"
-      )
-    ) {
+    if (!document.querySelector("[data-gco-engagement-css]")) {
       const css = document.createElement("link");
       css.rel = "stylesheet";
-      css.href = new URL("css/site-engagement.css", base).href;
+      css.href = new URL("css/site-engagement.css", siteRoot).href;
       css.dataset.gcoEngagementCss = "true";
       document.head.append(css);
     }
 
-    if (!document.querySelector("script[data-gco-engagement-script]")) {
+    if (!document.querySelector("[data-gco-engagement-script]")) {
       const js = document.createElement("script");
-      js.src = new URL("js/site-engagement.js", base).href;
+      js.src = new URL("js/site-engagement.js", siteRoot).href;
       js.dataset.gcoEngagementScript = "true";
       document.body.append(js);
     }
   } catch (error) {
-    console.warn("GCSE OnTrack engagement tools could not load.");
+    console.warn("GCSE OnTrack shared engagement tools could not load.");
+  }
+
+  function addMissionNavigation() {
+    const nav = document.querySelector(".container nav, nav[aria-label='Main navigation']");
+    if (!nav || nav.querySelector('a[href="mission.html"]')) return;
+
+    const link = document.createElement("a");
+    link.href = "mission.html";
+    link.textContent = "🎯 Mission";
+    link.title = "Build a focused revision session";
+    nav.append(link);
+  }
+
+  function addHomepageMissionCard() {
+    const isHome = location.pathname.endsWith("/") || location.pathname.endsWith("/index.html");
+    if (!isHome) return;
+
+    const grid = document.querySelector("main .grid.grid3");
+    if (!grid || grid.querySelector('a[href="mission.html"]')) return;
+
+    const card = document.createElement("a");
+    card.className = "card feature-card gco-mission-card";
+    card.href = "mission.html";
+
+    const icon = document.createElement("span");
+    icon.className = "feature-icon";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = "🎯";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "Revision Mission";
+
+    const description = document.createElement("p");
+    description.textContent =
+      "Turn one topic into a focused, timed study session with clear steps and a saved completion record.";
+
+    card.append(icon, heading, description);
+    grid.append(card);
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
-    const accountLink = document.querySelector('a[href="account.html"]');
+    addMissionNavigation();
+    addHomepageMissionCard();
 
+    const accountLink = document.querySelector('a[href="account.html"]');
     if (!accountLink) return;
 
-    if (
-      !window.supabaseClient ||
-      !window.supabaseClient.auth
-    ) {
+    if (!window.supabaseClient || !window.supabaseClient.auth) {
       accountLink.textContent = "👤 Account";
       return;
     }
 
-    const { data, error } =
-      await window.supabaseClient.auth.getSession();
+    try {
+      const { data, error } = await window.supabaseClient.auth.getSession();
 
-    if (error || !data.session) {
-      accountLink.textContent = "👤 Sign In";
-      accountLink.href = "account.html";
-      return;
-    }
+      if (error || !data.session) {
+        accountLink.textContent = "👤 Sign In";
+        accountLink.href = "account.html";
+        return;
+      }
 
-    const email = data.session.user.email || "Account";
+      const email = data.session.user.email || "Account";
+      accountLink.textContent = `👤 ${email}`;
+      accountLink.title = `Signed in as ${email}`;
 
-    accountLink.textContent = `👤 ${email}`;
-    accountLink.title = `Signed in as ${email}`;
-
-    const accountPrompt = document.getElementById("accountPrompt");
-
-    if (accountPrompt) {
-      accountPrompt.hidden = true;
-      accountPrompt.style.display = "none";
+      const prompt = document.getElementById("accountPrompt");
+      if (prompt) {
+        prompt.hidden = true;
+        prompt.style.display = "none";
+      }
+    } catch (error) {
+      console.warn("GCSE OnTrack account status could not be checked.");
     }
   });
 })();
