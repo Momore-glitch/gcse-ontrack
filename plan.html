@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+  <title>Study Planner | GCSE ONTRACK</title>
+  <meta name="description" content="Build a realistic GCSE study plan and manage your weekly timetable in one connected place.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/study-planner.css">
+</head>
+<body>
+<div class="container study-planner-page">
+  <nav aria-label="Main navigation">
+    <a href="index.html">🏠 Home</a>
+    <a href="account.html">👤 Account</a>
+    <a href="plan.html" aria-current="page">📝 Study Planner</a>
+    <a href="resources.html">📚 Resources</a>
+    <a href="past-papers.html">📄 Papers & Videos</a>
+    <a href="progress.html">📊 Progress</a>
+    <a href="timetable.html">🗓 Timetable</a>
+    <a href="guides.html">📖 Guides</a>
+  </nav>
+
+  <header class="pageHeader">
+    <span class="eyebrow">One plan · two connected views</span>
+    <h1>Study Planner</h1>
+    <p>Plan ordinary weekly learning or prepare for exams. Choose what you can realistically study, then manage the same sessions in your timetable.</p>
+  </header>
+
+  <div class="planner-view-switch" aria-label="Planner views">
+    <a class="planner-view active" href="plan.html" aria-current="page">📝 Build my plan</a>
+    <a class="planner-view" href="timetable.html">🗓 Open my timetable</a>
+  </div>
+
+  <section class="planner-summary panel" aria-live="polite">
+    <div>
+      <span class="eyebrow">Your saved plan</span>
+      <h2 id="savedPlanTitle">No weekly schedule generated yet</h2>
+      <p id="savedPlanDescription" class="muted">Your existing plans and timetable entries are kept. Set your availability and topics to build the connected schedule.</p>
+    </div>
+    <div class="planner-summary-metrics">
+      <div><strong id="summarySessions">0</strong><span>Sessions</span></div>
+      <div><strong id="summaryMinutes">0</strong><span>Study minutes</span></div>
+      <div><strong id="summarySubjects">0</strong><span>Subjects</span></div>
+    </div>
+  </section>
+
+  <form id="studyPlanForm" class="panel planner-form" novalidate>
+    <div class="planner-section-heading">
+      <div><span class="eyebrow">01 · Plan purpose</span><h2>What are you planning for?</h2></div>
+      <span class="planner-step-number">01</span>
+    </div>
+
+    <div class="planner-mode-grid">
+      <label class="mode-option">
+        <input type="radio" name="planMode" value="weekly" checked>
+        <span><strong>Weekly learning</strong><small>Build a sustainable routine for learning and keeping up with classwork.</small></span>
+      </label>
+      <label class="mode-option">
+        <input type="radio" name="planMode" value="exam">
+        <span><strong>Exam preparation</strong><small>Organise revision around an upcoming exam date.</small></span>
+      </label>
+    </div>
+
+    <div id="examDateWrap" class="planner-field" hidden>
+      <label for="examDate">Exam date</label>
+      <input id="examDate" type="date">
+      <p class="field-hint">Used to show the time remaining. It will not make the planner overload your week.</p>
+    </div>
+
+    <div class="planner-divider"></div>
+    <div class="planner-section-heading">
+      <div><span class="eyebrow">02 · Subjects and topics</span><h2>What do you need to study?</h2><p class="muted">Select your subjects, add topic focus, choose the exam board and optionally set a weekly study-time target and target grade for each subject.</p></div>
+      <span class="planner-step-number">02</span>
+    </div>
+
+    <div id="subjectChoices" class="subject-choice-grid">
+      <label class="subject-choice"><input type="checkbox" value="Maths"><span>Maths</span></label>
+      <label class="subject-choice"><input type="checkbox" value="English Language"><span>English Language</span></label>
+      <label class="subject-choice"><input type="checkbox" value="English Literature"><span>English Literature</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Biology"><span>Biology</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Chemistry"><span>Chemistry</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Physics"><span>Physics</span></label>
+      <label class="subject-choice"><input type="checkbox" value="History"><span>History</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Geography"><span>Geography</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Business"><span>Business</span></label>
+      <label class="subject-choice"><input type="checkbox" value="IT / Digital IT"><span>IT / Digital IT</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Computer Science"><span>Computer Science</span></label>
+      <label class="subject-choice"><input type="checkbox" value="Religious Studies"><span>Religious Studies</span></label>
+    </div>
+    <div class="custom-subject-row">
+      <label for="customSubject">Add another subject</label>
+      <div class="inline-entry"><input id="customSubject" maxlength="60" placeholder="e.g. French or Psychology"><button id="addCustomSubject" class="btn secondary" type="button">Add subject</button></div>
+    </div>
+    <div id="subjectSettings" class="subject-settings" aria-live="polite">
+      <p class="muted">Select at least one subject to add its topic focus.</p>
+    </div>
+
+    <div class="planner-divider"></div>
+    <div class="planner-section-heading">
+      <div><span class="eyebrow">03 · Weekly availability</span><h2>When can you realistically study?</h2><p class="muted">Add up to two separate study windows each day, up to 180 minutes total. Choose custom times, durations and break lengths.</p></div>
+      <span class="planner-step-number">03</span>
+    </div>
+    <div class="availability-list">
+      <div class="availability-explainer">Add up to two separate study windows each day — for example, one after school and another after dinner. Enter durations in five-minute steps, with up to 180 minutes in total per day. Leave a window at 0 minutes when you are unavailable.</div>
+      <div class="availability-day">
+        <strong>Monday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Mon-1" aria-label="Monday first study window minutes"></label><label>Start <input type="time" value="16:00" data-day-window-start="Mon-1" aria-label="Monday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Mon-2" aria-label="Monday second study window minutes"></label><label>Start <input type="time" value="19:00" data-day-window-start="Mon-2" aria-label="Monday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Tuesday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Tue-1" aria-label="Tuesday first study window minutes"></label><label>Start <input type="time" value="16:00" data-day-window-start="Tue-1" aria-label="Tuesday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Tue-2" aria-label="Tuesday second study window minutes"></label><label>Start <input type="time" value="19:00" data-day-window-start="Tue-2" aria-label="Tuesday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Wednesday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Wed-1" aria-label="Wednesday first study window minutes"></label><label>Start <input type="time" value="16:00" data-day-window-start="Wed-1" aria-label="Wednesday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Wed-2" aria-label="Wednesday second study window minutes"></label><label>Start <input type="time" value="19:00" data-day-window-start="Wed-2" aria-label="Wednesday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Thursday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Thu-1" aria-label="Thursday first study window minutes"></label><label>Start <input type="time" value="16:00" data-day-window-start="Thu-1" aria-label="Thursday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Thu-2" aria-label="Thursday second study window minutes"></label><label>Start <input type="time" value="19:00" data-day-window-start="Thu-2" aria-label="Thursday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Friday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Fri-1" aria-label="Friday first study window minutes"></label><label>Start <input type="time" value="16:00" data-day-window-start="Fri-1" aria-label="Friday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Fri-2" aria-label="Friday second study window minutes"></label><label>Start <input type="time" value="19:00" data-day-window-start="Fri-2" aria-label="Friday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Saturday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Sat-1" aria-label="Saturday first study window minutes"></label><label>Start <input type="time" value="10:00" data-day-window-start="Sat-1" aria-label="Saturday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Sat-2" aria-label="Saturday second study window minutes"></label><label>Start <input type="time" value="14:00" data-day-window-start="Sat-2" aria-label="Saturday second study window start"></label></div>
+      </div>
+      <div class="availability-day">
+        <strong>Sunday</strong>
+        <div class="availability-slot"><span>Window 1</span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Sun-1" aria-label="Sunday first study window minutes"></label><label>Start <input type="time" value="10:00" data-day-window-start="Sun-1" aria-label="Sunday first study window start"></label></div>
+        <div class="availability-slot"><span>Window 2 <small>(optional)</small></span><label>Minutes <input type="number" min="0" max="180" step="5" value="0" inputmode="numeric" data-day-window-minutes="Sun-2" aria-label="Sunday second study window minutes"></label><label>Start <input type="time" value="14:00" data-day-window-start="Sun-2" aria-label="Sunday second study window start"></label></div>
+      </div>
+    </div>
+
+    <div class="planner-options-row">
+      <div><label for="sessionLength">Preferred study-session length (minutes)</label><input id="sessionLength" type="number" min="15" max="90" step="5" value="25" inputmode="numeric"><p class="field-hint">Choose any length from 15 to 90 minutes in five-minute steps. The planner may make one session slightly longer to avoid an unusable 5–10 minute remainder, while keeping sessions within 90 minutes.</p><label for="breakLength">Break between sessions</label><select id="breakLength"><option value="0">No automatic break</option><option value="5" selected>5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option></select></div>
+      <div class="break-explainer"><strong>Built-in study structure</strong><p>Closed-book recall → focused learning → exam-style questions → marking and corrections. The planner respects your subject time targets and leaves unused time free instead of over-allocating it.</p></div>
+    </div>
+
+    <div class="planner-submit-row">
+      <p id="planFormMessage" class="form-message" role="status" aria-live="polite"></p>
+      <button class="btn" type="submit">⚡ Generate my weekly plan</button>
+    </div>
+  </form>
+
+  <section class="panel generated-plan-panel">
+    <div class="section-heading"><div><span class="eyebrow">04 · Your connected schedule</span><h2>What your week will look like</h2><p class="muted">Your generated sessions appear in the same timetable you can edit and manage.</p></div><a class="btn secondary" href="timetable.html">Manage timetable →</a></div>
+    <div id="generatedPlanPreview" class="generated-plan-preview"><div class="empty"><strong>Your weekly plan will appear here</strong><p>Choose subjects, topics and available time, then generate your schedule.</p></div></div>
+    <div class="actions planner-bottom-actions"><button id="replaceGeneratedPlan" class="btn secondary small" type="button" disabled>Replace generated sessions</button><a class="btn small" href="timetable.html">Open full timetable →</a></div>
+  </section>
+
+  <footer>GCSE ONTRACK · A realistic plan is one you can adapt and keep using.</footer>
+</div>
+<script src="storage.js"></script>
+<script src="js/study-planner.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/account-status.js"></script>
+</body>
+</html>
