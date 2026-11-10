@@ -1,0 +1,106 @@
+/* GCSE ONTRACK — Phase 3 topic-specific study guidance */
+.phase3-session-steps {
+  margin-top: 12px;
+  padding: 12px 13px;
+  border: 1px solid #dfd4bc;
+  border-radius: 11px;
+  background: #fffdf8;
+}
+.phase3-session-steps > summary {
+  color: #72520f;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 850;
+}
+.phase3-focus-line {
+  margin: 8px 0 6px;
+  color: #80611c;
+  font-size: .76rem;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+.phase3-session-steps ol {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+.phase3-session-steps li {
+  margin: 7px 0;
+  color: #55534d;
+  font-size: .82rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.phase3-topic-resources {
+  margin-top: 11px;
+  padding: 12px;
+  border: 1px solid #ddcfad;
+  border-radius: 11px;
+  background: #fbf7ed;
+  scroll-margin-top: 16px;
+}
+.phase3-topic-resources > summary {
+  color: #705111;
+  cursor: pointer;
+  font-size: .86rem;
+  font-weight: 850;
+}
+.phase3-topic-resources > .field-hint {
+  margin: 8px 0;
+  color: #6c665b;
+  font-size: .76rem;
+  line-height: 1.45;
+}
+.phase3-resource-item {
+  min-width: 0;
+  padding: 11px;
+  border-color: #e3dac8;
+  background: #fffefa;
+}
+.phase3-resource-match {
+  display: inline-flex;
+  max-width: 100%;
+  margin-top: 5px;
+  padding: 3px 7px;
+  border: 1px solid #e7dec9;
+  border-radius: 999px;
+  color: #76602e;
+  background: #faf5e8;
+  font-size: .65rem;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.phase3-resource-item .session-resource-link {
+  line-height: 1.4;
+}
+.phase3-resource-item p {
+  line-height: 1.5;
+}
+.phase3-resource-item button:focus-visible,
+.phase3-session-steps summary:focus-visible,
+.phase3-topic-resources summary:focus-visible {
+  outline: 3px solid #c59628;
+  outline-offset: 3px;
+}
+.phase3-topic-resources .resource-disclaimer {
+  margin-top: 11px;
+  color: #716d64;
+  font-size: .71rem;
+  line-height: 1.45;
+}
+@media (max-width: 520px) {
+  .phase3-session-steps,
+  .phase3-topic-resources {
+    padding: 10px;
+  }
+  .phase3-session-steps li,
+  .phase3-resource-item p {
+    font-size: .78rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phase3-topic-resources,
+  .phase3-session-steps {
+    scroll-behavior: auto;
+  }
+}
