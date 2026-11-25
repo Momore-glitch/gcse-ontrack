@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+  <title>GCSE ONTRACK | Plan your week. Stay organised. See your progress.</title>
+  <meta name="description" content="A connected GCSE planner, weekly organiser and progress tracker. Keep your trusted third-party resources organised alongside your timetable.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/ontrack-overhaul.css">
+</head>
+<body>
+<div class="container">
+  <nav aria-label="Main navigation">
+    <a href="index.html">Home</a><a href="plan.html">Planner</a><a href="timetable.html">Timetable</a><a href="progress.html">Progress</a><a href="resources.html">Resource Centre</a>
+  </nav>
+  <main id="gcoHomeDashboard">
+    <section class="gco-home-hero">
+      <div class="gco-home-welcome">
+        <span class="gco-kicker">YOUR GCSE COMMAND CENTRE</span>
+        <h1>Know what’s next.<br>Keep everything organised.</h1>
+        <p>GCSE ONTRACK connects your study plan, weekly timetable, saved third-party resources and progress records. Your trusted learning websites remain part of the workflow; ONTRACK helps you organise when and how you use them.</p>
+        <div class="actions">
+          <a class="btn" href="plan.html">Build or edit my plan →</a>
+          <a class="btn secondary" href="timetable.html">Open timetable</a>
+        </div>
+      </div>
+      <aside class="gco-next-card" aria-labelledby="gcoNextTitle">
+        <div>
+          <span class="gco-kicker" id="gcoHomeStatus">Your next step</span>
+          <h2 id="gcoNextTitle">Build a realistic week</h2>
+          <p id="gcoNextDetail">Choose your subjects, topics and available study windows. You can adjust every session later.</p>
+        </div>
+        <a class="btn" id="gcoNextAction" href="plan.html">Set up my planner →</a>
+      </aside>
+    </section>
+
+    <section class="gco-home-metrics" aria-label="Your planning summary">
+      <div class="gco-home-metric"><strong id="gcoMetricPlanned">0</strong><span>Sessions still planned</span></div>
+      <div class="gco-home-metric"><strong id="gcoMetricCompleted">0</strong><span>Sessions completed</span></div>
+      <div class="gco-home-metric"><strong id="gcoMetricResources">0</strong><span>Saved resources</span></div>
+      <div class="gco-home-metric"><strong id="gcoMetricStreak">0</strong><span>Active-day streak</span></div>
+    </section>
+
+    <section class="gco-home-section gco-progress-overview">
+      <div class="gco-section-head"><div><span class="gco-kicker">WEEKLY OVERVIEW</span><h2>Your plan, at a glance</h2><p>Progress is calculated from timetable sessions you mark complete.</p></div><a href="progress.html">Open progress tracker →</a></div>
+      <div class="gco-progress-stats">
+        <div><strong id="gcoMetricRate">0%</strong><span>Completion rate</span></div>
+        <div><strong id="gcoMetricMinutes">0m</strong><span>Minutes completed</span></div>
+        <div><strong id="gcoWeekResourceCount">0</strong><span>Active saved links</span></div>
+        <div><strong id="gcoWeekCompletedCount">0</strong><span>Sessions completed</span></div>
+      </div>
+      <div class="gco-progress-track"><span id="gcoWeekProgress" style="width:0%"></span></div>
+      <p class="gco-progress-caption" id="gcoWeekProgressText">0 of 0 planned sessions completed</p>
+    </section>
+
+    <section class="gco-home-section">
+      <div class="gco-section-head"><div><span class="gco-kicker">YOUR CORE WORKSPACE</span><h2>Go straight to what you need</h2><p>Each area has one clear purpose and shares the same saved plan and records.</p></div></div>
+      <div class="gco-shortcuts">
+        <a class="gco-shortcut" href="plan.html"><span class="gco-shortcut-icon">🗓️</span><strong>Plan my week</strong><span>Choose subjects, topics, available windows and session lengths.</span></a>
+        <a class="gco-shortcut" href="timetable.html"><span class="gco-shortcut-icon">📅</span><strong>Manage timetable</strong><span>Move sessions, add catch-up time and open topic-linked resources.</span></a>
+        <a class="gco-shortcut" href="resources.html"><span class="gco-shortcut-icon">🔗</span><strong>Resource Centre</strong><span>Save, search, organise and revisit the third-party links you trust.</span></a>
+        <a class="gco-shortcut" href="progress.html"><span class="gco-shortcut-icon">📈</span><strong>Review progress</strong><span>Record activity, paper practice, targets and mistakes to revisit.</span></a>
+      </div>
+    </section>
+
+    <p class="gco-home-context" id="gcoHomeContext">Your plan, saved resources and completed sessions will connect here as you use ONTRACK.</p>
+
+    <section class="panel" id="accountPrompt" style="margin-top:22px;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div style="flex:1;min-width:240px"><span class="gco-kicker">OPTIONAL ACCOUNT</span><h2>Create an ONTRACK account</h2><p class="muted" style="margin-bottom:0">Use account features when you are ready. Your current planning and resource data is stored in this browser and does not automatically sync between devices.</p></div>
+      <div class="actions"><a class="btn secondary" href="account.html">Account & sign in →</a></div>
+    </section>
+    <section class="premium-banner" id="premiumCard" aria-labelledby="premium-title" style="margin-top:18px">
+      <div><span class="gco-kicker">OPTIONAL PREMIUM TOOLS</span><h2 id="premium-title">More detailed study evidence</h2><p id="premiumCardText">Explore additional tools for paper scores, topic gaps and structured evidence when you need them.</p></div>
+      <a id="premiumHomeBtn" href="subscription.html" class="btn">Explore membership →</a>
+    </section>
+  </main>
+  <footer>GCSE ONTRACK · Plan with purpose. Stay organised. Make progress visible.</footer>
+</div>
+<script src="storage.js"></script>
+<script src="js/ontrack-shell.js"></script>
+<script src="js/ontrack-dashboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/home-premium.js"></script>
+<script src="js/account-status.js"></script>
+</body>
+</html>
